@@ -1,0 +1,32 @@
+//
+//  AtChat.pch
+//  AtChat
+//
+//  Created by zhouMR on 16/11/1.
+//  Copyright © 2016年 luowei. All rights reserved.
+//
+
+#ifndef AtChat_pch
+#define AtChat_pch
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+
+
+#import "NetContants.h"
+#import "VCBase.h"
+#import <MJRefresh/MJRefresh.h>
+//#import "MJChiBaoZiHeader.h"
+#import "YYKit.h"
+#import "UIImageView+SDWebImage.h"
+#import "XMPPConfig.h"
+#import <MBProgressHUD/MBProgressHUD.h>
+#import "XmppTools.h"
+#import "Notify.h"
+#import "Global.h"
+#import "Toast.h"
+#import "ApiObject.h"
+#import "NetRequestTool.h"
+#import "AFNetWorking.h"
+
+#endif /* AtChat_pch */
