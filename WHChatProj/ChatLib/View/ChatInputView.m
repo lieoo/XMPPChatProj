@@ -219,7 +219,6 @@
             [self.delegate recordFinish:self.url withTime:audioDurationSeconds];
         }
     }
-
 }
 - (void)changeImage {
     [_recorder updateMeters];//更新测量值

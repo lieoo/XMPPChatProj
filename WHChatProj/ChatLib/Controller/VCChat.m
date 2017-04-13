@@ -10,11 +10,12 @@
 #import "Message.h"
 #import "VCChatCell.h"
 #import "ChatInputView.h"
+#import "WPToolBarView.h"
 
 #import <MediaPlayer/MediaPlayer.h>//播放语音
 
-@interface VCChat ()<UITableViewDelegate,UITableViewDataSource,UIImagePickerControllerDelegate,UINavigationControllerDelegate,ChatInputDelegate,XMPPStreamDelegate>
-@property (nonatomic, strong) UITableView *table;
+@interface VCChat ()<UITableViewDelegate,UITableViewDataSource,UIImagePickerControllerDelegate,UINavigationControllerDelegate,XMPPStreamDelegate,WPToolBarDataDelegate>
+@property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *dataSource;
 @property (nonatomic, strong) ChatInputView *inputText;
 @property (nonatomic, assign) NSInteger curIndex;//记录cell下标 用作判断是语音还是图片
@@ -28,9 +29,15 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+
+    WPToolBarView * toolview = [[WPToolBarView alloc]initWithFrame:CGRectMake(0, [UIScreen mainScreen].bounds.size.height -50, [UIScreen mainScreen].bounds.size.width, 50) viewController:self];
+    toolview.delegate = self;
     
-    [self.view addSubview:self.table];
-    [self.view addSubview:self.inputText];
+    [self.view addSubview:self.tableView];
+    [self.view addSubview:toolview];
+
+    
+//    [self.view addSubview:self.inputText];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillChangeFrame:) name:UIKeyboardWillChangeFrameNotification object:nil];
     [[XmppTools sharedManager].xmppStream addDelegate:self delegateQueue:dispatch_get_main_queue()];
     [self reloadMessages];
@@ -145,20 +152,20 @@
 }
 
 - (void)reload {
-    [self.table reloadData];
+    [self.tableView reloadData];
     [self scrollToBottom];
 }
 
 
 -(void)scrollToBottom {
     if (self.dataSource.count > 0) {
-        [self.table scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.dataSource.count - 1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+        [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.dataSource.count - 1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
     }
 }
 
 - (void)hideInput {
     [self.inputText hide];
-    [self handleResetHeightWithMoreFuncView];
+//    [self handleResetHeightWithMoreFuncView];
 }
 
 - (void)dismiss{
@@ -191,7 +198,7 @@
 }
 - (void)disMissKeyBoardDelegate{
     [self dismiss];//收起键盘
-    _table.frame = CGRectMake(0, 64, DEVICEWIDTH,  DEVICEHEIGHT - 64 - 50);
+    self.tableView.frame = CGRectMake(0, 64, DEVICEWIDTH,  DEVICEHEIGHT - 64 - 50);
 }
 - (void)popUpMoreFuncViewDelegate{
     [self.view resignFirstResponder];
@@ -234,72 +241,32 @@
 
 #pragma mark - 监听事件
 - (void) keyboardWillChangeFrame:(NSNotification *)note{
-    CGRect keyboardFrame = [note.userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
-    CGFloat duration = [note.userInfo[UIKeyboardAnimationDurationUserInfoKey] floatValue];
-    CGFloat transformY = keyboardFrame.origin.y - self.view.height;
-    CGFloat h = DEVICEHEIGHT - NAV_STATUS_HEIGHT - 50;
-    CGFloat hx = h +transformY-NAV_STATUS_HEIGHT;
-    if(transformY < 0){
-        self.inputText.isOpend = TRUE;
-    }else{
-        self.inputText.isOpend = FALSE;
-    }
-    [UIView animateWithDuration:duration animations:^{
-        self.inputText.transform = CGAffineTransformMakeTranslation(0, transformY);
-        CGRect f = self.table.frame;
-        
-        if(transformY < 0){
-            f.size.height = hx + 64 ;//键盘弹出
-            self.inputText.isOpend = TRUE;
-        }else{
-            f.size.height = DEVICEHEIGHT-200 ;//
-            self.inputText.isOpend = FALSE;
-        }
-        self.table.frame = f;
-    } completion:^(BOOL finished) {
-        [self scrollToBottom];
-    }];
-}
-
-- (void)handleHeightWithFaceHeight:(CGFloat)height{
-    CGFloat y = DEVICEHEIGHT - NAV_STATUS_HEIGHT - self.inputText.height;
-    [UIView animateWithDuration:0.3 animations:^{
-        self.table.height = y;
-    } completion:^(BOOL finished) {
-        [self scrollToBottom];
-    }];
-}
-- (void)handleHeightWithMoreFuncHeight:(CGFloat)height{
-    CGFloat y = DEVICEHEIGHT - NAV_STATUS_HEIGHT - 50 ;
-
-    [UIView animateWithDuration:0.3 animations:^{
-        self.table.height = y - 100;
-        self.inputText.frame = CGRectMake(0, self.table.bottom, DEVICEWIDTH, 50);
-    } completion:^(BOOL finished) {
-        [self scrollToBottom];
-    }];
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, .5 * NSEC_PER_SEC);
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+        [self.tableView scrollToBottom];
+    });
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
 //    [self handleResetHeightWithMoreFuncView];
 }
-- (void)handleResetHeightWithMoreFuncView{
-//    CGFloat height ;
-//    if (!isHaveFuncView) {
-//        height = DEVICEHEIGHT-NAV_STATUS_HEIGHT-self.inputText.height + 50;
-//    }else{
-//        height = DEVICEHEIGHT-NAV_STATUS_HEIGHT-self.inputText.height - 80;
-//    }
-    [UIView animateWithDuration:0.3 animations:^{
-//        self.table.height = height;
-//        if (isHaveFuncView)self.inputText.frame =  CGRectMake(0, self.table.bottom, DEVICEWIDTH, 50);
-        
-        self.table.height = DEVICEHEIGHT - 64 - 50;
-        self.inputText.frame = CGRectMake(0, self.table.bottom, kScreenWidth, 60);
-    } completion:^(BOOL finished) {
-        [self scrollToBottom];
-    }];
-}
+//- (void)handleResetHeightWithMoreFuncView{
+////    CGFloat height ;
+////    if (!isHaveFuncView) {
+////        height = DEVICEHEIGHT-NAV_STATUS_HEIGHT-self.inputText.height + 50;
+////    }else{
+////        height = DEVICEHEIGHT-NAV_STATUS_HEIGHT-self.inputText.height - 80;
+////    }
+//    [UIView animateWithDuration:0.3 animations:^{
+////        self.table.height = height;
+////        if (isHaveFuncView)self.inputText.frame =  CGRectMake(0, self.table.bottom, DEVICEWIDTH, 50);
+//        
+//        self.table.height = DEVICEHEIGHT - 64 - 50;
+//        self.inputText.frame = CGRectMake(0, self.table.bottom, kScreenWidth, 60);
+//    } completion:^(BOOL finished) {
+//        [self scrollToBottom];
+//    }];
+//}
 
 - (void)playWithData:(NSData *)data{
     NSError *error;
@@ -308,25 +275,40 @@
     if (!error) [self.player play];
 }
 
-- (UITableView*)table{
-    if (!_table) {
-        _table = [[UITableView alloc]initWithFrame:CGRectMake(0, 64, DEVICEWIDTH, DEVICEHEIGHT - 64 - 50) style:UITableViewStylePlain];
-        [_table registerClass:[VCChatCell class] forCellReuseIdentifier:@"VCChatCell"];
-        _table.delegate = self;
-        _table.dataSource = self;
-        _table.backgroundColor = [UIColor cyanColor];
-        _table.separatorStyle = UITableViewCellSeparatorStyleNone;
-        _table.backgroundColor = [UIColor clearColor];
-        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(dismiss)];
-        [_table addGestureRecognizer:tap];
+- (UITableView*)tableView{
+    if (!_tableView) {
+//        _table = [[UITableView alloc]initWithFrame:CGRectMake(0, 64, DEVICEWIDTH, DEVICEHEIGHT - 64 - 50) style:UITableViewStylePlain];
+//        [_table registerClass:[VCChatCell class] forCellReuseIdentifier:@"VCChatCell"];
+//        _table.delegate = self;
+//        _table.dataSource = self;
+//        _table.backgroundColor = [UIColor cyanColor];
+//        _table.separatorStyle = UITableViewCellSeparatorStyleNone;
+//        _table.backgroundColor = [UIColor clearColor];
+//        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(dismiss)];
+//        [_table addGestureRecognizer:tap];
+        _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 64, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height - 50 -64) style:UITableViewStyleGrouped];
+        _tableView.delegate = self;
+        _tableView.dataSource = self;
+        _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        _tableView.backgroundColor = [UIColor whiteColor];
+        [_tableView registerClass:[VCChatCell class] forCellReuseIdentifier:@"VCChatCell"];
+        UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tap)];
+        [_tableView addGestureRecognizer:tap];
     }
-    return _table;
+    return _tableView;
+}
+
+- (void)tap
+{
+    [self.view endEditing:YES];
+    [[NSNotificationCenter defaultCenter] postNotificationName:WPBiaoQingWillHidden object:nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:WPMoreWillHidden object:nil];
 }
 
 
 - (ChatInputView*)inputText{
     if (!_inputText) {
-        _inputText = [[ChatInputView alloc]initWithFrame:CGRectMake(0, self.table.bottom, DEVICEWIDTH, 50)];
+        _inputText = [[ChatInputView alloc]initWithFrame:CGRectMake(0, self.tableView.bottom, DEVICEWIDTH, 50)];
         _inputText.delegate = self;
     }
     return _inputText;
