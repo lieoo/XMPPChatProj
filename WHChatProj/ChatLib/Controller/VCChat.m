@@ -19,6 +19,8 @@
 @property (nonatomic, strong) ChatInputView *inputText;
 @property (nonatomic, assign) NSInteger curIndex;//记录cell下标 用作判断是语音还是图片
 @property (nonatomic, strong) AVAudioPlayer *player;
+@property (nonatomic, assign) BOOL keyBoardStatus;
+
 @end
 
 @implementation VCChat
@@ -82,8 +84,6 @@
  */
 - (void)reloadMessages{
     NSManagedObjectContext *context = [XmppTools sharedManager].messageArchivingCoreDataStorage.mainThreadManagedObjectContext;
-    
-    // 2.FetchRequest【查哪张表】
     NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"XMPPMessageArchiving_Message_CoreDataObject"];
     //创建查询条件
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"bareJidStr = %@ and streamBareJidStr = %@", self.toUser.bare, [XmppTools sharedManager].userJid.bare];
@@ -144,21 +144,21 @@
     }
 }
 
-- (void)reload{
+- (void)reload {
     [self.table reloadData];
     [self scrollToBottom];
 }
 
 
--(void)scrollToBottom{
+-(void)scrollToBottom {
     if (self.dataSource.count > 0) {
         [self.table scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.dataSource.count - 1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
     }
 }
 
-- (void)hideInput{
+- (void)hideInput {
     [self.inputText hide];
-    [self resetHeight];
+    [self handleResetHeightWithMoreFuncView];
 }
 
 - (void)dismiss{
@@ -168,7 +168,7 @@
 }
 
 #pragma mark - ChatInputViewDelegate
--(void)send:(NSString *)msg{
+-(void)send:(NSString *)msg {
     if (![msg isEqualToString:@""]) {
         XMPPMessage *message = [XMPPMessage messageWithType:CHATTYPE to:self.toUser];
         [message addAttributeWithName:@"bodyType" stringValue:[NSString stringWithFormat:@"%d",TEXT]];
@@ -177,32 +177,40 @@
     }
 }
 
--(void)recordFinish:(NSURL *)url withTime:(float)time{
+-(void)recordFinish:(NSURL *)url withTime:(float)time {
     self.url = url;
     NSData *data = [[NSData alloc]initWithContentsOfURL:self.url];
     [self sendRecordMessageWithData:data bodyName:@"[语音]" withTime:time];
 }
 
 //选择图片
-- (void)selectImg{
+- (void)selectImg {
     UIImagePickerController *picker = [[UIImagePickerController alloc]init];
     picker.delegate = self;
     [self presentViewController:picker animated:YES completion:nil];
 }
+- (void)disMissKeyBoardDelegate{
+    [self dismiss];//收起键盘
+    _table.frame = CGRectMake(0, 64, DEVICEWIDTH,  DEVICEHEIGHT - 64 - 50);
+}
+- (void)popUpMoreFuncViewDelegate{
+    [self.view resignFirstResponder];
+//    _table = [[UITableView alloc]initWithFrame:CGRectMake(0, 64, DEVICEWIDTH, DEVICEHEIGHT - 64 - 50) style:UITableViewStylePlain];
+//    [self resetHeightWithMoreFuncView:YES];
+//    self.table.frame = CGRectMake(0, 64, DEVICEWIDTH, DEVICEHEIGHT - 64 - 80);
+
+}
 
 #pragma mark - UIImagePickerControllerDelegate
-- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
-{
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
     UIImage *image = info[UIImagePickerControllerOriginalImage];
-    
     NSData *data = UIImageJPEGRepresentation(image,0.3);
     [self sendMessageWithData:data bodyName:@"[图片]"];
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 /** 发送图片 */
-- (void)sendMessageWithData:(NSData *)data bodyName:(NSString *)name
-{
+- (void)sendMessageWithData:(NSData *)data bodyName:(NSString *)name {
     // 转换成base64的编码
     NSString *base64str = [data base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
     XMPPMessage *message = [XMPPMessage messageWithType:CHATTYPE to:self.toUser];
@@ -213,14 +221,8 @@
 }
 
 /** 发送录音 */
-- (void)sendRecordMessageWithData:(NSData *)data bodyName:(NSString *)name withTime:(float)time
-{
-    
+- (void)sendRecordMessageWithData:(NSData *)data bodyName:(NSString *)name withTime:(float)time {
     NSString *base64str = [data base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
-    
-    NSLog(@"base64str:decodeding %@",base64str);
-    
-    
     XMPPMessage *message = [XMPPMessage messageWithType:CHATTYPE to:self.toUser];
     [message addAttributeWithName:@"bodyType" stringValue:[NSString stringWithFormat:@"%d",RECORD]];
     [message addAttributeWithName:@"time" stringValue:[NSString stringWithFormat:@"%f",time]];
@@ -259,7 +261,7 @@
     }];
 }
 
-- (void)handleHeight:(CGFloat)height{
+- (void)handleHeightWithFaceHeight:(CGFloat)height{
     CGFloat y = DEVICEHEIGHT - NAV_STATUS_HEIGHT - self.inputText.height;
     [UIView animateWithDuration:0.3 animations:^{
         self.table.height = y;
@@ -267,24 +269,43 @@
         [self scrollToBottom];
     }];
 }
+- (void)handleHeightWithMoreFuncHeight:(CGFloat)height{
+    CGFloat y = DEVICEHEIGHT - NAV_STATUS_HEIGHT - 50 ;
 
-- (void)resetHeight{
-    CGFloat height = DEVICEHEIGHT-NAV_STATUS_HEIGHT-self.inputText.height;
     [UIView animateWithDuration:0.3 animations:^{
-        self.table.height = height;
+        self.table.height = y - 100;
+        self.inputText.frame = CGRectMake(0, self.table.bottom, DEVICEWIDTH, 50);
     } completion:^(BOOL finished) {
         [self scrollToBottom];
     }];
 }
 
-- (void)playWithData:(NSData *)data {
-    
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
+//    [self handleResetHeightWithMoreFuncView];
+}
+- (void)handleResetHeightWithMoreFuncView{
+//    CGFloat height ;
+//    if (!isHaveFuncView) {
+//        height = DEVICEHEIGHT-NAV_STATUS_HEIGHT-self.inputText.height + 50;
+//    }else{
+//        height = DEVICEHEIGHT-NAV_STATUS_HEIGHT-self.inputText.height - 80;
+//    }
+    [UIView animateWithDuration:0.3 animations:^{
+//        self.table.height = height;
+//        if (isHaveFuncView)self.inputText.frame =  CGRectMake(0, self.table.bottom, DEVICEWIDTH, 50);
+        
+        self.table.height = DEVICEHEIGHT - 64 - 50;
+        self.inputText.frame = CGRectMake(0, self.table.bottom, kScreenWidth, 60);
+    } completion:^(BOOL finished) {
+        [self scrollToBottom];
+    }];
+}
+
+- (void)playWithData:(NSData *)data{
     NSError *error;
      self.player= [[AVAudioPlayer alloc]initWithData:data fileTypeHint:@"" error:&error];
     [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayAndRecord error:nil];
-
     if (!error) [self.player play];
-
 }
 
 - (UITableView*)table{
@@ -293,6 +314,7 @@
         [_table registerClass:[VCChatCell class] forCellReuseIdentifier:@"VCChatCell"];
         _table.delegate = self;
         _table.dataSource = self;
+        _table.backgroundColor = [UIColor cyanColor];
         _table.separatorStyle = UITableViewCellSeparatorStyleNone;
         _table.backgroundColor = [UIColor clearColor];
         UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(dismiss)];
@@ -315,7 +337,7 @@
     }
     return _dataSource;
 }
-- (AVPlayer *)player {
+- (AVAudioPlayer *)player {
     if (_player == nil) {
         _player = [[AVAudioPlayer alloc] init];
         _player.volume = 1.0; // 默认最大音量

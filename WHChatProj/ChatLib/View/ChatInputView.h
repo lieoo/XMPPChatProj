@@ -19,9 +19,14 @@
 -(void)send:(NSString *)msg;
 -(void)recordFinish:(NSURL *)url withTime:(float)time;
 -(void)selectImg;
+-(void)disMissKeyBoardDelegate;
+-(void)popUpMoreFuncViewDelegate;
 
 //显示表情时应该处理高
-- (void)handleHeight:(CGFloat)height;
+- (void)handleHeightWithMoreFuncHeight:(CGFloat)height;
+- (void)handleHeightWithFaceHeight:(CGFloat)height;
+- (void)handleResetHeightWithMoreFuncView;
+
 @end
 
 @interface ChatInputView : UIView<UITextViewDelegate,FaceViewDelegate>
@@ -44,5 +49,8 @@
 @property (nonatomic, strong) NSURL *url;
 @property (nonatomic, strong) AVAudioRecorder *recorder;
 @property (nonatomic, strong) NSTimer *timer;
+
+@property (nonatomic, strong) UIView *moreFuncView;
+
 
 @end

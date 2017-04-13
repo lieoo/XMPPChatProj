@@ -20,7 +20,6 @@
 		D15AF7031E9DFC6A007736EE /* FaceCollCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D15AF6F91E9DFC6A007736EE /* FaceCollCell.m */; };
 		D15AF7041E9DFC6A007736EE /* FaceHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = D15AF6FB1E9DFC6A007736EE /* FaceHeaderView.m */; };
 		D15AF7051E9DFC6A007736EE /* FaceView.m in Sources */ = {isa = PBXBuildFile; fileRef = D15AF6FD1E9DFC6A007736EE /* FaceView.m */; };
-		D15AF7061E9DFC6A007736EE /* VCChatCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D15AF6FF1E9DFC6A007736EE /* VCChatCell.m */; };
 		D15AF7201E9DFD46007736EE /* ApiObject.m in Sources */ = {isa = PBXBuildFile; fileRef = D15AF7091E9DFD46007736EE /* ApiObject.m */; };
 		D15AF7211E9DFD46007736EE /* NetRequestTool.m in Sources */ = {isa = PBXBuildFile; fileRef = D15AF70B1E9DFD46007736EE /* NetRequestTool.m */; };
 		D15AF7221E9DFD46007736EE /* NetTool.m in Sources */ = {isa = PBXBuildFile; fileRef = D15AF70D1E9DFD46007736EE /* NetTool.m */; };
@@ -91,6 +90,7 @@
 		D15F65A21E9E5136000B63CA /* yinjie@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D15F65A01E9E5136000B63CA /* yinjie@3x.png */; };
 		D15F65A51E9E516A000B63CA /* chexiao@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D15F65A31E9E516A000B63CA /* chexiao@2x.png */; };
 		D15F65A61E9E516A000B63CA /* chexiao@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D15F65A41E9E516A000B63CA /* chexiao@3x.png */; };
+		D15F65A91E9F8666000B63CA /* VCChatCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D15F65A81E9F8666000B63CA /* VCChatCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -118,8 +118,6 @@
 		D15AF6FB1E9DFC6A007736EE /* FaceHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FaceHeaderView.m; sourceTree = "<group>"; };
 		D15AF6FC1E9DFC6A007736EE /* FaceView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FaceView.h; sourceTree = "<group>"; };
 		D15AF6FD1E9DFC6A007736EE /* FaceView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FaceView.m; sourceTree = "<group>"; };
-		D15AF6FE1E9DFC6A007736EE /* VCChatCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VCChatCell.h; sourceTree = "<group>"; };
-		D15AF6FF1E9DFC6A007736EE /* VCChatCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VCChatCell.m; sourceTree = "<group>"; };
 		D15AF7081E9DFD46007736EE /* ApiObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApiObject.h; sourceTree = "<group>"; };
 		D15AF7091E9DFD46007736EE /* ApiObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApiObject.m; sourceTree = "<group>"; };
 		D15AF70A1E9DFD46007736EE /* NetRequestTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetRequestTool.h; sourceTree = "<group>"; };
@@ -225,6 +223,8 @@
 		D15F65A01E9E5136000B63CA /* yinjie@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "yinjie@3x.png"; sourceTree = "<group>"; };
 		D15F65A31E9E516A000B63CA /* chexiao@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "chexiao@2x.png"; sourceTree = "<group>"; };
 		D15F65A41E9E516A000B63CA /* chexiao@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "chexiao@3x.png"; sourceTree = "<group>"; };
+		D15F65A71E9F8666000B63CA /* VCChatCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VCChatCell.h; sourceTree = "<group>"; };
+		D15F65A81E9F8666000B63CA /* VCChatCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VCChatCell.m; sourceTree = "<group>"; };
 		FC991A9AA1DCAD6C67A2AB6A /* Pods-WHChatProj.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WHChatProj.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WHChatProj/Pods-WHChatProj.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -339,12 +339,12 @@
 				D15AF6F71E9DFC6A007736EE /* ChatInputView.m */,
 				D15AF6F81E9DFC6A007736EE /* FaceCollCell.h */,
 				D15AF6F91E9DFC6A007736EE /* FaceCollCell.m */,
+				D15F65A71E9F8666000B63CA /* VCChatCell.h */,
+				D15F65A81E9F8666000B63CA /* VCChatCell.m */,
 				D15AF6FA1E9DFC6A007736EE /* FaceHeaderView.h */,
 				D15AF6FB1E9DFC6A007736EE /* FaceHeaderView.m */,
 				D15AF6FC1E9DFC6A007736EE /* FaceView.h */,
 				D15AF6FD1E9DFC6A007736EE /* FaceView.m */,
-				D15AF6FE1E9DFC6A007736EE /* VCChatCell.h */,
-				D15AF6FF1E9DFC6A007736EE /* VCChatCell.m */,
 				D15F657E1E9E4E5A000B63CA /* VoiceHUDView.h */,
 				D15F657F1E9E4E5A000B63CA /* VoiceHUDView.m */,
 				D15F65811E9E4EB8000B63CA /* VoiceHUDView.xib */,
@@ -739,6 +739,7 @@
 				D15AF7251E9DFD46007736EE /* UIImageView+SDWebImage.m in Sources */,
 				D15AF7261E9DFD46007736EE /* DataStore.m in Sources */,
 				D15F65801E9E4E5A000B63CA /* VoiceHUDView.m in Sources */,
+				D15F65A91E9F8666000B63CA /* VCChatCell.m in Sources */,
 				D15AF7201E9DFD46007736EE /* ApiObject.m in Sources */,
 				D15AF7391E9E0D34007736EE /* AFURLRequestSerialization.m in Sources */,
 				D15AF7671E9E0DD5007736EE /* MLEmojiLabel.m in Sources */,
@@ -757,7 +758,6 @@
 				D15AF76E1E9E0DD5007736EE /* NSString+MLExpression.m in Sources */,
 				D15AF7741E9E0DD5007736EE /* TTTAttributedLabel.m in Sources */,
 				D15AF7231E9DFD46007736EE /* XmppTools.m in Sources */,
-				D15AF7061E9DFC6A007736EE /* VCChatCell.m in Sources */,
 				D15AF7731E9E0DD5007736EE /* README.md in Sources */,
 				D15AF6DC1E9DFBFF007736EE /* AppDelegate.m in Sources */,
 				D15AF6D91E9DFBFF007736EE /* main.m in Sources */,

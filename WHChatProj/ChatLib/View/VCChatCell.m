@@ -8,14 +8,16 @@
 
 #import "VCChatCell.h"
 #import "MLEmojiLabel.h"
+
 #define kMaxContainerWidth 220.f
 #define MaxChatImageViewWidh 200.f
 #define MaxChatImageViewHeight 300.f
 
-@interface VCChatCell()<MLEmojiLabelDelegate>
+@interface VCChatCell()<MLEmojiLabelDelegate,UIGestureRecognizerDelegate>
 @property(nonatomic,strong)UIImageView *userImg;
-@property(nonatomic,strong)UIImageView *bgImg;
 @property(nonatomic,strong)UIView *container;
+@property(nonatomic,strong)UIImageView *containerImageView;
+@property(nonatomic,strong)UIImageView *maskViewImage;
 @property (nonatomic, strong) MLEmojiLabel *lbContent;   //文字消息
 @property(nonatomic,strong)UIImageView *ivImg;      //图片消息
 @property (nonatomic, strong) XMPPMessageArchiving_Message_CoreDataObject *msg;
@@ -39,8 +41,10 @@
     _container = [[UIView alloc]init];
     [self.contentView addSubview:_container];
     //消息背景
-    _bgImg= [[UIImageView alloc]init];
-    [_container addSubview:_bgImg];
+    _containerImageView = [[UIImageView alloc]init];
+    [_container addSubview:_containerImageView];
+    
+    _maskViewImage = [[UIImageView alloc]init];
     
     _lbContent = [MLEmojiLabel new];
     _lbContent.font = FONT(14*RATIO_WIDHT320);
@@ -58,13 +62,14 @@
     
     _ivImg = [[UIImageView alloc]init];
     _ivImg.hidden = YES;
+    _ivImg.userInteractionEnabled = YES;
     [_container addSubview:_ivImg];
-    
     
     UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(labelTouchUpInside:)];
     [_lbContent addGestureRecognizer:tapGestureRecognizer];
     
 }
+
 
 -(void)loadData:(XMPPMessageArchiving_Message_CoreDataObject *)msg{
     self.msg = msg;
@@ -102,13 +107,12 @@
         NSString *time = [msg.message attributeStringValueForName:@"time"];
         self.lbContent.text = [NSString stringWithFormat:@"[语音] %@''",time];
     }
-    
-}
-
-- (void)labelTouchUpInside:(id)sender{
-    if (self.touchCellIndex) {
-        self.touchCellIndex(_index);
+    if([self.msg.outgoing isEqualToNumber: @(1)]){
+        self.containerImageView.image = [self stretchImage:@"SenderTextNodeBkg"];
+    }else{
+        self.containerImageView.image = [self stretchImage:@"ReceiverTextNodeBkg"];
     }
+    self.maskViewImage.image = self.containerImageView.image;
 }
 
 #pragma  mark - MLEmojiLabelDelegate
@@ -118,6 +122,12 @@
     }else if(type == MLEmojiLabelLinkTypePhoneNumber){
         NSMutableString * str = [[NSMutableString alloc] initWithFormat:@"tel:%@",link];
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:str]];
+    }
+}
+
+- (void)labelTouchUpInside:(id)sender{
+    if (self.touchCellIndex) {
+        self.touchCellIndex(_index);
     }
 }
 
@@ -145,8 +155,10 @@
         
         w = size.width;
         h = size.height;
-        [self.container setMaskView:self.bgImg];
+        //        [self.container setMaskView:self.maskViewImage];
+        self.container.layer.mask = self.maskViewImage.layer;
     }else if([chatType integerValue] == TEXT || [chatType integerValue] == RECORD){  //文字-语音
+        [self.container.layer.mask removeFromSuperlayer];
         w = [self.lbContent sizeThatFits:CGSizeMake(MAXFLOAT, 14*RATIO_WIDHT320)].width;
         if (w > kMaxContainerWidth) {
             w = kMaxContainerWidth;
@@ -164,13 +176,13 @@
         h += 30;
     }
     
-    r = self.bgImg.frame;
+    r = self.containerImageView.frame;
     r.origin.x = 0;
     r.origin.y = 0;
     r.size.width = w;
     r.size.height = h;
-    self.bgImg.frame = r;
-    self.bgImg.image = [self stretchImage:@"ReceiverTextNodeBkg"];
+    self.containerImageView.frame = r;
+    self.maskViewImage.frame = r;
     
     r = self.container.frame;
     r.origin.x = self.userImg.right+15;
@@ -189,7 +201,6 @@
         r = self.container.frame;
         r.origin.x = self.userImg.left - r.size.width - 15;
         self.container.frame = r;
-        self.bgImg.image = [self stretchImage:@"SenderTextNodeBkg"];
     }
 }
 

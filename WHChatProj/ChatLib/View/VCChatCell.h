@@ -10,12 +10,22 @@
 #import "Message.h"
 typedef void(^touchCellIndex)(NSInteger index);
 
-@interface VCChatCell : UITableViewCell
+@protocol VCChatCellDelegate;
 
+@interface VCChatCell : UITableViewCell
+@property (nonatomic, weak) id<VCChatCellDelegate> delegate;
 -(void)loadData:(XMPPMessageArchiving_Message_CoreDataObject *)msg;
 + (CGFloat)calHeight:(XMPPMessageArchiving_Message_CoreDataObject *)msg;
 
 @property (nonatomic,assign) NSInteger index;
 @property (nonatomic,copy)touchCellIndex touchCellIndex;
+
+@end
+
+@protocol VCChatCellDelegate <NSObject>
+
+//- (void)chat:(VCChatCell*)cell didSelectWithType:(NSInteger)type withUrl:(NSURL*)url withImage:(UIImage*)img;
+
+
 
 @end

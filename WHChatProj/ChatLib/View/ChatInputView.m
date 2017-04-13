@@ -57,26 +57,26 @@
         [self.btnRecord addGestureRecognizer:presss];
         [self addSubview:self.btnRecord];
         
-        UIImageView *faceImg = [UIImageView new];
-        [faceImg setImage:[UIImage imageNamed:@"ChatFaceIcon"]];
-        faceImg.frame = CGRectMake(inputText.right+5, self.recordImg.top, 30, 30);
-        faceImg.userInteractionEnabled = TRUE;
-        UITapGestureRecognizer *faceTap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(showFaceAction)];
-        [faceImg addGestureRecognizer:faceTap];
-        [self addSubview:faceImg];
+        UIButton *faceBtn = [[UIButton alloc]init];
+        [faceBtn setImage:[UIImage imageNamed:@"ChatFaceIcon"] forState:UIControlStateNormal];
+        faceBtn.frame = CGRectMake(inputText.right+5, self.recordImg.top, 30, 30);
+        [faceBtn addTarget:self action:@selector(showFaceAction) forControlEvents:UIControlEventTouchUpInside];
+        [self addSubview:faceBtn];
         
-        UIImageView *addImg = [UIImageView new];
-        [addImg setImage:[UIImage imageNamed:@"ChatAddIcon"]];
-        addImg.frame = CGRectMake(faceImg.right+5, self.recordImg.top, 30, 30);
-        addImg.userInteractionEnabled = TRUE;
-        UITapGestureRecognizer *addImgTap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(selectImgAction)];
-        [addImg addGestureRecognizer:addImgTap];
-        [self addSubview:addImg];
+        UIButton *addImageBtn = [[UIButton alloc]init];
+        [addImageBtn setImage:[UIImage imageNamed:@"ChatAddIcon"] forState:UIControlStateNormal];
+        addImageBtn.frame = CGRectMake(faceBtn.right + 5, self.recordImg.top, 30, 30);
+        [addImageBtn addTarget:self action:@selector(selectImgAction:) forControlEvents:UIControlEventTouchUpInside];
+        [self addSubview:addImageBtn];
+
+        UIView *moreFuncView = [[UIView alloc]initWithFrame:CGRectMake(0, 50, kScreenSize.width, 100)];
+        moreFuncView.backgroundColor = [UIColor redColor];
+        moreFuncView.hidden = YES;
+        _moreFuncView = moreFuncView;
+        [self addSubview:_moreFuncView];
         
         self.voiceHUDView.hidden = YES;
         faceData = [ChatInputView emojiDictionary];
-        [[AVAudioSession sharedInstance]
-         setCategory: AVAudioSessionCategoryPlayAndRecord error: nil];
     }
     return self;
 }
@@ -92,17 +92,15 @@
     return emojiDictionary;
 }
 
--(id)init{
+-(id)init {
     return [self initWithFrame:CGRectMake(0, DEVICEWIDTH-50-NAV_STATUS_HEIGHT, DEVICEWIDTH, 50)];
 }
 
-- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text{
-    if ([text isEqualToString:@"\n"]){ //判断输入的字是否是回车，即按下return
-        //在这里做你响应return键的代码
+- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
+    if ([text isEqualToString:@"\n"]){
         [self send];
-        return NO; //这里返回NO，就代表return键值失效，即页面上按下return，不会出现换行，如果为yes，则输入页面会换行
+        return NO;
     }
-    
     return YES;
 }
 
@@ -126,8 +124,8 @@
     f.size.height += faceView.height;
     self.frame = f;
 
-    if ([self.delegate respondsToSelector:@selector(handleHeight:)]) {
-        [self.delegate handleHeight:faceView.height];
+    if ([self.delegate respondsToSelector:@selector(handleHeightWithFaceHeight:)]) {
+        [self.delegate handleHeightWithFaceHeight:faceView.height];
     }
     [UIView animateWithDuration:0.3 animations:^{
         self.transform = CGAffineTransformMakeTranslation(0, -faceView.height);
@@ -136,9 +134,13 @@
     }];
     
 }
-
-
 -(void)hideFaceAnimation{
+    [self hideMoreFuncAnimation];
+    
+    if ([self.delegate respondsToSelector:@selector(handleResetHeightWithMoreFuncView)]) {
+        [self.delegate handleResetHeightWithMoreFuncView];
+    }
+    
     if (showFace) {
         CGRect f = self.frame;
         f.size.height -= faceView.frame.size.height;
@@ -149,7 +151,40 @@
             showFace = FALSE;
         }];
     }
+}
+
+-(void)showMoreFuncAnimation{
+    [self setKeyboard];
+    _moreFuncView.hidden = NO;
+    CGRect f = self.frame;
+    f.size.height += _moreFuncView.height;
+    self.frame = f;
     
+    if ([self.delegate respondsToSelector:@selector(handleHeightWithMoreFuncHeight:)]) {
+        [self.delegate handleHeightWithMoreFuncHeight:_moreFuncView.height];
+    }
+    [UIView animateWithDuration:0.3 animations:^{
+        self.transform = CGAffineTransformMakeTranslation(0, -_moreFuncView.height);
+    }completion:^(BOOL finished) {
+        showFace = TRUE;
+    }];
+}
+-(void)hideMoreFuncAnimation{
+//    CGRect f = self.frame;
+//    f.size.height -= _moreFuncView.frame.size.height;
+//    self.frame = f;
+    if ([self.delegate respondsToSelector:@selector(handleResetHeightWithMoreFuncView)]) {
+        [self.delegate handleResetHeightWithMoreFuncView];
+    }
+    [UIView animateWithDuration:0.0 animations:^{
+//        self.transform = CGAffineTransformMakeTranslation(0, 0);
+        _moreFuncView.hidden = YES;
+
+    } completion:^(BOOL finished) {
+        showFace = FALSE;
+        showFace = NO;
+    }];
+
 }
 
 -(void)selectFace:(int)faceTag{
@@ -186,21 +221,16 @@
     }
 
 }
-- (void)changeImage
-{
-    NSLog(@"%s",__func__);
-        
+- (void)changeImage {
     [_recorder updateMeters];//更新测量值
     float avg = [_recorder averagePowerForChannel:0];
     float minValue = -60;
     float range = 60;
     float outRange = 100;
-    if (avg < minValue)
-    {
+    if (avg < minValue){
         avg = minValue;
     }
-    float decibels = (avg + range) / range * outRange ;
-    NSLog(@"%f",decibels);
+    float decibels = (avg + range) / range * outRange;
     
     if (decibels<20) {
         [self.voiceHUDView.yinjieImageView setImage:[UIImage imageNamed:@"yinjie1@2x.png"]];
@@ -216,10 +246,7 @@
 }
 
 - (void)longPressForRecord:(UILongPressGestureRecognizer *)press{
-    
- 
     self.voiceHUDView.hidden = NO;
-    
     static BOOL bSend;
     switch (press.state)
     {
@@ -273,7 +300,6 @@
 //录音开始
 -(void)recordDownAction{
     NSError *error = nil;
-    
     //激活AVAudioSession
     AVAudioSession *session = [AVAudioSession sharedInstance];
     [session setCategory:AVAudioSessionCategoryPlayAndRecord error:&error];
@@ -282,7 +308,6 @@
     }else {
         NSLog(@"session error: %@",error);
     }
-    
     //设置AVAudioRecorder类的setting参数
     NSDictionary *recorderSettings = [[NSDictionary alloc] initWithObjectsAndKeys:
                                       [NSNumber numberWithFloat:16000.0],AVSampleRateKey,
@@ -308,7 +333,7 @@
 }
 
 //键盘和录音切换
--(void)recordKeyboardChange{
+-(void)recordKeyboardChange {
     if (isKeyboard) {
         [self setKeyboard];
         [inputText becomeFirstResponder];
@@ -319,7 +344,7 @@
     }
 }
 
--(void)setKeyboard{
+-(void)setKeyboard {
     [self.recordImg setImage:[UIImage imageNamed:@"ChatRecordIcon"] forState:UIControlStateNormal];
     self.btnRecord.hidden = TRUE;
     inputText.hidden = FALSE;
@@ -343,7 +368,6 @@
         NSRange tail = [content rangeOfString:@"]" options:NSBackwardsSearch];
         if (tail.length > 0) {
             NSRange fore = [content rangeOfString:@"[" options:NSBackwardsSearch];
-            
             length = (int)(tail.location - fore.location);
         }
         
@@ -354,10 +378,26 @@
 }
 
 //选择图片
-- (void)selectImgAction{
-    if ([self.delegate respondsToSelector:@selector(selectImg)]) {
-        [self.delegate selectImg];
+- (void)selectImgAction:(UIButton *)sender{
+//    if ([self.delegate respondsToSelector:@selector(selectImg)]) {
+//        [self.delegate selectImg];
+//    }
+    sender.selected = !sender.selected;
+    
+    if (sender.selected) {
+        NSLog(@"selected");
+//        if ([self.delegate respondsToSelector:@selector(popUpMoreFuncViewDelegate)]) {
+//            [self.delegate popUpMoreFuncViewDelegate];
+//        }
+        [self showMoreFuncAnimation];
+    }else{
+        NSLog(@"Unselected");
+        if ([self.delegate respondsToSelector:@selector(disMissKeyBoardDelegate)]) {
+            [self.delegate disMissKeyBoardDelegate];
+        }
+        [self hideMoreFuncAnimation];
     }
+  
 }
 
 - (BOOL)textViewShouldBeginEditing:(UITextView *)textView{
