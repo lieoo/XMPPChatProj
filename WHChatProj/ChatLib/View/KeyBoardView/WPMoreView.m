@@ -49,11 +49,12 @@
         self.backgroundColor = UIColorFromRGB(0xececef);
         [self registerBiaoQingNotificationCenter];
         self.dataArray = @[@"0",
-                           @"1",];
+                           @"3",
+                           @"2"];
         
         self.titleArray = @[@"照片",
-                            @"收藏",
-                            ];
+                            @"视频",
+                            @"照相"];
         [self loadView];
     }
     return self;
@@ -90,8 +91,6 @@
                           delay:0
                         options:UIViewAnimationOptionCurveEaseIn
                      animations:^{
-                         
-                         
                          for(UIView * view in self.mainView.subviews)
                          {
                              if([view isKindOfClass:[WPTextView class]])
@@ -100,7 +99,6 @@
                                  self.mainView.frame = CGRectMake(0, [UIScreen mainScreen].bounds.size.height - self.frame.size.height -15 - view.frame.size.height , self.mainView.frame.size.width, 15 + view.frame.size.height);
                              }
                          }
-                         
                          
                          self.frame = CGRectMake(0, [UIScreen mainScreen].bounds.size.height - self.frame.size.height, self.frame.size.width, self.frame.size.height);
                          
@@ -162,7 +160,7 @@
                     action:@selector(pageChange)
           forControlEvents:UIControlEventValueChanged];
     
-    self.contrl.numberOfPages = 2;
+    self.contrl.numberOfPages = 1;
     self.contrl.currentPage = 0;
     self.contrl.pageIndicatorTintColor = UIColorFromRGB(0xcccccc);
     self.contrl.currentPageIndicatorTintColor = [UIColor lightGrayColor];
@@ -173,22 +171,18 @@
 #pragma mark - scrollview & uipagecontrol
 
 
-- (void)pageChange
-{
+- (void)pageChange{
     [self.scrollView setContentOffset:CGPointMake(self.contrl.currentPage * self.frame.size.width, 0) animated:YES];
     [self.contrl setCurrentPage:self.contrl.currentPage];
 }
 
 -(void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
-    
     [self.contrl setCurrentPage:self.scrollView.contentOffset.x / 320];
     [self.contrl updateCurrentPageDisplay];
 }
 
 #pragma mark - private
-- (void)btnClick:(UIButton *)sender
-{
-    
+- (void)btnClick:(UIButton *)sender{
     if(self.delegate && [self.delegate respondsToSelector:@selector(moreViewTreated:)])
     {
         [self.delegate moreViewTreated:sender.tag];

@@ -8,7 +8,8 @@
 
 #import "WPToolBarView.h"
 //#import "WPContentLable.h"
-
+#import <AVFoundation/AVCaptureDevice.h>
+#import <AVFoundation/AVMediaFormat.h>
 
 @interface WPToolBarView ()<UITextViewDelegate,WPMoreViewDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate,WPBiaoQingViewDelegate>
 {
@@ -103,7 +104,8 @@
 
 - (UIButton *)voiceBtn
 {
-    if(!_voiceBtn){
+    if(!_voiceBtn)
+{
         _voiceBtn = [[UIButton alloc]initWithFrame:CGRectMake(self.textView.frame.origin.x, self.textView.frame.origin.y, self.textView.frame.size.width, 35)];
         [_voiceBtn setTitle:@"按住 说话" forState:UIControlStateNormal];
         _voiceBtn.backgroundColor = UIColorFromRGB(0xececef);
@@ -176,7 +178,8 @@
         isBiaoQing = NO;
        
     }
-    
+    [[NSNotificationCenter defaultCenter]postNotificationName:@"keyboardWillChangeFrame" object:nil];
+
     [self configerViewControllerTableviewFram];
     
 }
@@ -239,6 +242,7 @@
 - (void)longPressForRecord:(UILongPressGestureRecognizer *)press{
     self.voiceHUDView.hidden = NO;
     static BOOL bSend;
+    bSend = YES;
     switch (press.state)
     {
         case UIGestureRecognizerStateBegan:
@@ -276,6 +280,7 @@
                 [self.recorder deleteRecording];
             }
             [_voiceHUDView removeAllSubviews];
+            [_voiceHUDView removeFromSuperview];
             _voiceHUDView = nil;
             [_timer invalidate];
             break;
@@ -324,6 +329,8 @@
 -(void)recordUpAction{
     [self.recorder stop];
     self.recorder = nil;
+    [self.voiceHUDView removeAllSubviews];
+    [self.voiceHUDView removeFromSuperview];
     AVURLAsset* audioAsset =[AVURLAsset URLAssetWithURL:self.url options:nil];
     CMTime audioDuration = audioAsset.duration;
     float audioDurationSeconds =CMTimeGetSeconds(audioDuration);
@@ -333,15 +340,13 @@
         }
     }
 }
-- (void)baoqingHidden
-{
+- (void)baoqingHidden{
     [self.rightbtn1 setBackgroundImage:[UIImage imageNamed:@"biaoqing"] forState:UIControlStateNormal];
     isBiaoQing = NO;
     [self configerViewControllerTableviewFram];
 }
 
-- (void)moreHidden
-{
+- (void)moreHidden{
     isMore = NO;
 }
 
@@ -359,13 +364,11 @@
                              } completion:nil];
         }
     }
-    
 }
 
 
 #pragma mark - UITextViewDelegate
-- (void)textViewDidBeginEditing:(UITextView *)textView
-{
+- (void)textViewDidBeginEditing:(UITextView *)textView{
     isBiaoQing = NO;
     isMore = NO;
     [self.moreView removeFromSuperview];
@@ -377,95 +380,42 @@
 
 - (BOOL)textView: (UITextView *)textview shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
 {
-    if ([text isEqualToString:@"\n"])
-    {
-//        if(self.delegate && [self.delegate respondsToSelector:@selector(wp_respond:)])
-//        {
-////            WPDataModel * model = [[WPDataModel alloc]init];
-////        
-////            model.content = [NSString stringWithFormat:@"%@%@",self.textView.text,@" "];
-////            model.fromOrto = TO;
-////            model.stype = PASSSTYPE_STR;
-////            NSLog(@" %@ ",self.textView.text);
-////            
-////            
-////            NSString * str = [WPStringManager replaceStr:self.textView.text];
-////            
-////            model.contentWidth = [WPStringManager getStringRect:str].width;
-////            model.contentHeight = [WPStringManager getStringRect:str].height + 25;
-////            [self.delegate wp_respond:model];
-//            self.textView.text = @"";
-//        }
+    if ([text isEqualToString:@"\n"]){
         if ([self.delegate respondsToSelector:@selector(send:)]) {
             [self.delegate send:self.textView.text];
             self.textView.text = @"";
         }
-        
         return NO;
     }
-    
     return YES;
 }
 
 #pragma mark - WPMoreViewDelegate
 
-- (void)moreViewTreated:(NSInteger)treated
-{
-    if(treated == 0)
-    {
+- (void)moreViewTreated:(NSInteger)treated{
+    if(treated == 0){
+        if (![self isPhotoLibraryAvailable])return;
         UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
         imagePickerController.delegate = self;
         imagePickerController.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-        
-        [self.viewController presentViewController:imagePickerController animated:YES completion:^{
-            
-        }];
+        [self.viewController presentViewController:imagePickerController animated:YES completion:nil];
     }
 }
 
 
 #pragma mark - imagepickerDelegate
 
-- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
-{
-    [picker dismissViewControllerAnimated:YES completion:^{
-        
-    }];
-    
-    UIImage *image = [info objectForKey:UIImagePickerControllerOriginalImage];
-    
-    if(self.delegate && [self.delegate respondsToSelector:@selector(wp_respond:)])
-    {
-//        WPDataModel * model = [[WPDataModel alloc]init];
-//        model.content = image;
-//        model.fromOrto = TO;
-//        model.stype = PASSSTYPE_IMG;
-//        
-//        CGSize size = CGSizeMake(150, 180);
-//        CGSize imgSize= image.size;
-//        float scale=size.height/size.width;
-//        float imgScale=imgSize.height/imgSize.width;
-//        float width=0.0f,height=0.0f;
-//        if(imgScale<scale&&imgSize.width>size.width){
-//            width=size.width;
-//            height=width*imgScale;
-//        }else if(imgScale>scale&&imgSize.height>size.height){
-//            height=size.height;
-//            width=height/imgScale;
-//        }else
-//        {
-//            height = image.size.height;
-//            width = image.size.width;
-//        }
-//        
-//        model.contentWidth = width;
-//        model.contentHeight = height;
-//        [self.delegate wp_respond:model];
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info{
+    [picker dismissViewControllerAnimated:YES completion:nil];
+    if(self.delegate && [self.delegate respondsToSelector:@selector(sendImageDataDic:)]){
+        [self.delegate sendImageDataDic:info];
     }
 }
-
+- (BOOL) isPhotoLibraryAvailable{
+    return [UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary];
+}
 - (VoiceHUDView *)voiceHUDView{
-    if (!_voiceHUDView) {
+    if (_voiceHUDView == nil) {
         CGPoint point =  [UIApplication sharedApplication].keyWindow.center;
         VoiceHUDView *voiceView = [[[NSBundle mainBundle] loadNibNamed:@"VoiceHUDView" owner:self options:nil]firstObject];
         voiceView.frame = CGRectMake(point.x-100,point.y-100, 200, 200);
@@ -488,8 +438,7 @@
 }
 #pragma mark - biaoqingDelegate
 
-- (void)WPbiaoQiongStr:(NSString *)str
-{
+- (void)WPbiaoQiongStr:(NSString *)str{
     self.textView.text = [NSString stringWithFormat:@"%@%@",self.textView.text,str];
 }
 

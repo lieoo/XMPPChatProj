@@ -22,6 +22,7 @@
 //- (void)wp_respond:(WPDataModel *)dataModel;
 
 -(void)send:(NSString *)msg;
+-(void)sendImageDataDic:(NSDictionary *)dic;
 -(void)recordFinish:(NSURL *)url withTime:(float)time;
 
 @end
