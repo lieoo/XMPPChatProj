@@ -21,6 +21,7 @@
 @property (nonatomic, assign) NSInteger curIndex;//记录cell下标 用作判断是语音还是图片
 @property (nonatomic, strong) AVAudioPlayer *player;
 @property (nonatomic, assign) BOOL keyBoardStatus;
+@property (nonatomic, strong) UIImageView *fullImageView;
 
 @end
 
@@ -58,16 +59,18 @@
     NSLog(@"%s__%d|%@",__func__,__LINE__,msg.body);
     [cell loadData:msg];
     cell.index = indexPath.row;
-    cell.touchCellIndex = ^(NSInteger index){
+    cell.touchCellIndex = ^(NSInteger index ,UITapGestureRecognizer *sender){
         XMPPMessageArchiving_Message_CoreDataObject *msg = [self.dataSource objectAtIndex:index];
-        NSLog(@"%@",msg.body);
-        
         __weak VCChat *weakSelf = self;
         if ([msg.body isEqualToString:@"[语音]"]) {
             NSString *voiceBody = [msg.message attributeStringValueForName:@"timeBody"];
             NSLog(@"%@",voiceBody);
             NSData *data = [[NSData alloc]initWithBase64EncodedString:voiceBody options:NSDataBase64DecodingIgnoreUnknownCharacters];
             [weakSelf playWithData:data];
+        }else if ([msg.body isEqualToString:@"[图片]"]){
+            NSString *imageBody = [msg.message attributeStringValueForName:@"imgBody"];
+            NSData *data = [[NSData alloc]initWithBase64EncodedString:imageBody options:NSDataBase64DecodingIgnoreUnknownCharacters];
+            [weakSelf showImageWithData:data TapSender:sender];
         }
     };
     return cell;
@@ -104,17 +107,12 @@
     NSError *error = nil;
     NSArray *fetchedObjects = [context executeFetchRequest:fetchRequest error:&error];
     
-    NSLog(@"%@",fetchedObjects);
-    
-    
     if(fetchedObjects.count > 0){
-        
         if (self.dataSource != nil) {
             if ([self.dataSource count] > 0) {
                 [self.dataSource removeAllObjects];
             }
             [self.dataSource addObjectsFromArray:fetchedObjects];
-            
             [self reload];
         }
     }
@@ -123,7 +121,6 @@
 #pragma mark - Message
 
 - (void)xmppStream:(XMPPStream *)sender didSendMessage:(XMPPMessage *)message{
-    
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, 0.2 * NSEC_PER_SEC);
     dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
         [self reloadMessages];
@@ -134,8 +131,7 @@
     NSLog(@"%s__%d|发送失败",__func__,__LINE__);
 }
 
-- (void)xmppStream:(XMPPStream *)sender didReceiveMessage:(XMPPMessage *)message
-{
+- (void)xmppStream:(XMPPStream *)sender didReceiveMessage:(XMPPMessage *)message {
     if (message.body) {
         NSLog(@"%s__%d|收到消息---%@",__func__,__LINE__,message.body);
         dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, 0.3 * NSEC_PER_SEC);
@@ -161,16 +157,6 @@
         [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.dataSource.count - 1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
     }
 }
-
-//- (void)hideInput {
-//    [self.inputText hide];
-//}
-//
-//- (void)dismiss{
-//    if (self.inputText.isOpend) {
-//        [self hideInput];
-//    }
-//}
 
 #pragma mark - ChatInputViewDelegate
 -(void)send:(NSString *)msg {
@@ -209,7 +195,6 @@
 
 /** 发送图片 */
 - (void)sendMessageWithData:(NSData *)data bodyName:(NSString *)name {
-    // 转换成base64的编码
     NSString *base64str = [data base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
     XMPPMessage *message = [XMPPMessage messageWithType:CHATTYPE to:self.toUser];
     [message addAttributeWithName:@"bodyType" stringValue:[NSString stringWithFormat:@"%d",IMAGE]];
@@ -227,7 +212,6 @@
     [message addAttributeWithName:@"timeBody" stringValue:base64str];
     [message addBody:name];
     [[XmppTools sharedManager].xmppStream sendElement:message];
-    
 }
 
 #pragma mark - 监听事件
@@ -246,11 +230,32 @@
 
 - (void)playWithData:(NSData *)data{
     NSError *error;
-     self.player= [[AVAudioPlayer alloc]initWithData:data fileTypeHint:@"" error:&error];
+     self.player = [[AVAudioPlayer alloc]initWithData:data fileTypeHint:@"" error:&error];
     [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayAndRecord error:nil];
     if (!error) [self.player play];
 }
-
+- (void)showImageWithData:(NSData *)data TapSender:(UITapGestureRecognizer *)sender{
+    UIImage *imageData = [UIImage imageWithData:data];
+    self.fullImageView = [[UIImageView alloc]initWithImage:imageData];
+    self.fullImageView.userInteractionEnabled = YES;
+    [self.fullImageView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(actionTap2:)]];
+    self.fullImageView.frame = CGRectMake(kScreenWidth/2-100, kScreenHeight/2-100, 200, 200);
+    self.fullImageView.backgroundColor = [UIColor blackColor];
+    [[UIApplication sharedApplication].keyWindow addSubview:self.fullImageView];
+    self.fullImageView.contentMode = UIViewContentModeScaleAspectFit;
+    [UIView animateWithDuration:.3 animations:^{
+        self.fullImageView.frame = [UIScreen mainScreen].bounds;
+    }];
+}
+- (void)actionTap2:(UITapGestureRecognizer *)tap{
+    [UIView animateWithDuration:0.2 animations:^{
+        self.fullImageView.frame = CGRectMake(kScreenWidth/2-100, kScreenHeight/2-100, 200, 200);
+        self.fullImageView.alpha = 0;
+    } completion:^(BOOL finished) {
+        [_fullImageView removeFromSuperview];
+    }];
+    [UIApplication sharedApplication].statusBarHidden=NO;
+}
 - (UITableView*)tableView{
     if (!_tableView) {
         _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 64, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height - 50 -64) style:UITableViewStyleGrouped];
@@ -265,21 +270,12 @@
     return _tableView;
 }
 
-- (void)tap
-{
+- (void)tap{
     [self.view endEditing:YES];
     [[NSNotificationCenter defaultCenter] postNotificationName:WPBiaoQingWillHidden object:nil];
     [[NSNotificationCenter defaultCenter] postNotificationName:WPMoreWillHidden object:nil];
 }
 
-
-//- (ChatInputView*)inputText{
-//    if (!_inputText) {
-//        _inputText = [[ChatInputView alloc]initWithFrame:CGRectMake(0, self.tableView.bottom, DEVICEWIDTH, 50)];
-//        _inputText.delegate = self;
-//    }
-//    return _inputText;
-//}
 - (NSMutableArray *)dataSource {
     if (!_dataSource) {
         _dataSource = [NSMutableArray array];

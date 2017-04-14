@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "Message.h"
-typedef void(^touchCellIndex)(NSInteger index);
+typedef void(^touchCellIndex)(NSInteger index,UITapGestureRecognizer *sender);
 
 @protocol VCChatCellDelegate;
 

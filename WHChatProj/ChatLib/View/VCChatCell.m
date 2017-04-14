@@ -18,9 +18,9 @@
 @property(nonatomic,strong)UIView *container;
 @property(nonatomic,strong)UIImageView *containerImageView;
 @property(nonatomic,strong)UIImageView *maskViewImage;
-@property (nonatomic, strong) MLEmojiLabel *lbContent;   //文字消息
+@property(nonatomic,strong) MLEmojiLabel *lbContent;   //文字消息
 @property(nonatomic,strong)UIImageView *ivImg;      //图片消息
-@property (nonatomic, strong) XMPPMessageArchiving_Message_CoreDataObject *msg;
+@property(nonatomic,strong) XMPPMessageArchiving_Message_CoreDataObject *msg;
 @end
 @implementation VCChatCell
 
@@ -45,6 +45,7 @@
     [_container addSubview:_containerImageView];
     
     _maskViewImage = [[UIImageView alloc]init];
+    _maskViewImage.userInteractionEnabled = YES;
     
     _lbContent = [MLEmojiLabel new];
     _lbContent.font = FONT(14*RATIO_WIDHT320);
@@ -58,6 +59,7 @@
     _lbContent.customEmojiPlistName = @"expressionImage_custom";
     _lbContent.textColor = [UIColor blackColor];
     _lbContent.hidden = YES;
+    _lbContent.userInteractionEnabled = YES;
     [_container addSubview:_lbContent];
     
     _ivImg = [[UIImageView alloc]init];
@@ -67,7 +69,8 @@
     
     UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(labelTouchUpInside:)];
     [_lbContent addGestureRecognizer:tapGestureRecognizer];
-    
+    [_ivImg addGestureRecognizer:tapGestureRecognizer];
+
 }
 
 
@@ -107,7 +110,7 @@
         NSString *time = [msg.message attributeStringValueForName:@"time"];
         self.lbContent.text = [NSString stringWithFormat:@"[语音] %@''",time];
     }
-    if([self.msg.outgoing isEqualToNumber: @(1)]){
+    if(self.msg.isOutgoing){
         self.containerImageView.image = [self stretchImage:@"SenderTextNodeBkg"];
     }else{
         self.containerImageView.image = [self stretchImage:@"ReceiverTextNodeBkg"];
@@ -125,9 +128,9 @@
     }
 }
 
-- (void)labelTouchUpInside:(id)sender{
+- (void)labelTouchUpInside:(UITapGestureRecognizer *)sender{
     if (self.touchCellIndex) {
-        self.touchCellIndex(_index);
+        self.touchCellIndex(_index,sender);
     }
 }
 
