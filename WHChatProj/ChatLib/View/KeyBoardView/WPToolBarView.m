@@ -26,20 +26,21 @@
 @property (nonatomic , strong) WPMoreView * moreView;
 
 @property (nonatomic , strong) UIButton * voiceBtn;
-@property (nonatomic , strong) UIViewController * viewController;
+@property (nonatomic , weak) UIViewController * viewController;
 
 @end
 
 
 @implementation WPToolBarView
-
-- (id)initWithFrame:(CGRect)frame viewController:(UIViewController *)viewController
-{
-    self = [super initWithFrame:frame];
-    if(self)
-    {
+#pragma mark --TODO 内存泄漏
+- (void)dealloc{
+    NSLog(@"%s%d",__func__,__LINE__);
+}
+- (id)initWithFrame:(CGRect)frame viewController:(UIViewController *)viewController{
+    if(self = [super initWithFrame:frame]){
+        
         self.viewController = viewController;
-        viewController.automaticallyAdjustsScrollViewInsets = NO;
+        self.viewController.automaticallyAdjustsScrollViewInsets = NO;
         self.backgroundColor = UIColorFromRGB(0xececef);
         self.textView = [[WPTextView alloc]initWithFrame:CGRectMake(42, 7.5, self.frame.size.width - 122, 35) mainView:self];
         self.textView.delegate = self;
@@ -51,7 +52,7 @@
         [self addSubview:self.leftBtn];
         [self addSubview:self.rightbtn1];
         [self addSubview:self.rightbtn2];
-        
+
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(baoqingHidden)
                                                      name:WPBiaoQingWillHidden
@@ -67,45 +68,34 @@
 
 #pragma mark - property
 
-- (UIButton *)leftBtn
-{
-    if(!_leftBtn)
-    {
+- (UIButton *)leftBtn{
+    if(!_leftBtn){
         _leftBtn = [[UIButton alloc]initWithFrame:CGRectMake(5, self.frame.size.height - 30 -10, 30,30)];
         [_leftBtn setBackgroundImage:[UIImage imageNamed:@"voice"] forState:UIControlStateNormal];
         [_leftBtn addTarget:self action:@selector(leftBtnClick) forControlEvents:UIControlEventTouchUpInside];
-        
     }
     return _leftBtn;
 }
 
-- (UIButton *)rightbtn1
-{
-    if(!_rightbtn1)
-    {
+- (UIButton *)rightbtn1{
+    if(!_rightbtn1){
         _rightbtn1 = [[UIButton alloc]initWithFrame:CGRectMake(self.frame.size.width - 13 - 60, self.frame.size.height - 30 -10, 30,30)];
         [_rightbtn1 setBackgroundImage:[UIImage imageNamed:@"biaoqing"] forState:UIControlStateNormal];
         [_rightbtn1 addTarget:self action:@selector(rightbtn1Click) forControlEvents:UIControlEventTouchUpInside];
-        
     }
     return _rightbtn1;
 }
-- (UIButton *)rightbtn2
-{
-    if(!_rightbtn2)
-    {
+- (UIButton *)rightbtn2{
+    if(!_rightbtn2){
         _rightbtn2 = [[UIButton alloc]initWithFrame:CGRectMake(self.frame.size.width - 5 -30, self.frame.size.height - 30 -10, 30,30)];
         [_rightbtn2 setBackgroundImage:[UIImage imageNamed:@"more"] forState:UIControlStateNormal];
         [_rightbtn2 addTarget:self action:@selector(rightbtn2Click) forControlEvents:UIControlEventTouchUpInside];
-        
     }
     return _rightbtn2;
 }
 
-- (UIButton *)voiceBtn
-{
-    if(!_voiceBtn)
-{
+- (UIButton *)voiceBtn{
+    if(!_voiceBtn){
         _voiceBtn = [[UIButton alloc]initWithFrame:CGRectMake(self.textView.frame.origin.x, self.textView.frame.origin.y, self.textView.frame.size.width, 35)];
         [_voiceBtn setTitle:@"按住 说话" forState:UIControlStateNormal];
         _voiceBtn.backgroundColor = UIColorFromRGB(0xececef);
@@ -125,10 +115,8 @@
 
 #pragma mark - private
 
-- (void)leftBtnClick
-{
-    if(!isVoice)
-    {
+- (void)leftBtnClick {
+    if(!isVoice){
         self.textView.alpha = 0;
         [self.leftBtn setBackgroundImage:[UIImage imageNamed:@"keyboard"] forState:UIControlStateNormal];
         [self addSubview:self.voiceBtn];
@@ -139,27 +127,21 @@
         self.frame = CGRectMake(0, [UIScreen mainScreen].bounds.size.height - 50, [UIScreen mainScreen].bounds.size.width, 50);
         isBiaoQing = NO;
         isMore = NO;
-        
-    }else
-    {
+    }else {
         self.textView.alpha = 1;
         [self.leftBtn setBackgroundImage:[UIImage imageNamed:@"voice"] forState:UIControlStateNormal];
         [self.textView becomeFirstResponder];
         [self.voiceBtn removeFromSuperview];
     }
-    
     isVoice = !isVoice;
     [self configerViewControllerTableviewFram];
     
 }
 
-- (void)rightbtn1Click
-{
+- (void)rightbtn1Click{
     self.textView.alpha = 1;
-    if(!isBiaoQing)
-    {
+    if(!isBiaoQing){
         [self.viewController.view addSubview:self.biaoQingView];
-        
         [self.rightbtn1 setBackgroundImage:[UIImage imageNamed:@"keyboard"] forState:UIControlStateNormal];
         [self.leftBtn setBackgroundImage:[UIImage imageNamed:@"voice"] forState:UIControlStateNormal];
         [[NSNotificationCenter defaultCenter] postNotificationName:WPMoreWillHidden object:nil];
@@ -170,26 +152,19 @@
         isVoice = NO;
         isMore = NO;
         isBiaoQing = YES;
-        
     }else{
         [self.rightbtn1 setBackgroundImage:[UIImage imageNamed:@"biaoqing"] forState:UIControlStateNormal];
         [self.textView becomeFirstResponder];
         [self.biaoQingView removeFromSuperview];
         isBiaoQing = NO;
-       
     }
     [[NSNotificationCenter defaultCenter]postNotificationName:@"keyboardWillChangeFrame" object:nil];
-
     [self configerViewControllerTableviewFram];
-    
 }
 
-- (void)rightbtn2Click
-{
-    
+- (void)rightbtn2Click{
     self.textView.alpha = 1;
-    if(!isMore)
-    {
+    if(!isMore){
         [self.viewController.view addSubview:self.moreView];
         [[NSNotificationCenter defaultCenter] postNotificationName:WPBiaoQingWillHidden object:nil];
         [self endEditing:YES];
@@ -201,20 +176,13 @@
         isVoice = NO;
         isBiaoQing = NO;
         isMore = YES;
-    }else
-    {
+    }else{
         [self.textView becomeFirstResponder];
         [self.moreView removeFromSuperview];
         isMore = NO;
     }
-    
     [self configerViewControllerTableviewFram];
 }
-
-//- (void)voiceBtn2Click
-//{
-//    
-//}
 - (void)changeImage {
     [_recorder updateMeters];//更新测量值
     float avg = [_recorder averagePowerForChannel:0];
@@ -243,17 +211,13 @@
     self.voiceHUDView.hidden = NO;
     static BOOL bSend;
     bSend = YES;
-    switch (press.state)
-    {
-        case UIGestureRecognizerStateBegan:
-        {
+    switch (press.state){
+        case UIGestureRecognizerStateBegan:{
             [self recordDownAction];
             break;
         }
-        case UIGestureRecognizerStateChanged:
-        {
+        case UIGestureRecognizerStateChanged:{
             CGPoint currentPoint = [press locationInView:press.view];
-            
             if (currentPoint.y < -50){
                 self.voiceHUDView.recallImageView.hidden = NO;
                 self.voiceHUDView.yinjieImageView.hidden = YES;
@@ -271,8 +235,7 @@
             break;
         }
         case UIGestureRecognizerStateEnded:
-        case UIGestureRecognizerStateCancelled:
-        {
+        case UIGestureRecognizerStateCancelled:{
             if (bSend){
                 [self recordUpAction];
             }else{
@@ -350,12 +313,9 @@
     isMore = NO;
 }
 
-- (void)configerViewControllerTableviewFram
-{
-    for(UIView * view in self.viewController.view.subviews)
-    {
-        if([view isKindOfClass:[UITableView class]])
-        {
+- (void)configerViewControllerTableviewFram{
+    for(UIView * view in self.viewController.view.subviews){
+        if([view isKindOfClass:[UITableView class]]){
             [UIView animateWithDuration:0.25
                                   delay:0
                                 options:UIViewAnimationOptionCurveEaseIn
@@ -378,8 +338,7 @@
 
 }
 
-- (BOOL)textView: (UITextView *)textview shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
-{
+- (BOOL)textView: (UITextView *)textview shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text{
     if ([text isEqualToString:@"\n"]){
         if ([self.delegate respondsToSelector:@selector(send:)]) {
             [self.delegate send:self.textView.text];

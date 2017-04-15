@@ -42,9 +42,7 @@
 
 - (id)initWithMoreFrame:(CGRect)frame mainView:(UIView *)mainView
 {
-    self = [super initWithFrame:frame];
-    if(self)
-    {
+    if(self = [super initWithFrame:frame]){
         self.mainView = mainView;
         self.backgroundColor = UIColorFromRGB(0xececef);
         [self registerBiaoQingNotificationCenter];
@@ -62,19 +60,16 @@
 
 #pragma mark - draw
 
-- (void)drawRect:(CGRect)rect
-{
+- (void)drawRect:(CGRect)rect{
     [super drawRect:rect];
     CGContextRef context = UIGraphicsGetCurrentContext();
     CGContextSetFillColorWithColor(context, [UIColor lightGrayColor].CGColor);
     CGContextFillRect(context, CGRectMake(0, 0.5, CGRectGetWidth(self.frame), 0.5));
 }
 
-
 #pragma mark - notificationCenter
 
-- (void)registerBiaoQingNotificationCenter
-{
+- (void)registerBiaoQingNotificationCenter{
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(moreShow)
                                                  name:WPMoreWillShow
@@ -85,8 +80,7 @@
                                                object:nil];
 }
 
-- (void)moreShow
-{
+- (void)moreShow{
     [UIView animateWithDuration:0.25
                           delay:0
                         options:UIViewAnimationOptionCurveEaseIn
@@ -105,8 +99,7 @@
                      } completion:nil];
 }
 
-- (void)moreHidden
-{
+- (void)moreHidden{
     [UIView animateWithDuration:0.25
                           delay:0
                         options:UIViewAnimationOptionCurveEaseIn
@@ -116,8 +109,8 @@
                      } completion:nil];
 }
 
-- (void)dealloc
-{
+- (void)dealloc{
+    NSLog(@"%s",__func__);
     [[NSNotificationCenter defaultCenter] removeObserver:self name:WPMoreWillShow object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:WPMoreWillHidden object:nil];
 }
@@ -125,8 +118,7 @@
 
 #pragma mark - loadView
 
-- (void)loadView
-{
+- (void)loadView{
     self.scrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 1, self.frame.size.width, self.frame.size.height)];
     self.scrollView.backgroundColor = UIColorFromRGB(0xececef);
     self.scrollView.contentSize = CGSizeMake(self.frame.size.width * 2, self.frame.size.height);
@@ -183,11 +175,9 @@
 
 #pragma mark - private
 - (void)btnClick:(UIButton *)sender{
-    if(self.delegate && [self.delegate respondsToSelector:@selector(moreViewTreated:)])
-    {
+    if(self.delegate && [self.delegate respondsToSelector:@selector(moreViewTreated:)]){
         [self.delegate moreViewTreated:sender.tag];
     }
-    
 }
 
 @end

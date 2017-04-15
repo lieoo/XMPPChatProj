@@ -23,12 +23,8 @@
 
 - (id)initWithFrame:(CGRect)frame mainView:(UIView *)mainView
 {
-    self = [super initWithFrame:frame];
-    if(self)
-    {
+    if(self = [super initWithFrame:frame]){
         self.mainView = mainView;
-       
-        
         CGFloat cornerRadius = 6.0f;
         
         self.backgroundColor = [UIColor whiteColor];
@@ -55,31 +51,22 @@
     return self;
 }
 
-- (void)layoutSubviews
-{
+- (void)layoutSubviews{
     [super layoutSubviews];
     CGSize sizeThatFits = [self sizeThatFits:self.frame.size];
     float newHeight = sizeThatFits.height;
     
-    
-    
-    if(isKeyBoard)
-    {
+    if(isKeyBoard){
         height = [UIScreen mainScreen].bounds.size.height - self.mainView.frame.origin.y - self.mainView.frame.size.height;
-    }else
-    {
+    }else{
         isKeyBoard = NO;
     }
-    
     self.frame = CGRectMake(self.frame.origin.x, self.frame.origin.y, self.frame.size.width, newHeight);
-
     self.mainView.frame = CGRectMake(0, [UIScreen mainScreen].bounds.size.height - height - 15 - newHeight, self.mainView.frame.size.width, 15 + newHeight);
 }
 
 #pragma mark - notification
-- (void) registerForKeyboardNotifications
-{
-   
+- (void)registerForKeyboardNotifications{
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(keyboardWasShown:)
                                                  name:UIKeyboardWillShowNotification
@@ -91,13 +78,9 @@
                                                 object:nil];
 }
 
-- (void)keyboardWasShown:(NSNotification *)noti
-{
-    
+- (void)keyboardWasShown:(NSNotification *)noti{
     isKeyBoard = YES;
-    
     NSDictionary *info = [noti userInfo];
-    
     NSValue *value = [info objectForKey:UIKeyboardFrameEndUserInfoKey];
     
     NSString * time = [info objectForKey:UIKeyboardAnimationDurationUserInfoKey];
@@ -113,8 +96,7 @@
     }];
 }
 
-- (void)keyboardWasHidden:(NSNotification *)noti
-{
+- (void)keyboardWasHidden:(NSNotification *)noti{
     NSDictionary *info = [noti userInfo];
     NSString * time = [info objectForKey:UIKeyboardAnimationDurationUserInfoKey];
     
@@ -125,10 +107,6 @@
                          self.mainView.frame = CGRectMake(0,[UIScreen mainScreen].bounds.size.height - self.frame.size.height - 15 , self.mainView.frame.size.width, self.frame.size.height + 15);
                      } completion:nil];
 }
-
-
-
-
 - (void)dealloc
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];

@@ -20,6 +20,7 @@
 //@property (nonatomic, strong) ChatInputView *inputText;
 @property (nonatomic, assign) NSInteger curIndex;//记录cell下标 用作判断是语音还是图片
 @property (nonatomic, strong) AVAudioPlayer *player;
+@property (nonatomic, weak) WPToolBarView *toolView;
 @property (nonatomic, assign) BOOL keyBoardStatus;
 @property (nonatomic, strong) UIImageView *fullImageView;
 
@@ -30,14 +31,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    WPToolBarView * toolview = [[WPToolBarView alloc]initWithFrame:CGRectMake(0, [UIScreen mainScreen].bounds.size.height -50, [UIScreen mainScreen].bounds.size.width, 50) viewController:self];
-    toolview.delegate = self;
-    
+    WPToolBarView * toolView = [[WPToolBarView alloc]initWithFrame:CGRectMake(0, [UIScreen mainScreen].bounds.size.height -50, [UIScreen mainScreen].bounds.size.width, 50) viewController:self];
+    toolView.delegate = self;
+    _toolView = toolView;
     [self.view addSubview:self.tableView];
-    [self.view addSubview:toolview];
+    [self.view addSubview:_toolView];
 
-    
-//    [self.view addSubview:self.inputText];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillChangeFrame:) name:UIKeyboardWillChangeFrameNotification object:nil];
     [[XmppTools sharedManager].xmppStream addDelegate:self delegateQueue:dispatch_get_main_queue()];
     [self reloadMessages];
@@ -54,17 +53,17 @@
 }
 
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    VCChatCell *cell = [tableView dequeueReusableCellWithIdentifier:@"VCChatCell"];
+    static NSString *cellIdentifider = @"VCChatCell";
+    VCChatCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifider];
     XMPPMessageArchiving_Message_CoreDataObject *msg = [self.dataSource objectAtIndex:indexPath.row];
     NSLog(@"%s__%d|%@",__func__,__LINE__,msg.body);
     [cell loadData:msg];
     cell.index = indexPath.row;
+    __weak VCChat *weakSelf = self;
     cell.touchCellIndex = ^(NSInteger index ,UITapGestureRecognizer *sender){
-        XMPPMessageArchiving_Message_CoreDataObject *msg = [self.dataSource objectAtIndex:index];
-        __weak VCChat *weakSelf = self;
+        XMPPMessageArchiving_Message_CoreDataObject *msg = [weakSelf.dataSource objectAtIndex:index];
         if ([msg.body isEqualToString:@"[语音]"]) {
             NSString *voiceBody = [msg.message attributeStringValueForName:@"timeBody"];
-            NSLog(@"%@",voiceBody);
             NSData *data = [[NSData alloc]initWithBase64EncodedString:voiceBody options:NSDataBase64DecodingIgnoreUnknownCharacters];
             [weakSelf playWithData:data];
         }else if ([msg.body isEqualToString:@"[图片]"]){
@@ -74,18 +73,6 @@
         }
     };
     return cell;
-}
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-//    if (self.inputText.isOpend) {
-//        [self hideInput];
-//    }
-}
-
-- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
-//    if (self.inputText.isOpend) {
-//        [self hideInput];
-//    }
 }
 
 /**
@@ -224,8 +211,12 @@
 - (void)dealloc{
     NSLog(@"%s",__func__);
 }
+- (void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    [self.toolView removeFromSuperview];
+    self.toolView = nil;
+}
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
-//    [self handleResetHeightWithMoreFuncView];
 }
 
 - (void)playWithData:(NSData *)data{

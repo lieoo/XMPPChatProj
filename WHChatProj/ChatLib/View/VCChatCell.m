@@ -67,10 +67,8 @@
     _ivImg.userInteractionEnabled = YES;
     [_container addSubview:_ivImg];
     
-    UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(labelTouchUpInside:)];
-    [_lbContent addGestureRecognizer:tapGestureRecognizer];
-    [_ivImg addGestureRecognizer:tapGestureRecognizer];
-
+    [_lbContent addGestureRecognizer:[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(labelTouchUpInside:)]];
+    [_ivImg addGestureRecognizer:[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(imageTouchUpInside:)]];
 }
 
 
@@ -82,11 +80,10 @@
     }
     NSData *photoData = [[XmppTools sharedManager] getImageData:user];
     
-    UIImage *headImg;
+//    UIImage *headImg;
     if (photoData) {
-        headImg = [UIImage imageWithData:photoData];
         dispatch_async(dispatch_get_main_queue(), ^{
-            self.userImg.image = headImg;
+            self.userImg.image = [UIImage imageWithData:photoData];
         });
     }
     
@@ -127,13 +124,17 @@
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:str]];
     }
 }
-
+#pragma mark - 手势冲突
 - (void)labelTouchUpInside:(UITapGestureRecognizer *)sender{
     if (self.touchCellIndex) {
         self.touchCellIndex(_index,sender);
     }
 }
-
+-(void)imageTouchUpInside:(UITapGestureRecognizer *)sender{
+    if (self.touchCellIndex) {
+        self.touchCellIndex(_index,sender);
+    }
+}
 - (void)layoutSubviews{
     [super layoutSubviews];
     CGRect r = self.userImg.frame;
