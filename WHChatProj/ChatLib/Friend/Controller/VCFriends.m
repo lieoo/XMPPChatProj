@@ -11,9 +11,10 @@
 #import "VCChat.h"
 #import "VCAddFriend.h"
 
-@interface VCFriends ()<UITableViewDelegate,UITableViewDataSource>
+@interface VCFriends ()<UITableViewDelegate,UITableViewDataSource,UIAlertViewDelegate>
 @property (nonatomic, strong) UITableView *table;
 @property (nonatomic, strong) NSMutableArray *dataSource;
+@property (nonatomic, strong) XMPPJID *jid;
 
 @end
 
@@ -41,7 +42,9 @@
     vc.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:vc animated:TRUE];
 }
-
+- (void)deleteUser{
+    [[XmppTools sharedManager]removeFriend:self.jid.user];
+}
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return self.dataSource.count;
@@ -66,6 +69,19 @@
     vc.title = user.jid.user;
     vc.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:vc animated:TRUE];
+}
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        XMPPUserMemoryStorageObject *userObj = [self.dataSource objectAtIndex:indexPath.row];
+        self.jid = userObj.jid;
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:[NSString stringWithFormat:@"是否删除%@",userObj.jid.user] message:nil delegate:self cancelButtonTitle:@"删除!"  otherButtonTitles:@"等等再说", nil];
+        alert.tag = 1;
+        [alert show];
+    }
+}
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    if (alertView.tag == 1 && buttonIndex == 0)[self deleteUser];
 }
 
 - (void)rosterChange {

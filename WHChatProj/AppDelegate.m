@@ -9,7 +9,7 @@
 #import "AppDelegate.h"
 #import "ViewController.h"
 #import "VCFriends.h"
-#import "MineViewController.h"
+#import "VCMine.h"
 @interface AppDelegate ()
 
 @end
@@ -35,7 +35,7 @@
     c2.tabBarItem.title=@"好友";
     c2.tabBarItem.image=[UIImage imageNamed:@"TabFriendIcon"];
 
-    MineViewController *c3=[[MineViewController alloc]init];
+    VCMine *c3=[[VCMine alloc]init];
     c3.tabBarItem.title=@"我的";
     c3.tabBarItem.image=[UIImage imageNamed:@"TabMeIcon"];
     

@@ -7,8 +7,6 @@
 //
 
 #import "XmppTools.h"
-//#import "VCLogin.h"
-//#import "VCNavBase.h"
 
 @implementation XmppTools
 
@@ -239,8 +237,6 @@
     [alertView show];
     
 }
-
-
 #pragma mark - UIAlertViewDelegate
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
