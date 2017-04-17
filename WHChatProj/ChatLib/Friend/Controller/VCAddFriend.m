@@ -29,7 +29,7 @@
 #pragma  mark - geter seter
 - (UILabel*)lbName{
     if (!_lbName) {
-        _lbName = [[UILabel alloc]initWithFrame:CGRectMake(10, 50, 45, 15)];
+        _lbName = [[UILabel alloc]initWithFrame:CGRectMake(10, 100, 45, 15)];
         _lbName.text = @"帐号：";
         _lbName.font = [UIFont systemFontOfSize:14];
     }
@@ -38,7 +38,7 @@
 
 - (UITextField*)tfText{
     if (!_tfText) {
-        _tfText = [[UITextField alloc]initWithFrame:CGRectMake(self.lbName.right+10, 42, DEVICEWIDTH-self.lbName.right-20, 30)];
+        _tfText = [[UITextField alloc]initWithFrame:CGRectMake(self.lbName.right+10, 95, DEVICEWIDTH-self.lbName.right-20, 30)];
         _tfText.placeholder = @" 好友帐号";
         _tfText.layer.borderColor = RGB(189, 189, 189).CGColor;
         _tfText.layer.borderWidth = 0.5;
@@ -51,7 +51,6 @@
 - (UIButton*)btnAdd{
     if (!_btnAdd) {
         _btnAdd = [[UIButton alloc]initWithFrame:CGRectMake(10, self.lbName.bottom+30, DEVICEWIDTH-20, 40)];
-        
         [_btnAdd setBackgroundColor:BASE_COLOR];
         [_btnAdd setTitle:@"添加好友" forState:UIControlStateNormal];
         [_btnAdd addTarget:self action:@selector(addAction) forControlEvents:UIControlEventTouchUpInside];

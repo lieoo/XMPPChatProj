@@ -55,7 +55,6 @@
 }
 
 - (void)updateData:(XMPPUserMemoryStorageObject*)user{
-//    self.ivImg.image = [UIImage imageNamed:@"abc"];
     self.lbName.text = user.jid.user;
     if (user.isOnline) {
         self.status.text = @"[在线]";
