@@ -144,8 +144,12 @@
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:@"该帐号在其他设备登录" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
         alertView.tag = 101;
         [alertView show];
+    }else{
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:@"连接失败" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
+        [alertView show];
     }
     NSLog(@"%s--%d|连接失败|%@",__func__,__LINE__,error);
+    
     
 }
 

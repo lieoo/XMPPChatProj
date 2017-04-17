@@ -7,7 +7,9 @@
 //
 
 #import "AppDelegate.h"
-
+#import "ViewController.h"
+#import "VCFriends.h"
+#import "MineViewController.h"
 @interface AppDelegate ()
 
 @end
@@ -24,6 +26,27 @@
     
     [[UIApplication sharedApplication] registerUserNotificationSettings:set];
     
+    
+    ViewController  *c1 =[[ViewController alloc]init];
+    c1.tabBarItem.title=@"消息";
+    c1.tabBarItem.image=[UIImage imageNamed:@"TabMessageIcon"];
+
+    VCFriends *c2=[[VCFriends alloc]init];
+    c2.tabBarItem.title=@"好友";
+    c2.tabBarItem.image=[UIImage imageNamed:@"TabFriendIcon"];
+
+    MineViewController *c3=[[MineViewController alloc]init];
+    c3.tabBarItem.title=@"我的";
+    c3.tabBarItem.image=[UIImage imageNamed:@"TabMeIcon"];
+    
+    UINavigationController *nav1 = [[UINavigationController alloc]initWithRootViewController:c1];
+    UINavigationController *nav2 = [[UINavigationController alloc]initWithRootViewController:c2];
+    UINavigationController *nav3 = [[UINavigationController alloc]initWithRootViewController:c3];
+    
+    UITabBarController *tabbarC = [[UITabBarController alloc]init];
+    tabbarC.viewControllers=@[nav1,nav2,nav3];
+    
+    self.window.rootViewController = tabbarC;
     
     return YES;
 }

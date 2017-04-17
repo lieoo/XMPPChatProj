@@ -8,6 +8,17 @@
 
 /* Begin PBXBuildFile section */
 		15167F277ABEB52A45916C4E /* Pods_WHChatProj.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C847988C5DDAFD7F309A3A69 /* Pods_WHChatProj.framework */; };
+		D103BE6E1EA49FA900BEC0EF /* MineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D103BE6D1EA49FA900BEC0EF /* MineViewController.m */; };
+		D103BE711EA4A7A300BEC0EF /* TabFriendIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D103BE6F1EA4A7A300BEC0EF /* TabFriendIcon@2x.png */; };
+		D103BE721EA4A7A300BEC0EF /* TabFriendIcon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D103BE701EA4A7A300BEC0EF /* TabFriendIcon@3x.png */; };
+		D103BE751EA4A7AE00BEC0EF /* TabMeIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D103BE731EA4A7AE00BEC0EF /* TabMeIcon@2x.png */; };
+		D103BE761EA4A7AE00BEC0EF /* TabMeIcon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D103BE741EA4A7AE00BEC0EF /* TabMeIcon@3x.png */; };
+		D103BE791EA4A7B700BEC0EF /* TabMessageIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D103BE771EA4A7B700BEC0EF /* TabMessageIcon@2x.png */; };
+		D103BE7A1EA4A7B700BEC0EF /* TabMessageIcon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D103BE781EA4A7B700BEC0EF /* TabMessageIcon@3x.png */; };
+		D103BE841EA4A96400BEC0EF /* VCAddFriend.m in Sources */ = {isa = PBXBuildFile; fileRef = D103BE7D1EA4A96400BEC0EF /* VCAddFriend.m */; };
+		D103BE851EA4A96400BEC0EF /* VCFriends.m in Sources */ = {isa = PBXBuildFile; fileRef = D103BE7F1EA4A96400BEC0EF /* VCFriends.m */; };
+		D103BE861EA4A96400BEC0EF /* VCFriendsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D103BE831EA4A96400BEC0EF /* VCFriendsCell.m */; };
+		D1155A541EA24519008488EF /* VCMsgesCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D1155A531EA24519008488EF /* VCMsgesCell.m */; };
 		D15AF6D91E9DFBFF007736EE /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D15AF6D81E9DFBFF007736EE /* main.m */; };
 		D15AF6DC1E9DFBFF007736EE /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D15AF6DB1E9DFBFF007736EE /* AppDelegate.m */; };
 		D15AF6DF1E9DFBFF007736EE /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D15AF6DE1E9DFBFF007736EE /* ViewController.m */; };
@@ -231,6 +242,22 @@
 /* Begin PBXFileReference section */
 		C847988C5DDAFD7F309A3A69 /* Pods_WHChatProj.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WHChatProj.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CCECB1C205230BD8D98802D0 /* Pods-WHChatProj.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WHChatProj.release.xcconfig"; path = "Pods/Target Support Files/Pods-WHChatProj/Pods-WHChatProj.release.xcconfig"; sourceTree = "<group>"; };
+		D103BE6C1EA49FA900BEC0EF /* MineViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MineViewController.h; sourceTree = "<group>"; };
+		D103BE6D1EA49FA900BEC0EF /* MineViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MineViewController.m; sourceTree = "<group>"; };
+		D103BE6F1EA4A7A300BEC0EF /* TabFriendIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "TabFriendIcon@2x.png"; sourceTree = "<group>"; };
+		D103BE701EA4A7A300BEC0EF /* TabFriendIcon@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "TabFriendIcon@3x.png"; sourceTree = "<group>"; };
+		D103BE731EA4A7AE00BEC0EF /* TabMeIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "TabMeIcon@2x.png"; sourceTree = "<group>"; };
+		D103BE741EA4A7AE00BEC0EF /* TabMeIcon@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "TabMeIcon@3x.png"; sourceTree = "<group>"; };
+		D103BE771EA4A7B700BEC0EF /* TabMessageIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "TabMessageIcon@2x.png"; sourceTree = "<group>"; };
+		D103BE781EA4A7B700BEC0EF /* TabMessageIcon@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "TabMessageIcon@3x.png"; sourceTree = "<group>"; };
+		D103BE7C1EA4A96400BEC0EF /* VCAddFriend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VCAddFriend.h; sourceTree = "<group>"; };
+		D103BE7D1EA4A96400BEC0EF /* VCAddFriend.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VCAddFriend.m; sourceTree = "<group>"; };
+		D103BE7E1EA4A96400BEC0EF /* VCFriends.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VCFriends.h; sourceTree = "<group>"; };
+		D103BE7F1EA4A96400BEC0EF /* VCFriends.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VCFriends.m; sourceTree = "<group>"; };
+		D103BE821EA4A96400BEC0EF /* VCFriendsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VCFriendsCell.h; sourceTree = "<group>"; };
+		D103BE831EA4A96400BEC0EF /* VCFriendsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VCFriendsCell.m; sourceTree = "<group>"; };
+		D1155A521EA24519008488EF /* VCMsgesCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VCMsgesCell.h; sourceTree = "<group>"; };
+		D1155A531EA24519008488EF /* VCMsgesCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VCMsgesCell.m; sourceTree = "<group>"; };
 		D15AF6D41E9DFBFF007736EE /* WHChatProj.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WHChatProj.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D15AF6D81E9DFBFF007736EE /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		D15AF6DA1E9DFBFF007736EE /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -532,6 +559,64 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		D103BE661EA49F0A00BEC0EF /* Message */ = {
+			isa = PBXGroup;
+			children = (
+				D15AF6F51E9DFC6A007736EE /* View */,
+				D15AF6F21E9DFC6A007736EE /* Model */,
+				D15AF6EF1E9DFC6A007736EE /* Controller */,
+			);
+			path = Message;
+			sourceTree = "<group>";
+		};
+		D103BE671EA49F8000BEC0EF /* Friend */ = {
+			isa = PBXGroup;
+			children = (
+				D103BE7B1EA4A96400BEC0EF /* Controller */,
+				D103BE801EA4A96400BEC0EF /* Model */,
+				D103BE811EA4A96400BEC0EF /* View */,
+			);
+			name = Friend;
+			path = ChatLib/Friend;
+			sourceTree = "<group>";
+		};
+		D103BE681EA49F8500BEC0EF /* Mine */ = {
+			isa = PBXGroup;
+			children = (
+				D103BE6C1EA49FA900BEC0EF /* MineViewController.h */,
+				D103BE6D1EA49FA900BEC0EF /* MineViewController.m */,
+			);
+			name = Mine;
+			path = ChatLib/Mine;
+			sourceTree = "<group>";
+		};
+		D103BE7B1EA4A96400BEC0EF /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				D103BE7C1EA4A96400BEC0EF /* VCAddFriend.h */,
+				D103BE7D1EA4A96400BEC0EF /* VCAddFriend.m */,
+				D103BE7E1EA4A96400BEC0EF /* VCFriends.h */,
+				D103BE7F1EA4A96400BEC0EF /* VCFriends.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		D103BE801EA4A96400BEC0EF /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		D103BE811EA4A96400BEC0EF /* View */ = {
+			isa = PBXGroup;
+			children = (
+				D103BE821EA4A96400BEC0EF /* VCFriendsCell.h */,
+				D103BE831EA4A96400BEC0EF /* VCFriendsCell.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		D15AF6CB1E9DFBFF007736EE = {
 			isa = PBXGroup;
 			children = (
@@ -554,10 +639,14 @@
 			isa = PBXGroup;
 			children = (
 				D15AF6EE1E9DFC33007736EE /* ChatLib */,
+				D103BE671EA49F8000BEC0EF /* Friend */,
+				D103BE681EA49F8500BEC0EF /* Mine */,
 				D15AF6DA1E9DFBFF007736EE /* AppDelegate.h */,
 				D15AF6DB1E9DFBFF007736EE /* AppDelegate.m */,
 				D15AF6DD1E9DFBFF007736EE /* ViewController.h */,
 				D15AF6DE1E9DFBFF007736EE /* ViewController.m */,
+				D1155A521EA24519008488EF /* VCMsgesCell.h */,
+				D1155A531EA24519008488EF /* VCMsgesCell.m */,
 				D15AF6E01E9DFBFF007736EE /* Main.storyboard */,
 				D15AF6E31E9DFBFF007736EE /* Assets.xcassets */,
 				D15AF6E51E9DFBFF007736EE /* LaunchScreen.storyboard */,
@@ -580,9 +669,7 @@
 			children = (
 				D15AF7071E9DFD46007736EE /* Network */,
 				D15AF7111E9DFD46007736EE /* Tools */,
-				D15AF6EF1E9DFC6A007736EE /* Controller */,
-				D15AF6F21E9DFC6A007736EE /* Model */,
-				D15AF6F51E9DFC6A007736EE /* View */,
+				D103BE661EA49F0A00BEC0EF /* Message */,
 			);
 			path = ChatLib;
 			sourceTree = "<group>";
@@ -595,7 +682,8 @@
 				D15AF6F01E9DFC6A007736EE /* VCChat.h */,
 				D15AF6F11E9DFC6A007736EE /* VCChat.m */,
 			);
-			path = Controller;
+			name = Controller;
+			path = ../Controller;
 			sourceTree = "<group>";
 		};
 		D15AF6F21E9DFC6A007736EE /* Model */ = {
@@ -604,7 +692,8 @@
 				D15AF6F31E9DFC6A007736EE /* Message.h */,
 				D15AF6F41E9DFC6A007736EE /* Message.m */,
 			);
-			path = Model;
+			name = Model;
+			path = ../Model;
 			sourceTree = "<group>";
 		};
 		D15AF6F51E9DFC6A007736EE /* View */ = {
@@ -625,7 +714,8 @@
 				D15F657F1E9E4E5A000B63CA /* VoiceHUDView.m */,
 				D15F65811E9E4EB8000B63CA /* VoiceHUDView.xib */,
 			);
-			path = View;
+			name = View;
+			path = ../View;
 			sourceTree = "<group>";
 		};
 		D15AF7071E9DFD46007736EE /* Network */ = {
@@ -801,6 +891,12 @@
 		D15AF77A1E9E13A2007736EE /* ImageSource */ = {
 			isa = PBXGroup;
 			children = (
+				D103BE6F1EA4A7A300BEC0EF /* TabFriendIcon@2x.png */,
+				D103BE701EA4A7A300BEC0EF /* TabFriendIcon@3x.png */,
+				D103BE731EA4A7AE00BEC0EF /* TabMeIcon@2x.png */,
+				D103BE741EA4A7AE00BEC0EF /* TabMeIcon@3x.png */,
+				D103BE771EA4A7B700BEC0EF /* TabMessageIcon@2x.png */,
+				D103BE781EA4A7B700BEC0EF /* TabMessageIcon@3x.png */,
 				D15F65F61E9FB8F6000B63CA /* Expression */,
 				D15F65831E9E4FFF000B63CA /* yuyin@2x.png */,
 				D15F65841E9E4FFF000B63CA /* yuyin@3x.png */,
@@ -1070,6 +1166,7 @@
 				D15F667D1E9FB8F6000B63CA /* Expression_31@2x.png in Resources */,
 				D15F66AF1E9FB8F6000B63CA /* Expression_77@2x.png in Resources */,
 				D15F66981E9FB8F6000B63CA /* Expression_56@2x.png in Resources */,
+				D103BE761EA4A7AE00BEC0EF /* TabMeIcon@3x.png in Resources */,
 				D15F65891E9E5010000B63CA /* yinjie1@2x.png in Resources */,
 				D15F668A1E9FB8F6000B63CA /* Expression_43@2x.png in Resources */,
 				D15F66C41E9FB8F6000B63CA /* Expression_96@2x.png in Resources */,
@@ -1107,6 +1204,7 @@
 				D15F66AA1E9FB8F6000B63CA /* Expression_72@2x.png in Resources */,
 				D15F65DD1E9FB7DE000B63CA /* voice.png in Resources */,
 				D15F65DC1E9FB7DE000B63CA /* more@3x.png in Resources */,
+				D103BE791EA4A7B700BEC0EF /* TabMessageIcon@2x.png in Resources */,
 				D15F66BC1E9FB8F6000B63CA /* Expression_89@2x.png in Resources */,
 				D15F66B41E9FB8F6000B63CA /* Expression_81@2x.png in Resources */,
 				D15F66BB1E9FB8F6000B63CA /* Expression_88@2x.png in Resources */,
@@ -1137,6 +1235,7 @@
 				D15AF78D1E9E13A2007736EE /* ChatFaceAdd@2x.png in Resources */,
 				D15F65DA1E9FB7DE000B63CA /* more.png in Resources */,
 				D15F66C31E9FB8F6000B63CA /* Expression_95@2x.png in Resources */,
+				D103BE751EA4A7AE00BEC0EF /* TabMeIcon@2x.png in Resources */,
 				D15F658A1E9E5010000B63CA /* yinjie1@3x.png in Resources */,
 				D15F66C61E9FB8F6000B63CA /* Expression_98@2x.png in Resources */,
 				D15F669C1E9FB8F6000B63CA /* Expression_5@2x.png in Resources */,
@@ -1153,6 +1252,7 @@
 				D15F666A1E9FB8F6000B63CA /* Expression_14@2x.png in Resources */,
 				D15F65EE1E9FB86A000B63CA /* 3@2x.png in Resources */,
 				D15F66AD1E9FB8F6000B63CA /* Expression_75@2x.png in Resources */,
+				D103BE711EA4A7A300BEC0EF /* TabFriendIcon@2x.png in Resources */,
 				D15AF6E71E9DFBFF007736EE /* LaunchScreen.storyboard in Resources */,
 				D15F65E31E9FB7E9000B63CA /* 2@2x.png in Resources */,
 				D15F66C71E9FB8F6000B63CA /* Expression_99@2x.png in Resources */,
@@ -1160,6 +1260,7 @@
 				D15F66B81E9FB8F6000B63CA /* Expression_85@2x.png in Resources */,
 				D15F65951E9E5020000B63CA /* yinjie4@2x.png in Resources */,
 				D15F66A71E9FB8F6000B63CA /* Expression_6@2x.png in Resources */,
+				D103BE7A1EA4A7B700BEC0EF /* TabMessageIcon@3x.png in Resources */,
 				D15AF7641E9E0DD5007736EE /* MLEmoji_Expression.bundle in Resources */,
 				D15F65D81E9FB7DE000B63CA /* keyboard@2x.png in Resources */,
 				D15F66861E9FB8F6000B63CA /* Expression_3@2x.png in Resources */,
@@ -1193,6 +1294,7 @@
 				D15F66A61E9FB8F6000B63CA /* Expression_69@2x.png in Resources */,
 				D15AF78E1E9E13A2007736EE /* ChatFaceAdd@3x.png in Resources */,
 				D15AF7921E9E13A2007736EE /* ChatFaceIcon@3x.png in Resources */,
+				D103BE721EA4A7A300BEC0EF /* TabFriendIcon@3x.png in Resources */,
 				D15F66C81E9FB8F6000B63CA /* Expression_9@2x.png in Resources */,
 				D15F659A1E9E5027000B63CA /* yinjie5@3x.png in Resources */,
 				D15F659E1E9E502C000B63CA /* yinjie6@3x.png in Resources */,
@@ -1298,7 +1400,10 @@
 				D15AF7051E9DFC6A007736EE /* FaceView.m in Sources */,
 				D15AF7691E9E0DD5007736EE /* NSMutableAttributedString+MLLabel.m in Sources */,
 				D15AF7251E9DFD46007736EE /* UIImageView+SDWebImage.m in Sources */,
+				D103BE851EA4A96400BEC0EF /* VCFriends.m in Sources */,
+				D103BE6E1EA49FA900BEC0EF /* MineViewController.m in Sources */,
 				D15AF7261E9DFD46007736EE /* DataStore.m in Sources */,
+				D1155A541EA24519008488EF /* VCMsgesCell.m in Sources */,
 				D15F65801E9E4E5A000B63CA /* VoiceHUDView.m in Sources */,
 				D15F65A91E9F8666000B63CA /* VCChatCell.m in Sources */,
 				D15AF7201E9DFD46007736EE /* ApiObject.m in Sources */,
@@ -1312,6 +1417,7 @@
 				D15AF73E1E9E0D8C007736EE /* VCBase.m in Sources */,
 				D15F65B71E9FAC68000B63CA /* WPBiaoqiangView.m in Sources */,
 				D15AF73B1E9E0D34007736EE /* AFURLSessionManager.m in Sources */,
+				D103BE841EA4A96400BEC0EF /* VCAddFriend.m in Sources */,
 				D15AF7001E9DFC6A007736EE /* VCChat.m in Sources */,
 				D15AF76F1E9E0DD5007736EE /* MLLabelLayoutManager.m in Sources */,
 				D15F65B51E9FAC68000B63CA /* WPToolBarView.m in Sources */,
@@ -1328,6 +1434,7 @@
 				D15AF6D91E9DFBFF007736EE /* main.m in Sources */,
 				D15AF7031E9DFC6A007736EE /* FaceCollCell.m in Sources */,
 				D15AF7221E9DFD46007736EE /* NetTool.m in Sources */,
+				D103BE861EA4A96400BEC0EF /* VCFriendsCell.m in Sources */,
 				D15F65B81E9FAC68000B63CA /* WPMoreView.m in Sources */,
 				D15AF7041E9DFC6A007736EE /* FaceHeaderView.m in Sources */,
 				D15AF7021E9DFC6A007736EE /* ChatInputView.m in Sources */,
