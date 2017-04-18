@@ -8,6 +8,6 @@
 
 #import "VCBase.h"
 
-@interface VCMine : VCBase
+@interface VCMine : UIViewController
 
 @end

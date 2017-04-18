@@ -1,5 +1,5 @@
 //
-//  VCFriends.h
+//  VCLogin.h
 //  AtChat
 //
 //  Created by zhouMR on 16/11/1.
@@ -8,5 +8,6 @@
 
 #import "VCBase.h"
 
-@interface VCFriends : UIViewController
+@interface VCLogin : VCBase
+
 @end

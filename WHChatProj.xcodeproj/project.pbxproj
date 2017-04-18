@@ -23,7 +23,7 @@
 		D1155A541EA24519008488EF /* VCMsgesCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D1155A531EA24519008488EF /* VCMsgesCell.m */; };
 		D15AF6D91E9DFBFF007736EE /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D15AF6D81E9DFBFF007736EE /* main.m */; };
 		D15AF6DC1E9DFBFF007736EE /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D15AF6DB1E9DFBFF007736EE /* AppDelegate.m */; };
-		D15AF6DF1E9DFBFF007736EE /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D15AF6DE1E9DFBFF007736EE /* ViewController.m */; };
+		D15AF6DF1E9DFBFF007736EE /* MsgViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D15AF6DE1E9DFBFF007736EE /* MsgViewController.m */; };
 		D15AF6E21E9DFBFF007736EE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D15AF6E01E9DFBFF007736EE /* Main.storyboard */; };
 		D15AF6E41E9DFBFF007736EE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D15AF6E31E9DFBFF007736EE /* Assets.xcassets */; };
 		D15AF6E71E9DFBFF007736EE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D15AF6E51E9DFBFF007736EE /* LaunchScreen.storyboard */; };
@@ -239,6 +239,8 @@
 		D15F66C71E9FB8F6000B63CA /* Expression_99@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D15F665E1E9FB8F6000B63CA /* Expression_99@2x.png */; };
 		D15F66C81E9FB8F6000B63CA /* Expression_9@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D15F665F1E9FB8F6000B63CA /* Expression_9@2x.png */; };
 		D15F66CA1E9FB9C6000B63CA /* expression_CH.plist in Resources */ = {isa = PBXBuildFile; fileRef = D15F66C91E9FB9C6000B63CA /* expression_CH.plist */; };
+		D1617B431EA5DFAA0049BE14 /* VCLogin.m in Sources */ = {isa = PBXBuildFile; fileRef = D1617B421EA5DFAA0049BE14 /* VCLogin.m */; };
+		D1617B461EA5E49D0049BE14 /* VCTabbarController.m in Sources */ = {isa = PBXBuildFile; fileRef = D1617B451EA5E49D0049BE14 /* VCTabbarController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -268,8 +270,8 @@
 		D15AF6D81E9DFBFF007736EE /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		D15AF6DA1E9DFBFF007736EE /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		D15AF6DB1E9DFBFF007736EE /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		D15AF6DD1E9DFBFF007736EE /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		D15AF6DE1E9DFBFF007736EE /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		D15AF6DD1E9DFBFF007736EE /* MsgViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MsgViewController.h; sourceTree = "<group>"; };
+		D15AF6DE1E9DFBFF007736EE /* MsgViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MsgViewController.m; sourceTree = "<group>"; };
 		D15AF6E11E9DFBFF007736EE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		D15AF6E31E9DFBFF007736EE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D15AF6E61E9DFBFF007736EE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -533,6 +535,10 @@
 		D15F665E1E9FB8F6000B63CA /* Expression_99@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Expression_99@2x.png"; sourceTree = "<group>"; };
 		D15F665F1E9FB8F6000B63CA /* Expression_9@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Expression_9@2x.png"; sourceTree = "<group>"; };
 		D15F66C91E9FB9C6000B63CA /* expression_CH.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = expression_CH.plist; sourceTree = "<group>"; };
+		D1617B411EA5DFAA0049BE14 /* VCLogin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VCLogin.h; sourceTree = "<group>"; };
+		D1617B421EA5DFAA0049BE14 /* VCLogin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VCLogin.m; sourceTree = "<group>"; };
+		D1617B441EA5E49D0049BE14 /* VCTabbarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VCTabbarController.h; sourceTree = "<group>"; };
+		D1617B451EA5E49D0049BE14 /* VCTabbarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VCTabbarController.m; sourceTree = "<group>"; };
 		FC991A9AA1DCAD6C67A2AB6A /* Pods-WHChatProj.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WHChatProj.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WHChatProj/Pods-WHChatProj.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -653,10 +659,14 @@
 				D103BE681EA49F8500BEC0EF /* Mine */,
 				D15AF6DA1E9DFBFF007736EE /* AppDelegate.h */,
 				D15AF6DB1E9DFBFF007736EE /* AppDelegate.m */,
-				D15AF6DD1E9DFBFF007736EE /* ViewController.h */,
-				D15AF6DE1E9DFBFF007736EE /* ViewController.m */,
+				D15AF6DD1E9DFBFF007736EE /* MsgViewController.h */,
+				D15AF6DE1E9DFBFF007736EE /* MsgViewController.m */,
+				D1617B411EA5DFAA0049BE14 /* VCLogin.h */,
+				D1617B421EA5DFAA0049BE14 /* VCLogin.m */,
 				D1155A521EA24519008488EF /* VCMsgesCell.h */,
 				D1155A531EA24519008488EF /* VCMsgesCell.m */,
+				D1617B441EA5E49D0049BE14 /* VCTabbarController.h */,
+				D1617B451EA5E49D0049BE14 /* VCTabbarController.m */,
 				D15AF6E01E9DFBFF007736EE /* Main.storyboard */,
 				D15AF6E31E9DFBFF007736EE /* Assets.xcassets */,
 				D15AF6E51E9DFBFF007736EE /* LaunchScreen.storyboard */,
@@ -1432,8 +1442,9 @@
 				D15AF7001E9DFC6A007736EE /* VCChat.m in Sources */,
 				D15AF76F1E9E0DD5007736EE /* MLLabelLayoutManager.m in Sources */,
 				D15F65B51E9FAC68000B63CA /* WPToolBarView.m in Sources */,
-				D15AF6DF1E9DFBFF007736EE /* ViewController.m in Sources */,
+				D15AF6DF1E9DFBFF007736EE /* MsgViewController.m in Sources */,
 				D15AF7271E9DFD46007736EE /* DataStoreManager.m in Sources */,
+				D1617B431EA5DFAA0049BE14 /* VCLogin.m in Sources */,
 				D15AF7711E9E0DD5007736EE /* MLLinkLabel.m in Sources */,
 				D15AF7011E9DFC6A007736EE /* Message.m in Sources */,
 				D15AF7211E9DFD46007736EE /* NetRequestTool.m in Sources */,
@@ -1443,6 +1454,7 @@
 				D15AF7731E9E0DD5007736EE /* README.md in Sources */,
 				D15AF6DC1E9DFBFF007736EE /* AppDelegate.m in Sources */,
 				D15AF6D91E9DFBFF007736EE /* main.m in Sources */,
+				D1617B461EA5E49D0049BE14 /* VCTabbarController.m in Sources */,
 				D15AF7031E9DFC6A007736EE /* FaceCollCell.m in Sources */,
 				D15AF7221E9DFD46007736EE /* NetTool.m in Sources */,
 				D103BE861EA4A96400BEC0EF /* VCFriendsCell.m in Sources */,

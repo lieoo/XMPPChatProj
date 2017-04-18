@@ -6,11 +6,11 @@
 //  Copyright © 2017年 lieo. All rights reserved.
 //
 
-#import "ViewController.h"
+#import "MsgViewController.h"
 #import "VCChat.h"
 #import "VCMsgesCell.h"
 
-@interface ViewController ()<UITableViewDelegate,UITableViewDataSource,XMPPStreamDelegate>
+@interface MsgViewController ()<UITableViewDelegate,UITableViewDataSource,XMPPStreamDelegate>
 
 @property (nonatomic, strong) UITableView *table;
 @property (nonatomic, strong) NSMutableArray *dataSource;
@@ -18,7 +18,7 @@
 
 @end
 
-@implementation ViewController
+@implementation MsgViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -26,15 +26,15 @@
     [self.view addSubview:self.table];
 
     [[XmppTools sharedManager].xmppStream addDelegate:self delegateQueue:dispatch_get_main_queue()];
-    [[XmppTools sharedManager] loginWithUser:@"messagetest" withPwd:@"123" withSuccess:^{
-        NSLog(@"登陆成功");
-       _jid = [XMPPJID jidWithString:@"localtest@127.0.0.1"];
+//    [[XmppTools sharedManager] loginWithUser:@"messagetest" withPwd:@"123" withSuccess:^{
+//        NSLog(@"登陆成功");
+//       _jid = [XMPPJID jidWithString:@"localtest@127.0.0.1"];
         [self reloadContacts];
 
-    } withFail:^(NSString *error) {
-        NSLog(@"登陆失败");
+//    } withFail:^(NSString *error) {
+//        NSLog(@"登陆失败");
 
-    }];
+//    }];
     
 }
 - (NSMutableArray *)dataSource{
