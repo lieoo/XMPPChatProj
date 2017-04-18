@@ -18,6 +18,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.title = @"添加好友";
     [self.view addSubview:self.lbName];
     [self.view addSubview:self.tfText];
     [self.view addSubview:self.btnAdd];
@@ -72,6 +73,7 @@
         dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
             [MBProgressHUD hideHUDForView:self.view animated:YES];
             [[XmppTools sharedManager]addFriendById:username];
+            hud.label.text = @"发送好友请求成功!";
         });
         
     }

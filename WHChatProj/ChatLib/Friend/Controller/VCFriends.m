@@ -23,6 +23,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self addRightBtn];
+    self.title = @"好友";
     [self.view addSubview:self.table];
     self.dataSource = [XmppTools sharedManager].contacts;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(rosterChange) name:kXMPP_ROSTER_CHANGE object:nil];

@@ -17,6 +17,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.title = @"我的";
     [self.view addSubview:self.table];
 }
 
