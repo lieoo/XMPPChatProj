@@ -8,8 +8,7 @@
 
 #import "VCLogin.h"
 #import "VCTabbarController.h"
-//#import "VCRegister.h"
-//#import "VCForgotPwd.h"
+#import "VCRegFinish.h"
 
 @interface VCLogin ()<UITextFieldDelegate>
 @property (nonatomic, strong) UIView *vPhone;
@@ -34,7 +33,7 @@
     [self.view addSubview:self.vPassword];
     [self.view addSubview:self.btnLogin];
     [self.view addSubview:self.btnRegister];
-    [self.view addSubview:self.btnForgot];
+//    [self.view addSubview:self.btnForgot];
     
     //读取沙盒
     NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
@@ -91,8 +90,8 @@
 }
 
 - (void)registerAction{
-//    VCRegister *vc = [[VCRegister alloc]init];
-//    [self.navigationController pushViewController:vc animated:TRUE];
+    VCRegFinish *vc = [[VCRegFinish alloc]init];
+    [self.navigationController pushViewController:vc animated:TRUE];
 }
 
 
@@ -173,20 +172,20 @@
     return _btnRegister;
 }
 
-- (UIButton*)btnForgot{
-    if (!_btnForgot) {
-        _btnForgot = [[UIButton alloc]initWithFrame:CGRectMake(10, self.btnLogin.bottom+10, DEVICEWIDTH-20, 15)];
-        [_btnForgot setTitle:@"忘记密码?" forState:UIControlStateNormal];
-        [_btnForgot setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
-        _btnForgot.titleLabel.font = [UIFont systemFontOfSize:14];
-        [_btnForgot.titleLabel sizeToFit];
-        _btnForgot.width = _btnForgot.titleLabel.width;
-        _btnForgot.left = DEVICEWIDTH-10-_btnForgot.width;
-        [_btnForgot addTarget:self action:@selector(forgotAction) forControlEvents:UIControlEventTouchUpInside];
-    }
-    return _btnForgot;
-}
-
+//- (UIButton*)btnForgot{
+//    if (!_btnForgot) {
+//        _btnForgot = [[UIButton alloc]initWithFrame:CGRectMake(10, self.btnLogin.bottom+10, DEVICEWIDTH-20, 15)];
+//        [_btnForgot setTitle:@"忘记密码?" forState:UIControlStateNormal];
+//        [_btnForgot setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
+//        _btnForgot.titleLabel.font = [UIFont systemFontOfSize:14];
+//        [_btnForgot.titleLabel sizeToFit];
+//        _btnForgot.width = _btnForgot.titleLabel.width;
+//        _btnForgot.left = DEVICEWIDTH-10-_btnForgot.width;
+//        [_btnForgot addTarget:self action:@selector(forgotAction) forControlEvents:UIControlEventTouchUpInside];
+//    }
+//    return _btnForgot;
+//}
+//
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
