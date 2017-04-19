@@ -19,11 +19,17 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self addRightBtn];
     [self.view addSubview:_table];
     [[XmppTools sharedManager].xmppStream addDelegate:self delegateQueue:dispatch_get_main_queue()];
-    
 }
 
+- (void)addRightBtn{
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"邀请好友" style:UIBarButtonItemStylePlain target:self action:@selector(inviteFriend)];
+}
+- (void)inviteFriend{
+    NSLog(@"%s",__func__);
+}
 -(NSMutableArray *)dataSource{
     if (!_dataSource) {
         _dataSource = [NSMutableArray array];

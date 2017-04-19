@@ -98,6 +98,7 @@
     picker.delegate = self;
     picker.allowsEditing = YES;
     picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    _picker = picker;
     return _picker;
 }
 

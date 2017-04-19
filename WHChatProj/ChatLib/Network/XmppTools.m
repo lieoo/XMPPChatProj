@@ -34,7 +34,7 @@
     
     _xmppAutoPing = [[XMPPAutoPing alloc] init];
     
-    [_xmppAutoPing setPingInterval:1];
+    [_xmppAutoPing setPingInterval:1000]; //控制 didReceiveIQ 方法响应时间
     [_xmppAutoPing setRespondsToQueries:YES];
     [_xmppAutoPing activate:_xmppStream];
     [_xmppAutoPing addDelegate:self delegateQueue:dispatch_get_global_queue(0, 0)];
@@ -357,20 +357,29 @@
 }
 - (BOOL)xmppStream:(XMPPStream *)sender didReceiveIQ:(XMPPIQ *)iq{
 //    NSLog(@"iq:%@",iq);
+    // 以下两个判断其实只需要有一个就够了
     NSString *elementID = iq.elementID;
     if (![elementID isEqualToString:@"getMyRooms"]) {
-        NSMutableArray *array = [NSMutableArray array];
-        for (DDXMLElement *element in iq.children) {
-            if ([element.name isEqualToString:@"query"]) {
-                for (DDXMLElement *item in element.children) {
-                    if ([item.name isEqualToString:@"item"]) {
-                        [array addObject:item];          //array  就是你的群列表
-                    }
+        return YES;
+    }
+    
+    NSArray *results = [iq elementsForXmlns:@"http://jabber.org/protocol/disco#items"];
+    if (results.count < 1) {
+        return YES;
+    }
+    
+    NSMutableArray *array = [NSMutableArray array];
+    for (DDXMLElement *element in iq.children) {
+        if ([element.name isEqualToString:@"query"]) {
+            for (DDXMLElement *item in element.children) {
+                if ([item.name isEqualToString:@"item"]) {
+                    [array addObject:item];          //array  就是你的群列表
+                    
                 }
             }
         }
-        [[NSNotificationCenter defaultCenter] postNotificationName:kXMPP_GET_GROUPS object:array];
     }
+    [[NSNotificationCenter defaultCenter] postNotificationName:kXMPP_GET_GROUPS object:array];
     return YES;
 }
 /**
