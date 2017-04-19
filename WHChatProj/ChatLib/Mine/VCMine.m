@@ -9,8 +9,9 @@
 #import "VCMine.h"
 #import "CellUserImg.h"
 
-@interface VCMine ()<UITableViewDelegate,UITableViewDataSource>
+@interface VCMine ()<UITableViewDelegate,UITableViewDataSource,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 @property (nonatomic, strong) UITableView *table;
+@property (nonatomic,weak)UIImagePickerController *picker;
 @end
 
 @implementation VCMine
@@ -72,6 +73,11 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:NO];// 取消选中
+    
+
+    // 显示图片选择器
+    [self presentViewController:self.picker animated:YES completion:nil];
+
 //    if(indexPath.section == 0){
 //        VCPhoto *vc = [[VCPhoto alloc]init];
 //        vc.hidesBottomBarWhenPushed = YES;
@@ -86,6 +92,28 @@
 //        [self.navigationController pushViewController:vc animated:TRUE];
 //    }
 }
+-(UIImagePickerController *)picker{
+    if (_picker)return _picker;
+    UIImagePickerController *picker = [[UIImagePickerController alloc]init];
+    picker.delegate = self;
+    picker.allowsEditing = YES;
+    picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    return _picker;
+}
+
+-(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info{
+    
+    // 获取图片 设置图片
+    UIImage *image = info[UIImagePickerControllerEditedImage];
+    // 隐藏当前模态窗口
+    [self dismissViewControllerAnimated:YES completion:nil];
+    
+    // 更新到服务器
+    XMPPvCardTemp *myvCard = [XmppTools sharedManager].xmppvCardModule.myvCardTemp;
+    myvCard.photo = UIImageJPEGRepresentation(image, 0.02);
+    [[XmppTools sharedManager].xmppvCardModule updateMyvCardTemp:myvCard];
+}
+
 
 #pragma mark - geter seter
 - (UITableView*)table{

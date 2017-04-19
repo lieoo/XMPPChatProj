@@ -27,6 +27,11 @@
                                    kImgKey    : @"TabMessageIcon",
                                    kSelImgKey : @"TabMessageIcon"},
                                  
+                                 @{kClassKey  : @"RoomListViewController",
+                                   kTitleKey  : @"群聊",
+                                   kImgKey    : @"TabMessageIcon",
+                                   kSelImgKey : @"TabMessageIcon"},
+                                 
                                  @{kClassKey  : @"VCFriends",
                                    kTitleKey  : @"好友",
                                    kImgKey    : @"TabFriendIcon",

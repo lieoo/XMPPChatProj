@@ -22,6 +22,8 @@
 		D103BE8F1EA4B08200BEC0EF /* CellUserImg.m in Sources */ = {isa = PBXBuildFile; fileRef = D103BE8E1EA4B08200BEC0EF /* CellUserImg.m */; };
 		D1155A541EA24519008488EF /* VCMsgesCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D1155A531EA24519008488EF /* VCMsgesCell.m */; };
 		D11EF27F1EA5FC4400CC54EB /* VCRegFinish.m in Sources */ = {isa = PBXBuildFile; fileRef = D11EF27E1EA5FC4400CC54EB /* VCRegFinish.m */; };
+		D11EF2821EA6247300CC54EB /* GroupMsgController.m in Sources */ = {isa = PBXBuildFile; fileRef = D11EF2811EA6247300CC54EB /* GroupMsgController.m */; };
+		D11EF2851EA62B0800CC54EB /* RoomListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D11EF2841EA62B0800CC54EB /* RoomListViewController.m */; };
 		D15AF6D91E9DFBFF007736EE /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D15AF6D81E9DFBFF007736EE /* main.m */; };
 		D15AF6DC1E9DFBFF007736EE /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D15AF6DB1E9DFBFF007736EE /* AppDelegate.m */; };
 		D15AF6DF1E9DFBFF007736EE /* MsgViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D15AF6DE1E9DFBFF007736EE /* MsgViewController.m */; };
@@ -269,6 +271,10 @@
 		D1155A531EA24519008488EF /* VCMsgesCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VCMsgesCell.m; sourceTree = "<group>"; };
 		D11EF27D1EA5FC4400CC54EB /* VCRegFinish.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VCRegFinish.h; sourceTree = "<group>"; };
 		D11EF27E1EA5FC4400CC54EB /* VCRegFinish.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VCRegFinish.m; sourceTree = "<group>"; };
+		D11EF2801EA6247300CC54EB /* GroupMsgController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GroupMsgController.h; sourceTree = "<group>"; };
+		D11EF2811EA6247300CC54EB /* GroupMsgController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GroupMsgController.m; sourceTree = "<group>"; };
+		D11EF2831EA62B0800CC54EB /* RoomListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoomListViewController.h; sourceTree = "<group>"; };
+		D11EF2841EA62B0800CC54EB /* RoomListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RoomListViewController.m; sourceTree = "<group>"; };
 		D15AF6D41E9DFBFF007736EE /* WHChatProj.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WHChatProj.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D15AF6D81E9DFBFF007736EE /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		D15AF6DA1E9DFBFF007736EE /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -664,6 +670,10 @@
 				D15AF6DB1E9DFBFF007736EE /* AppDelegate.m */,
 				D15AF6DD1E9DFBFF007736EE /* MsgViewController.h */,
 				D15AF6DE1E9DFBFF007736EE /* MsgViewController.m */,
+				D11EF2801EA6247300CC54EB /* GroupMsgController.h */,
+				D11EF2811EA6247300CC54EB /* GroupMsgController.m */,
+				D11EF2831EA62B0800CC54EB /* RoomListViewController.h */,
+				D11EF2841EA62B0800CC54EB /* RoomListViewController.m */,
 				D1617B411EA5DFAA0049BE14 /* VCLogin.h */,
 				D1617B421EA5DFAA0049BE14 /* VCLogin.m */,
 				D11EF27D1EA5FC4400CC54EB /* VCRegFinish.h */,
@@ -1457,6 +1467,8 @@
 				D15AF7741E9E0DD5007736EE /* TTTAttributedLabel.m in Sources */,
 				D11EF27F1EA5FC4400CC54EB /* VCRegFinish.m in Sources */,
 				D15AF7231E9DFD46007736EE /* XmppTools.m in Sources */,
+				D11EF2821EA6247300CC54EB /* GroupMsgController.m in Sources */,
+				D11EF2851EA62B0800CC54EB /* RoomListViewController.m in Sources */,
 				D15AF7731E9E0DD5007736EE /* README.md in Sources */,
 				D15AF6DC1E9DFBFF007736EE /* AppDelegate.m in Sources */,
 				D15AF6D91E9DFBFF007736EE /* main.m in Sources */,

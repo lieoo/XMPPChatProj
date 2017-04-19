@@ -355,7 +355,24 @@
     NSData *photoData = [[self avatarModule] photoDataForJID:jid];
     return photoData;
 }
-
+- (BOOL)xmppStream:(XMPPStream *)sender didReceiveIQ:(XMPPIQ *)iq{
+//    NSLog(@"iq:%@",iq);
+    NSString *elementID = iq.elementID;
+    if (![elementID isEqualToString:@"getMyRooms"]) {
+        NSMutableArray *array = [NSMutableArray array];
+        for (DDXMLElement *element in iq.children) {
+            if ([element.name isEqualToString:@"query"]) {
+                for (DDXMLElement *item in element.children) {
+                    if ([item.name isEqualToString:@"item"]) {
+                        [array addObject:item];          //array  就是你的群列表
+                    }
+                }
+            }
+        }
+        [[NSNotificationCenter defaultCenter] postNotificationName:kXMPP_GET_GROUPS object:array];
+    }
+    return YES;
+}
 /**
  * 更改密码  ------ 暂时未修改成功
  */

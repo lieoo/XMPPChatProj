@@ -34,5 +34,7 @@
 #define XMPP_HOST @"127.0.0.1"
 #define XMPP_PLATFORM @"IOS"
 #define CHATTYPE @"chat"                //消息类型chat、group
+#define kXMPP_SUBDOMAIN @"group"
+#define kXMPP_GET_GROUPS     @"kXMPP_GET_GROUPS"
 
 #endif /* Global_h */
