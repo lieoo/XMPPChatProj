@@ -8,6 +8,7 @@
 
 #import "RoomListViewController.h"
 #import "VCMsgesCell.h"
+#import "GroupMsgController.h"
 #import "XMPPRoomMemoryStorage.h"
 
 @interface RoomListViewController ()<XMPPRoomDelegate,UITableViewDataSource,UITableViewDelegate,UIAlertViewDelegate>
@@ -43,7 +44,7 @@
     alertV.alertViewStyle = UIAlertViewStylePlainTextInput;
     [alertV show];
 }
-//加入没有房间 会创建。此处应该和后端配合
+//假如没有房间 会创建。此处应该和后端配合
 - (void)getRoomsResult:(NSNotification *)notification{
     NSLog(@"%@",notification.object);
     
@@ -81,6 +82,13 @@
     return cell;
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    XMPPRoomMessageCoreDataStorageObject *user = [self.RoomDataSource objectAtIndex:indexPath.row];
+    GroupMsgController *groupVC = [[GroupMsgController alloc]init];
+//    groupVC.room =
+//    VCChat *vc = [[VCChat alloc]init];
+//    vc.toUser = user.bareJid;
+//    vc.title = user.bareJid.user;
+    [self.navigationController pushViewController:groupVC animated:TRUE];
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return 60;
@@ -92,19 +100,6 @@
 - (void)addLeftBtn{
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"查找房间" style:UIBarButtonItemStylePlain target:self action:@selector(searchGroup)];
 }
-//
-//- (void)creatChat{
-//    NSLog(@"%s",__func__);
-//    
-//    NSString *roomId = [NSString stringWithFormat:@"%@@group.im.joker.cn/%@",@"lieoo",[XmppTools sharedManager].xmppStream.myJID.bare];
-//    XMPPJID *roomJID = [XMPPJID jidWithString:roomId];
-//    XMPPRoomMemoryStorage *xmppRoomStorage = [[XMPPRoomMemoryStorage alloc] init];
-//    XMPPRoom *xmppRoom = [[XMPPRoom alloc] initWithRoomStorage:xmppRoomStorage jid:roomJID dispatchQueue:dispatch_get_main_queue()];
-//    [xmppRoom activate:[XmppTools sharedManager].xmppStream];
-//    [xmppRoom addDelegate:self delegateQueue:dispatch_get_main_queue()];
-//    [xmppRoom joinRoomUsingNickname:@"NickName" history:nil password:nil];
-//}
-//
 - (void)xmppRoomDidJoin:(XMPPRoom *)sender
 {
     [self configNewRoom:sender];//可以自定义房间配置 此处可以自定义
@@ -161,6 +156,7 @@
     NSString *message = [NSString stringWithFormat:@"群已创建完成"];
     dispatch_async(dispatch_get_main_queue(), ^{
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提示" message:message delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+        alertView.tag = 0;
         [alertView show];
     });
     [self configNewRoom:sender];//可以自定义房间配置 此处可以自定义
@@ -178,22 +174,10 @@
     [iqElement addChild:queryElement];
     [[XmppTools sharedManager].xmppStream sendElement:iqElement];
 }
-- (void)xmppRoom:(XMPPRoom *)sender occupantDidJoin:(XMPPJID *)occupantJID{
-    NSLog(@"%s",__func__);
-}
-//有人退出群聊
-- (void)xmppRoom:(XMPPRoom *)sender occupantDidLeave:(XMPPJID *)occupantJID{
-    NSLog(@"%s",__func__);
-}
-//有人在群里发言
-- (void)xmppRoom:(XMPPRoom *)sender didReceiveMessage:(XMPPMessage *)message fromOccupant:(XMPPJID *)occupantJID{
-    NSLog(@"%s",__func__);
-}
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
     NSString *roomId = [NSString stringWithFormat:@"%@@conference.127.0.0.1",[alertView textFieldAtIndex:0].text];
     XMPPJID *roomJID = [XMPPJID jidWithString:roomId];
-    // 如果不需要使用自带的CoreData存储，则可以使用这个。
     XMPPRoomMemoryStorage *xmppRoomStorage = [[XMPPRoomMemoryStorage alloc] init];
     XMPPRoom *xmppRoom = [[XMPPRoom alloc] initWithRoomStorage:xmppRoomStorage jid:roomJID dispatchQueue:dispatch_get_main_queue()];
     [xmppRoom activate:[XmppTools sharedManager].xmppStream];

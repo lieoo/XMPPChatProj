@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import <XMPPFramework/XMPPRoom.h>
 @interface GroupMsgController : UIViewController
+@property (nonatomic,strong)XMPPRoom *room;
+@property (nonatomic,strong)XMPPJID *jid;
+@property (nonatomic, strong) NSURL *url;
 
 @end
