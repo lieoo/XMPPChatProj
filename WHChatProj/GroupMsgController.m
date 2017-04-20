@@ -13,6 +13,7 @@
 #import <XMPPFramework/XMPPRoomCoreDataStorage.h>
 #import <MediaPlayer/MediaPlayer.h>//播放语音
 #import "XMPPMessageArchivingCoreDataStorage.h"
+#import "InviteUserViewController.h"
 @interface GroupMsgController ()<UITableViewDelegate,UITableViewDataSource,WPToolBarDataDelegate,UIPickerViewDelegate,UINavigationBarDelegate>
 
 @property (nonatomic, strong) UITableView *table;
@@ -31,6 +32,9 @@
 }
 - (void)inviteFriend{
     NSLog(@"%s",__func__);
+    InviteUserViewController *invite = [[InviteUserViewController alloc]init];
+    UINavigationController *naVC = [[UINavigationController alloc]initWithRootViewController: invite];
+    [self.navigationController presentViewController:naVC animated:YES completion:nil];
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -245,8 +249,8 @@
 }
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
-    [self.toolView removeFromSuperview];
-    self.toolView = nil;
+//    [self.toolView removeFromSuperview];
+//    self.toolView = nil;
 }
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
 }

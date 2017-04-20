@@ -244,6 +244,7 @@
 		D15F66CA1E9FB9C6000B63CA /* expression_CH.plist in Resources */ = {isa = PBXBuildFile; fileRef = D15F66C91E9FB9C6000B63CA /* expression_CH.plist */; };
 		D1617B431EA5DFAA0049BE14 /* VCLogin.m in Sources */ = {isa = PBXBuildFile; fileRef = D1617B421EA5DFAA0049BE14 /* VCLogin.m */; };
 		D1617B461EA5E49D0049BE14 /* VCTabbarController.m in Sources */ = {isa = PBXBuildFile; fileRef = D1617B451EA5E49D0049BE14 /* VCTabbarController.m */; };
+		D1671C0D1EA8F2F400BECFFE /* InviteUserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D1671C0C1EA8F2F400BECFFE /* InviteUserViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -548,6 +549,8 @@
 		D1617B421EA5DFAA0049BE14 /* VCLogin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VCLogin.m; sourceTree = "<group>"; };
 		D1617B441EA5E49D0049BE14 /* VCTabbarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VCTabbarController.h; sourceTree = "<group>"; };
 		D1617B451EA5E49D0049BE14 /* VCTabbarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VCTabbarController.m; sourceTree = "<group>"; };
+		D1671C0B1EA8F2F400BECFFE /* InviteUserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InviteUserViewController.h; sourceTree = "<group>"; };
+		D1671C0C1EA8F2F400BECFFE /* InviteUserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InviteUserViewController.m; sourceTree = "<group>"; };
 		FC991A9AA1DCAD6C67A2AB6A /* Pods-WHChatProj.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WHChatProj.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WHChatProj/Pods-WHChatProj.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -674,6 +677,8 @@
 				D11EF2811EA6247300CC54EB /* GroupMsgController.m */,
 				D11EF2831EA62B0800CC54EB /* RoomListViewController.h */,
 				D11EF2841EA62B0800CC54EB /* RoomListViewController.m */,
+				D1671C0B1EA8F2F400BECFFE /* InviteUserViewController.h */,
+				D1671C0C1EA8F2F400BECFFE /* InviteUserViewController.m */,
 				D1617B411EA5DFAA0049BE14 /* VCLogin.h */,
 				D1617B421EA5DFAA0049BE14 /* VCLogin.m */,
 				D11EF27D1EA5FC4400CC54EB /* VCRegFinish.h */,
@@ -1453,6 +1458,7 @@
 				D15AF73E1E9E0D8C007736EE /* VCBase.m in Sources */,
 				D15F65B71E9FAC68000B63CA /* WPBiaoqiangView.m in Sources */,
 				D15AF73B1E9E0D34007736EE /* AFURLSessionManager.m in Sources */,
+				D1671C0D1EA8F2F400BECFFE /* InviteUserViewController.m in Sources */,
 				D103BE841EA4A96400BEC0EF /* VCAddFriend.m in Sources */,
 				D15AF7001E9DFC6A007736EE /* VCChat.m in Sources */,
 				D15AF76F1E9E0DD5007736EE /* MLLabelLayoutManager.m in Sources */,
