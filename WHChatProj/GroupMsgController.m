@@ -12,7 +12,7 @@
 #import "VCChatCell.h"
 #import <XMPPFramework/XMPPRoomCoreDataStorage.h>
 #import <MediaPlayer/MediaPlayer.h>//播放语音
-
+#import "XMPPMessageArchivingCoreDataStorage.h"
 @interface GroupMsgController ()<UITableViewDelegate,UITableViewDataSource,WPToolBarDataDelegate,UIPickerViewDelegate,UINavigationBarDelegate>
 
 @property (nonatomic, strong) UITableView *table;
@@ -35,6 +35,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self addRightBtn];
+    self.title = self.room.roomJID.user;
     [self.view addSubview:_table];
     
 //    XMPPRoomMessageCoreDataStorageObject *rosterstorage = [[XMPPRoomMessageCoreDataStorageObject alloc]init];
@@ -67,6 +68,8 @@
     VCChatCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifider];
     XMPPMessageArchiving_Message_CoreDataObject *msg = [self.dataSource objectAtIndex:indexPath.row];
 //    NSLog(@"%s__%d|%@",__func__,__LINE__,msg.body);
+    NSLog(@"%s__%d|%@",__func__,__LINE__,msg);
+    
     [cell loadData:msg];
     cell.index = indexPath.row;
     __weak GroupMsgController *weakSelf = self;
@@ -96,7 +99,7 @@
 //    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"bareJidStr = %@ and streamBareJidStr = %@ and roomJID = ", self.toUser.bare, [XmppTools sharedManager].userJid.bare,self._room];
 //    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"streamBareJidStr = %@ and roomJID = %@", [XmppTools sharedManager].userJid.bare,self.room.roomJID];
 //    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"roomJID = %@",self.room.roomJID];
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"bareJidStr = %@",self.room.roomJID];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"bareJidStr = %@ and streamBareJidStr = %@",self.room.roomJID,[XmppTools sharedManager].userJid.bare];
     [fetchRequest setPredicate:predicate];
     NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"timestamp" ascending:YES];
     [fetchRequest setSortDescriptors:[NSArray arrayWithObjects:sortDescriptor, nil]];
@@ -130,8 +133,19 @@
 }
 
 - (void)xmppStream:(XMPPStream *)sender didReceiveMessage:(XMPPMessage *)message {
+    if ([XMPPMessage messageWithType:CHATTYPEGROUP to:self.room.roomJID]) return;
+    
     if (message.body) {
+        
+        [[XmppTools sharedManager].messageArchivingCoreDataStorage archiveMessage:message outgoing:YES xmppStream:[XmppTools sharedManager].xmppStream];
+        
         NSLog(@"%s__%d|收到消息---%@",__func__,__LINE__,message.body);
+        XMPPJID *jid = message.from;
+        NSString *str = jid.resource;
+        NSLog(@"%@",jid);
+        NSLog(@"%@",str);
+        
+        
         dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, 0.3 * NSEC_PER_SEC);
         dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
             [self reloadMessages];
@@ -161,7 +175,7 @@
     if (![msg isEqualToString:@""]) {
 //        XMPPMessage *message = [XMPPMessage messageWithType:kXMPP_SUBDOMAIN to:self.room];
 //        XMPPMessage *message = [XMPPMessage messageWithType:kXMPP_SUBDOMAIN];
-        XMPPMessage *message = [XMPPMessage messageWithType:kXMPP_SUBDOMAIN to:self.room.roomJID];
+        XMPPMessage *message = [XMPPMessage messageWithType:CHATTYPEGROUP to:self.room.roomJID];
         [message addAttributeWithName:@"bodyType" stringValue:[NSString stringWithFormat:@"%d",TEXT]];
         [message addBody:msg];
         [[XmppTools sharedManager].xmppStream sendElement:message];
@@ -197,7 +211,7 @@
 - (void)sendMessageWithData:(NSData *)data bodyName:(NSString *)name {
     NSString *base64str = [data base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
 //    XMPPMessage *message = [XMPPMessage messageWithType:kXMPP_SUBDOMAIN to:self.toUser];
-    XMPPMessage *message = [XMPPMessage messageWithType:kXMPP_SUBDOMAIN];
+    XMPPMessage *message = [XMPPMessage messageWithType:CHATTYPEGROUP];
     [message addAttributeWithName:@"bodyType" stringValue:[NSString stringWithFormat:@"%d",IMAGE]];
     [message addAttributeWithName:@"imgBody" stringValue:base64str];
     [message addBody:name];
@@ -207,7 +221,7 @@
 /** 发送录音 */
 - (void)sendRecordMessageWithData:(NSData *)data bodyName:(NSString *)name withTime:(float)time {
     NSString *base64str = [data base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
-    XMPPMessage *message = [XMPPMessage messageWithType:kXMPP_SUBDOMAIN];
+    XMPPMessage *message = [XMPPMessage messageWithType:CHATTYPEGROUP];
     [message addAttributeWithName:@"bodyType" stringValue:[NSString stringWithFormat:@"%d",RECORD]];
     [message addAttributeWithName:@"time" stringValue:[NSString stringWithFormat:@"%f",time]];
     [message addAttributeWithName:@"timeBody" stringValue:base64str];

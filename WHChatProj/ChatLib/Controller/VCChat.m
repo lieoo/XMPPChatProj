@@ -151,7 +151,7 @@
 #pragma mark - ChatInputViewDelegate
 -(void)send:(NSString *)msg {
     if (![msg isEqualToString:@""]) {
-        XMPPMessage *message = [XMPPMessage messageWithType:CHATTYPE to:self.toUser];
+        XMPPMessage *message = [XMPPMessage messageWithType:CHATTYPECHAT to:self.toUser];
         [message addAttributeWithName:@"bodyType" stringValue:[NSString stringWithFormat:@"%d",TEXT]];
         [message addBody:msg];
         [[XmppTools sharedManager].xmppStream sendElement:message];
@@ -186,7 +186,7 @@
 /** 发送图片 */
 - (void)sendMessageWithData:(NSData *)data bodyName:(NSString *)name {
     NSString *base64str = [data base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
-    XMPPMessage *message = [XMPPMessage messageWithType:CHATTYPE to:self.toUser];
+    XMPPMessage *message = [XMPPMessage messageWithType:CHATTYPECHAT to:self.toUser];
     [message addAttributeWithName:@"bodyType" stringValue:[NSString stringWithFormat:@"%d",IMAGE]];
     [message addAttributeWithName:@"imgBody" stringValue:base64str];
     [message addBody:name];
@@ -196,7 +196,7 @@
 /** 发送录音 */
 - (void)sendRecordMessageWithData:(NSData *)data bodyName:(NSString *)name withTime:(float)time {
     NSString *base64str = [data base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
-    XMPPMessage *message = [XMPPMessage messageWithType:CHATTYPE to:self.toUser];
+    XMPPMessage *message = [XMPPMessage messageWithType:CHATTYPECHAT to:self.toUser];
     [message addAttributeWithName:@"bodyType" stringValue:[NSString stringWithFormat:@"%d",RECORD]];
     [message addAttributeWithName:@"time" stringValue:[NSString stringWithFormat:@"%f",time]];
     [message addAttributeWithName:@"timeBody" stringValue:base64str];

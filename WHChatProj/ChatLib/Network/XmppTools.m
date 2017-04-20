@@ -341,23 +341,23 @@
 {
     [self.xmppRoster removeUser:[self getJIDWithUserId:name]];
 }
-
-- (void)sendTextMsg:(NSString *)msg withId:(NSString*)toUser{
-    XMPPJID *jid = [self getJIDWithUserId:toUser];
-    XMPPMessage *message = [XMPPMessage messageWithType:CHATTYPE to:jid];
-    [message addBody:msg];
-    XMPPElement *attachment = [XMPPElement elementWithName:@"MSGTYPE" stringValue:@"0"];
-    [message addChild:attachment];
-    [self.xmppStream sendElement:message];
-}
-
-- (void)sendGroupMsg:(NSString *)msg withRoomId:(NSString *)roomName{
-    NSString *newRoomName=[[roomName componentsSeparatedByString:@"@"]firstObject];
-    NSString* roomJid = [NSString stringWithFormat:@"%@%@",newRoomName,XMPP_GROUPSERVICE];
-    XMPPMessage *message = [XMPPMessage messageWithType:kXMPP_SUBDOMAIN to:[XMPPJID jidWithString:roomJid]];
-    [message addChild:[DDXMLNode elementWithName:@"body" stringValue:msg]];
-    [self.xmppStream sendElement:message];
-}
+//
+//- (void)sendTextMsg:(NSString *)msg withId:(NSString*)toUser{
+//    XMPPJID *jid = [self getJIDWithUserId:toUser];
+//    XMPPMessage *message = [XMPPMessage messageWithType:CHATTYPE to:jid];
+//    [message addBody:msg];
+//    XMPPElement *attachment = [XMPPElement elementWithName:@"MSGTYPE" stringValue:@"0"];
+//    [message addChild:attachment];
+//    [self.xmppStream sendElement:message];
+//}
+//
+//- (void)sendGroupMsg:(NSString *)msg withRoomId:(NSString *)roomName{
+//    NSString *newRoomName=[[roomName componentsSeparatedByString:@"@"]firstObject];
+//    NSString* roomJid = [NSString stringWithFormat:@"%@%@",newRoomName,XMPP_GROUPSERVICE];
+//    XMPPMessage *message = [XMPPMessage messageWithType:kXMPP_SUBDOMAIN to:[XMPPJID jidWithString:roomJid]];
+//    [message addChild:[DDXMLNode elementWithName:@"body" stringValue:msg]];
+//    [self.xmppStream sendElement:message];
+//}
 
 
 - (NSData*)getCurUserImageData

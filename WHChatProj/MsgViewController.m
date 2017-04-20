@@ -21,23 +21,16 @@
 @end
 
 @implementation MsgViewController
-
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    self.tabBarController.tabBar.hidden = NO;
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"消息";
     [self.view addSubview:self.table];
-
     [[XmppTools sharedManager].xmppStream addDelegate:self delegateQueue:dispatch_get_main_queue()];
-//    [[XmppTools sharedManager] loginWithUser:@"messagetest" withPwd:@"123" withSuccess:^{
-//        NSLog(@"登陆成功");
-//       _jid = [XMPPJID jidWithString:@"localtest@127.0.0.1"];
-        [self reloadContacts];
-
-//    } withFail:^(NSString *error) {
-//        NSLog(@"登陆失败");
-
-//    }];
-    
+    [self reloadContacts];
 }
 - (NSMutableArray *)dataSource{
     if (!_dataSource) {
@@ -105,6 +98,9 @@
             [self reloadContacts];
         });
     }
+}
+- (void)dealloc{
+    NSLog(@"MsgViewController dealloc");
 }
 
 - (void)reloadContacts{

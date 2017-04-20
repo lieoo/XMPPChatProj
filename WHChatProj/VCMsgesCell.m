@@ -66,9 +66,9 @@
     UIImage *headImg;
     if (photoData) {
         headImg = [UIImage imageWithData:photoData];
-        dispatch_async(dispatch_get_main_queue(), ^{
+//        dispatch_async(dispatch_get_main_queue(), ^{
             self.ivImg.image = headImg;
-        });
+//        });
     }
     
     self.lbName.text = data.bareJid.user;
