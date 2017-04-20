@@ -23,14 +23,14 @@
 @implementation MsgViewController
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    [[XmppTools sharedManager].xmppStream addDelegate:self delegateQueue:dispatch_get_main_queue()];
+    [self reloadContacts];
     self.tabBarController.tabBar.hidden = NO;
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"消息";
     [self.view addSubview:self.table];
-    [[XmppTools sharedManager].xmppStream addDelegate:self delegateQueue:dispatch_get_main_queue()];
-    [self reloadContacts];
 }
 - (NSMutableArray *)dataSource{
     if (!_dataSource) {
@@ -102,7 +102,10 @@
 - (void)dealloc{
     NSLog(@"MsgViewController dealloc");
 }
-
+- (void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    [[XmppTools sharedManager].xmppStream removeDelegate:self];
+}
 - (void)reloadContacts{
     NSManagedObjectContext *context = [XmppTools sharedManager].messageArchivingCoreDataStorage.mainThreadManagedObjectContext;
     

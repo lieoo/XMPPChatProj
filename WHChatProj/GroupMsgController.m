@@ -53,7 +53,10 @@
     [self reloadMessages];
     self.automaticallyAdjustsScrollViewInsets = NO;
 }
-
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    
+}
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return self.dataSource.count;
 }
@@ -133,7 +136,8 @@
 }
 
 - (void)xmppStream:(XMPPStream *)sender didReceiveMessage:(XMPPMessage *)message {
-    if ([XMPPMessage messageWithType:CHATTYPEGROUP to:self.room.roomJID]) return;
+    
+//    if ([XMPPMessage messageWithType:CHATTYPEGROUP to:self.room.roomJID]) return;
     
     if (message.body) {
         

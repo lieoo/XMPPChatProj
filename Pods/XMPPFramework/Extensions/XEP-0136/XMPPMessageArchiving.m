@@ -421,7 +421,11 @@
 - (void)xmppStream:(XMPPStream *)sender didReceiveMessage:(XMPPMessage *)message
 {
 	XMPPLogTrace();
-	
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSString *userName = [defaults stringForKey:@"userName"];
+    NSString *jidStr = message.toStr;
+    if([jidStr hasPrefix:userName])return;
+    
 	if ([self shouldArchiveMessage:message outgoing:NO xmppStream:sender])
 	{
 		[xmppMessageArchivingStorage archiveMessage:message outgoing:NO xmppStream:sender];
