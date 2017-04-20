@@ -72,6 +72,8 @@
     self.messageArchiving = [[XMPPMessageArchiving alloc]initWithMessageArchivingStorage:self.messageArchivingCoreDataStorage dispatchQueue:dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 9)];
     self.messageArchiving.clientSideMessageArchivingOnly = YES;
     [self.messageArchiving activate:self.xmppStream];
+    
+    
 }
 
 /**
@@ -132,6 +134,9 @@
 }
 
 - (void)xmppStreamDidDisconnect:(XMPPStream *)sender withError:(NSError *)error {
+    
+    NSLog(@"ERROR:\%@\n",error);
+    NSLog(@"SENDER:\n%@\n",sender);
     NSLog(@"%ld",error.code);
     if(error && error.code == 7){
         [self goOffLine];
@@ -338,14 +343,20 @@
 }
 
 - (void)sendTextMsg:(NSString *)msg withId:(NSString*)toUser{
-    
     XMPPJID *jid = [self getJIDWithUserId:toUser];
     XMPPMessage *message = [XMPPMessage messageWithType:CHATTYPE to:jid];
     [message addBody:msg];
     XMPPElement *attachment = [XMPPElement elementWithName:@"MSGTYPE" stringValue:@"0"];
     [message addChild:attachment];
     [self.xmppStream sendElement:message];
-    
+}
+
+- (void)sendGroupMsg:(NSString *)msg withRoomId:(NSString *)roomName{
+    NSString *newRoomName=[[roomName componentsSeparatedByString:@"@"]firstObject];
+    NSString* roomJid = [NSString stringWithFormat:@"%@%@",newRoomName,XMPP_GROUPSERVICE];
+    XMPPMessage *message = [XMPPMessage messageWithType:kXMPP_SUBDOMAIN to:[XMPPJID jidWithString:roomJid]];
+    [message addChild:[DDXMLNode elementWithName:@"body" stringValue:msg]];
+    [self.xmppStream sendElement:message];
 }
 
 
@@ -382,6 +393,12 @@
     [[NSNotificationCenter defaultCenter] postNotificationName:kXMPP_GET_GROUPS object:array];
     return YES;
 }
+//邀请好友
+- (void)inviteUser:(NSString *)jidStr toRoom:(XMPPRoom *)room withMessage:(NSString *)message{
+    XMPPJID * jid = [XMPPJID jidWithString:jidStr];
+    [room inviteUser:jid withMessage:message];
+}
+
 /**
  * 更改密码  ------ 暂时未修改成功
  */

@@ -9,7 +9,9 @@
 #import "MsgViewController.h"
 #import "VCChat.h"
 #import "VCMsgesCell.h"
-
+#import "GroupMsgController.h"
+#import "XMPPRoomMemoryStorage.h"
+#import "XMPPMessageArchiving_Contact_CoreDataObject.h"
 @interface MsgViewController ()<UITableViewDelegate,UITableViewDataSource,XMPPStreamDelegate>
 
 @property (nonatomic, strong) UITableView *table;
@@ -63,14 +65,24 @@
     return cell;
 }
 
+#pragma mark -- 这里群聊与私人聊天的区别在于 bareJid 是否含有服务器的名称
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    XMPPMessageArchiving_Contact_CoreDataObject *user = [self.dataSource objectAtIndex:indexPath.row];
-    VCChat *vc = [[VCChat alloc]init];
-    vc.toUser = user.bareJid;
-    vc.title = user.bareJid.user;
-    vc.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:vc animated:TRUE];
+    XMPPMessageArchiving_Contact_CoreDataObject *user = [self.dataSource objectAtIndex:indexPath.row]; 
+    if (!([user.bareJidStr rangeOfString:XMPP_GROUPSERVICE].location == NSNotFound)) {
+        GroupMsgController *groupVC = [[GroupMsgController alloc]init];
+        XMPPRoomMemoryStorage *roomStorage = [[XMPPRoomMemoryStorage alloc] init];
+        XMPPRoom *xmppRoom = [[XMPPRoom alloc] initWithRoomStorage:roomStorage jid:user.bareJid dispatchQueue:dispatch_get_main_queue()];
+        groupVC.room = xmppRoom;
+        self.tabBarController.tabBar.hidden = YES;
+        [self.navigationController pushViewController:groupVC animated:TRUE];
+    }else{
+        VCChat *vc = [[VCChat alloc]init];
+        vc.toUser = user.bareJid;
+        vc.title = user.bareJid.user;
+        vc.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:vc animated:TRUE];
+    }
 }
 
 - (UITableView*)table{

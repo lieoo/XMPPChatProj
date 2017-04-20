@@ -10,6 +10,7 @@
 #import "VCMsgesCell.h"
 #import "GroupMsgController.h"
 #import "XMPPRoomMemoryStorage.h"
+#import <XMPPFramework/XMPPRoomCoreDataStorage.h>
 
 @interface RoomListViewController ()<XMPPRoomDelegate,UITableViewDataSource,UITableViewDelegate,UIAlertViewDelegate>
 
@@ -21,6 +22,10 @@
 
 @implementation RoomListViewController
 
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    self.tabBarController.tabBar.hidden = NO;
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
 
@@ -40,14 +45,13 @@
 }
 - (void)CreatRoomTest{
     UIAlertView *alertV = [[UIAlertView alloc]initWithTitle:@"请输入群名" message:@"" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"好的", nil];
-    alertV.tag = 0;
+    alertV.tag = 1;
     alertV.alertViewStyle = UIAlertViewStylePlainTextInput;
     [alertV show];
 }
 //假如没有房间 会创建。此处应该和后端配合
 - (void)getRoomsResult:(NSNotification *)notification{
     NSLog(@"%@",notification.object);
-    
     [self.RoomDataSource removeAllObjects];
     [self.RoomDataSource addObjectsFromArray:[notification object]];
     [self.table reloadData];
@@ -59,8 +63,7 @@
     NSXMLElement *iqElement = [NSXMLElement elementWithName:@"iq"];
     [iqElement addAttributeWithName:@"type" stringValue:@"get"];
     [iqElement addAttributeWithName:@"from" stringValue:[XmppTools sharedManager].xmppStream.myJID.bare];
-//    NSString *service = [NSString stringWithFormat:@"group.127.0.0.1"];
-    NSString *service = [NSString stringWithFormat:@"conference.127.0.0.1"];
+    NSString *service = [NSString stringWithFormat:XMPP_GROUPSERVICE];
     [iqElement addAttributeWithName:@"to" stringValue:service];
     [iqElement addAttributeWithName:@"id" stringValue:@"getMyRooms"];
     [iqElement addChild:queryElement];
@@ -73,6 +76,8 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+//    VCMsgesCell *cell = [tableView dequeueReusableCellWithIdentifier:@"VCMsgesCell"];
+
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"roomCell" forIndexPath:indexPath];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     DDXMLElement *item = self.RoomDataSource[indexPath.row];
@@ -82,12 +87,12 @@
     return cell;
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    XMPPRoomMessageCoreDataStorageObject *user = [self.RoomDataSource objectAtIndex:indexPath.row];
     GroupMsgController *groupVC = [[GroupMsgController alloc]init];
-//    groupVC.room =
-//    VCChat *vc = [[VCChat alloc]init];
-//    vc.toUser = user.bareJid;
-//    vc.title = user.bareJid.user;
+    DDXMLElement *item = self.RoomDataSource[indexPath.row];
+    XMPPRoomMemoryStorage *roomStorage = [[XMPPRoomMemoryStorage alloc] init];
+    XMPPRoom *xmppRoom = [[XMPPRoom alloc] initWithRoomStorage:roomStorage jid:[XMPPJID jidWithString:[item attributeForName:@"jid"].stringValue] dispatchQueue:dispatch_get_main_queue()];
+    groupVC.room = xmppRoom;
+    self.tabBarController.tabBar.hidden = YES;
     [self.navigationController pushViewController:groupVC animated:TRUE];
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -151,7 +156,6 @@
 
 - (void)xmppRoomDidCreate:(XMPPRoom *)sender{
     NSLog(@"%s",__func__);
-    
     //    NSString *message = [NSString stringWithFormat:@"群<%@>已创建完成",sender.roomJID.user];
     NSString *message = [NSString stringWithFormat:@"群已创建完成"];
     dispatch_async(dispatch_get_main_queue(), ^{
@@ -168,7 +172,7 @@
     NSXMLElement *iqElement = [NSXMLElement elementWithName:@"iq"];
     [iqElement addAttributeWithName:@"type" stringValue:@"get"];
     [iqElement addAttributeWithName:@"from" stringValue:[XmppTools sharedManager].xmppStream.myJID.bare];
-    NSString *service = [NSString stringWithFormat:@"conference.127.0.0.1"];
+    NSString *service = [NSString stringWithFormat:XMPP_GROUPSERVICE];
     [iqElement addAttributeWithName:@"to" stringValue:service];
     [iqElement addAttributeWithName:@"id" stringValue:@"getMyRooms"];
     [iqElement addChild:queryElement];
@@ -176,13 +180,15 @@
 }
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
-    NSString *roomId = [NSString stringWithFormat:@"%@@conference.127.0.0.1",[alertView textFieldAtIndex:0].text];
-    XMPPJID *roomJID = [XMPPJID jidWithString:roomId];
-    XMPPRoomMemoryStorage *xmppRoomStorage = [[XMPPRoomMemoryStorage alloc] init];
-    XMPPRoom *xmppRoom = [[XMPPRoom alloc] initWithRoomStorage:xmppRoomStorage jid:roomJID dispatchQueue:dispatch_get_main_queue()];
-    [xmppRoom activate:[XmppTools sharedManager].xmppStream];
-    [xmppRoom addDelegate:self delegateQueue:dispatch_get_main_queue()];
-    [xmppRoom joinRoomUsingNickname:[XmppTools sharedManager].xmppStream.myJID.user history:nil password:nil];
+    if (alertView.tag == 1 && buttonIndex == 0) {        
+        NSString *roomId = [NSString stringWithFormat:@"%@@%@",[alertView textFieldAtIndex:0].text, XMPP_GROUPSERVICE];
+        XMPPJID *roomJID = [XMPPJID jidWithString:roomId];
+        XMPPRoomMemoryStorage *xmppRoomStorage = [[XMPPRoomMemoryStorage alloc] init];
+        XMPPRoom *xmppRoom = [[XMPPRoom alloc] initWithRoomStorage:xmppRoomStorage jid:roomJID dispatchQueue:dispatch_get_main_queue()];
+        [xmppRoom activate:[XmppTools sharedManager].xmppStream];
+        [xmppRoom addDelegate:self delegateQueue:dispatch_get_main_queue()];
+        [xmppRoom joinRoomUsingNickname:[XmppTools sharedManager].xmppStream.myJID.user history:nil password:nil];
+    }
 }
 - (UITableView*)table{
     if (!_table) {

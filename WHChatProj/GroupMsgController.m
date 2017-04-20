@@ -13,7 +13,7 @@
 #import <XMPPFramework/XMPPRoomCoreDataStorage.h>
 #import <MediaPlayer/MediaPlayer.h>//播放语音
 
-@interface GroupMsgController ()<UITableViewDelegate,UITableViewDataSource,WPToolBarDataDelegate,UIPickerViewDelegate>
+@interface GroupMsgController ()<UITableViewDelegate,UITableViewDataSource,WPToolBarDataDelegate,UIPickerViewDelegate,UINavigationBarDelegate>
 
 @property (nonatomic, strong) UITableView *table;
 @property (nonatomic, strong) NSMutableArray *dataSource;
@@ -37,10 +37,9 @@
     [self addRightBtn];
     [self.view addSubview:_table];
     
-    [[XmppTools sharedManager].xmppStream addDelegate:self delegateQueue:dispatch_get_main_queue()];
-    XMPPRoomMessageCoreDataStorageObject *rosterstorage = [[XMPPRoomMessageCoreDataStorageObject alloc]init];
-    _room = [[XMPPRoom alloc]initWithRoomStorage:rosterstorage jid:self.jid dispatchQueue:dispatch_get_main_queue()];
-    [_room activate:[XmppTools sharedManager].xmppStream];
+//    XMPPRoomMessageCoreDataStorageObject *rosterstorage = [[XMPPRoomMessageCoreDataStorageObject alloc]init];
+//    _room = [[XMPPRoom alloc]initWithRoomStorage:rosterstorage jid:self.jid dispatchQueue:dispatch_get_main_queue()];
+//    [_room activate:[XmppTools sharedManager].xmppStream];
     
     WPToolBarView * toolView = [[WPToolBarView alloc]initWithFrame:CGRectMake(0, [UIScreen mainScreen].bounds.size.height -50, [UIScreen mainScreen].bounds.size.width, 50) viewController:self];
     toolView.delegate = self;
@@ -92,16 +91,14 @@
 - (void)reloadMessages{
     NSManagedObjectContext *context = [XmppTools sharedManager].messageArchivingCoreDataStorage.mainThreadManagedObjectContext;
     NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"XMPPMessageArchiving_Message_CoreDataObject"];
-
+//    NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"XMPPRoomMessageCoreDataStorageObject"];
     //创建查询条件
 //    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"bareJidStr = %@ and streamBareJidStr = %@ and roomJID = ", self.toUser.bare, [XmppTools sharedManager].userJid.bare,self._room];
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"streamBareJidStr = %@ and roomJID = ", [XmppTools sharedManager].userJid.bare,self.room];
-
-    
+//    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"streamBareJidStr = %@ and roomJID = %@", [XmppTools sharedManager].userJid.bare,self.room.roomJID];
+//    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"roomJID = %@",self.room.roomJID];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"bareJidStr = %@",self.room.roomJID];
     [fetchRequest setPredicate:predicate];
-    
     NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"timestamp" ascending:YES];
-    
     [fetchRequest setSortDescriptors:[NSArray arrayWithObjects:sortDescriptor, nil]];
     //    fetchRequest.fetchOffset = 0;
     //    fetchRequest.fetchLimit = 10;
@@ -163,7 +160,8 @@
 -(void)send:(NSString *)msg {
     if (![msg isEqualToString:@""]) {
 //        XMPPMessage *message = [XMPPMessage messageWithType:kXMPP_SUBDOMAIN to:self.room];
-        XMPPMessage *message = [XMPPMessage messageWithType:kXMPP_SUBDOMAIN];
+//        XMPPMessage *message = [XMPPMessage messageWithType:kXMPP_SUBDOMAIN];
+        XMPPMessage *message = [XMPPMessage messageWithType:kXMPP_SUBDOMAIN to:self.room.roomJID];
         [message addAttributeWithName:@"bodyType" stringValue:[NSString stringWithFormat:@"%d",TEXT]];
         [message addBody:msg];
         [[XmppTools sharedManager].xmppStream sendElement:message];

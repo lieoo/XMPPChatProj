@@ -12,4 +12,6 @@
 @property (nonatomic, strong) UIView  *vLine;
 + (CGFloat)calHeight;
 - (void)updateData:(XMPPMessageArchiving_Contact_CoreDataObject*)data;
+@property (nonatomic,weak) UIImageView *imageView;
+@property (nonatomic,weak) UILabel *nameLabel;
 @end
