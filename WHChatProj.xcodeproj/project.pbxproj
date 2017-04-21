@@ -245,6 +245,7 @@
 		D1617B431EA5DFAA0049BE14 /* VCLogin.m in Sources */ = {isa = PBXBuildFile; fileRef = D1617B421EA5DFAA0049BE14 /* VCLogin.m */; };
 		D1617B461EA5E49D0049BE14 /* VCTabbarController.m in Sources */ = {isa = PBXBuildFile; fileRef = D1617B451EA5E49D0049BE14 /* VCTabbarController.m */; };
 		D1671C0D1EA8F2F400BECFFE /* InviteUserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D1671C0C1EA8F2F400BECFFE /* InviteUserViewController.m */; };
+		D16A4FA21EA9DE9F00E32E05 /* GroupListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D16A4FA11EA9DE9F00E32E05 /* GroupListTableViewCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -272,10 +273,10 @@
 		D1155A531EA24519008488EF /* VCMsgesCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VCMsgesCell.m; sourceTree = "<group>"; };
 		D11EF27D1EA5FC4400CC54EB /* VCRegFinish.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VCRegFinish.h; sourceTree = "<group>"; };
 		D11EF27E1EA5FC4400CC54EB /* VCRegFinish.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VCRegFinish.m; sourceTree = "<group>"; };
-		D11EF2801EA6247300CC54EB /* GroupMsgController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GroupMsgController.h; sourceTree = "<group>"; };
-		D11EF2811EA6247300CC54EB /* GroupMsgController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GroupMsgController.m; sourceTree = "<group>"; };
-		D11EF2831EA62B0800CC54EB /* RoomListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoomListViewController.h; sourceTree = "<group>"; };
-		D11EF2841EA62B0800CC54EB /* RoomListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RoomListViewController.m; sourceTree = "<group>"; };
+		D11EF2801EA6247300CC54EB /* GroupMsgController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GroupMsgController.h; path = WHChatProj/GroupMsgController.h; sourceTree = SOURCE_ROOT; };
+		D11EF2811EA6247300CC54EB /* GroupMsgController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GroupMsgController.m; path = WHChatProj/GroupMsgController.m; sourceTree = SOURCE_ROOT; };
+		D11EF2831EA62B0800CC54EB /* RoomListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RoomListViewController.h; path = ../../RoomListViewController.h; sourceTree = "<group>"; };
+		D11EF2841EA62B0800CC54EB /* RoomListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RoomListViewController.m; path = ../../RoomListViewController.m; sourceTree = "<group>"; };
 		D15AF6D41E9DFBFF007736EE /* WHChatProj.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WHChatProj.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D15AF6D81E9DFBFF007736EE /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		D15AF6DA1E9DFBFF007736EE /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -551,6 +552,8 @@
 		D1617B451EA5E49D0049BE14 /* VCTabbarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VCTabbarController.m; sourceTree = "<group>"; };
 		D1671C0B1EA8F2F400BECFFE /* InviteUserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InviteUserViewController.h; sourceTree = "<group>"; };
 		D1671C0C1EA8F2F400BECFFE /* InviteUserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InviteUserViewController.m; sourceTree = "<group>"; };
+		D16A4FA01EA9DE9F00E32E05 /* GroupListTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GroupListTableViewCell.h; sourceTree = "<group>"; };
+		D16A4FA11EA9DE9F00E32E05 /* GroupListTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GroupListTableViewCell.m; sourceTree = "<group>"; };
 		FC991A9AA1DCAD6C67A2AB6A /* Pods-WHChatProj.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WHChatProj.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WHChatProj/Pods-WHChatProj.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -666,17 +669,16 @@
 		D15AF6D61E9DFBFF007736EE /* WHChatProj */ = {
 			isa = PBXGroup;
 			children = (
+				D15AF7071E9DFD46007736EE /* Network */,
+				D15AF7111E9DFD46007736EE /* Tools */,
 				D15AF6EE1E9DFC33007736EE /* ChatLib */,
+				D16A4F9C1EA9DE5200E32E05 /* Group */,
 				D103BE671EA49F8000BEC0EF /* Friend */,
 				D103BE681EA49F8500BEC0EF /* Mine */,
 				D15AF6DA1E9DFBFF007736EE /* AppDelegate.h */,
 				D15AF6DB1E9DFBFF007736EE /* AppDelegate.m */,
 				D15AF6DD1E9DFBFF007736EE /* MsgViewController.h */,
 				D15AF6DE1E9DFBFF007736EE /* MsgViewController.m */,
-				D11EF2801EA6247300CC54EB /* GroupMsgController.h */,
-				D11EF2811EA6247300CC54EB /* GroupMsgController.m */,
-				D11EF2831EA62B0800CC54EB /* RoomListViewController.h */,
-				D11EF2841EA62B0800CC54EB /* RoomListViewController.m */,
 				D1671C0B1EA8F2F400BECFFE /* InviteUserViewController.h */,
 				D1671C0C1EA8F2F400BECFFE /* InviteUserViewController.m */,
 				D1617B411EA5DFAA0049BE14 /* VCLogin.h */,
@@ -707,8 +709,6 @@
 		D15AF6EE1E9DFC33007736EE /* ChatLib */ = {
 			isa = PBXGroup;
 			children = (
-				D15AF7071E9DFD46007736EE /* Network */,
-				D15AF7111E9DFD46007736EE /* Tools */,
 				D103BE661EA49F0A00BEC0EF /* Message */,
 			);
 			path = ChatLib;
@@ -773,7 +773,8 @@
 				D15AF70F1E9DFD46007736EE /* XmppTools.h */,
 				D15AF7101E9DFD46007736EE /* XmppTools.m */,
 			);
-			path = Network;
+			name = Network;
+			path = ChatLib/Network;
 			sourceTree = "<group>";
 		};
 		D15AF7111E9DFD46007736EE /* Tools */ = {
@@ -788,7 +789,8 @@
 				D15AF7171E9DFD46007736EE /* Const */,
 				D15AF71B1E9DFD46007736EE /* DataBase */,
 			);
-			path = Tools;
+			name = Tools;
+			path = ChatLib/Tools;
 			sourceTree = "<group>";
 		};
 		D15AF7121E9DFD46007736EE /* Category */ = {
@@ -1130,6 +1132,43 @@
 			path = Expression;
 			sourceTree = "<group>";
 		};
+		D16A4F9C1EA9DE5200E32E05 /* Group */ = {
+			isa = PBXGroup;
+			children = (
+				D16A4F9D1EA9DE7500E32E05 /* Controller */,
+				D16A4F9E1EA9DE7500E32E05 /* Model */,
+				D16A4F9F1EA9DE7500E32E05 /* View */,
+			);
+			path = Group;
+			sourceTree = "<group>";
+		};
+		D16A4F9D1EA9DE7500E32E05 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				D11EF2831EA62B0800CC54EB /* RoomListViewController.h */,
+				D11EF2841EA62B0800CC54EB /* RoomListViewController.m */,
+				D11EF2801EA6247300CC54EB /* GroupMsgController.h */,
+				D11EF2811EA6247300CC54EB /* GroupMsgController.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		D16A4F9E1EA9DE7500E32E05 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		D16A4F9F1EA9DE7500E32E05 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				D16A4FA01EA9DE9F00E32E05 /* GroupListTableViewCell.h */,
+				D16A4FA11EA9DE9F00E32E05 /* GroupListTableViewCell.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1431,6 +1470,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D15AF76D1E9E0DD5007736EE /* NSAttributedString+MLExpression.m in Sources */,
+				D16A4FA21EA9DE9F00E32E05 /* GroupListTableViewCell.m in Sources */,
 				D15AF7241E9DFD46007736EE /* Toast.m in Sources */,
 				D103BE8F1EA4B08200BEC0EF /* CellUserImg.m in Sources */,
 				D15AF76A1E9E0DD5007736EE /* NSString+MLLabel.m in Sources */,
