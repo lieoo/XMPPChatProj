@@ -62,10 +62,8 @@
 
 - (void)updateData:(XMPPMessageArchiving_Contact_CoreDataObject*)data{
     NSData *photoData = [[XmppTools sharedManager] getImageData:data.bareJid.user];
-    NSLog(@"%@",data.bareJid.user);
-    NSLog(@"%@",data.bareJidStr);
+    
     UIImage *headImg;
-
     if ([data.bareJidStr rangeOfString:XMPP_GROUPSERVICE].location != NSNotFound) {
         headImg = [UIImage imageNamed:@"people39"];
         self.ivImg.image = headImg;

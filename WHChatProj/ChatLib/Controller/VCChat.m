@@ -132,7 +132,6 @@
         UILocalNotification *noti = [[UILocalNotification alloc] init];
         [noti setAlertBody:message.body];
         [[UIApplication sharedApplication] presentLocalNotificationNow:noti];
-
     }
 }
 

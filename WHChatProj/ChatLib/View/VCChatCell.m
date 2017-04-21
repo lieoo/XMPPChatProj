@@ -21,6 +21,8 @@
 @property(nonatomic,strong) MLEmojiLabel *lbContent;   //文字消息
 @property(nonatomic,strong)UIImageView *ivImg;      //图片消息
 @property(nonatomic,strong) XMPPMessageArchiving_Message_CoreDataObject *msg;
+@property(nonatomic,strong)UILabel *timelabel;
+
 @end
 @implementation VCChatCell
 
@@ -66,6 +68,11 @@
     _ivImg.hidden = YES;
     _ivImg.userInteractionEnabled = YES;
     [_container addSubview:_ivImg];
+    
+    _timelabel = [[UILabel alloc]init];
+    _timelabel.font = [UIFont systemFontOfSize:10];
+    _timelabel.textColor = [UIColor grayColor];
+    [self.contentView addSubview:_timelabel];
     
     [_lbContent addGestureRecognizer:[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(labelTouchUpInside:)]];
     [_ivImg addGestureRecognizer:[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(imageTouchUpInside:)]];
@@ -113,6 +120,12 @@
         self.containerImageView.image = [self stretchImage:@"ReceiverTextNodeBkg"];
     }
     self.maskViewImage.image = self.containerImageView.image;
+    
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"MM月dd日 HH:mm"];
+    NSString *strDate = [dateFormatter stringFromDate:msg.timestamp];
+    self.timelabel.text = strDate;
+    
 }
 
 #pragma  mark - MLEmojiLabelDelegate
@@ -143,6 +156,8 @@
     r.size.width = 30*RATIO_WIDHT320;
     r.size.height = r.size.width;
     self.userImg.frame = r;
+    
+    self.timelabel.frame = CGRectMake(15+r.size.width, 0, 100, 15);
     
     CGFloat w ,h;
     
@@ -200,8 +215,8 @@
     if (self.msg.isOutgoing) {
         r = self.userImg.frame;
         r.origin.x = self.width - 10-self.userImg.width;
-        self.userImg.frame = r;
-        
+        self.userImg.frame = r;        
+        self.timelabel.frame = CGRectMake(kScreenWidth - 75 - self.userImg.width - 16, 0, 100, 15);
         r = self.container.frame;
         r.origin.x = self.userImg.left - r.size.width - 15;
         self.container.frame = r;
