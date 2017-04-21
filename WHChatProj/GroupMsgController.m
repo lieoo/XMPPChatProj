@@ -141,19 +141,7 @@
 
 - (void)xmppStream:(XMPPStream *)sender didReceiveMessage:(XMPPMessage *)message {
     
-//    if ([XMPPMessage messageWithType:CHATTYPEGROUP to:self.room.roomJID]) return;
-    
     if (message.body) {
-        
-        [[XmppTools sharedManager].messageArchivingCoreDataStorage archiveMessage:message outgoing:YES xmppStream:[XmppTools sharedManager].xmppStream];
-        
-        NSLog(@"%s__%d|收到消息---%@",__func__,__LINE__,message.body);
-        XMPPJID *jid = message.from;
-        NSString *str = jid.resource;
-        NSLog(@"%@",jid);
-        NSLog(@"%@",str);
-        
-        
         dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, 0.3 * NSEC_PER_SEC);
         dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
             [self reloadMessages];

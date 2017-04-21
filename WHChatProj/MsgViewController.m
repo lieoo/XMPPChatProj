@@ -112,7 +112,8 @@
     // 2.FetchRequest【查哪张表】
     NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"XMPPMessageArchiving_Contact_CoreDataObject"];
     //创建查询条件
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"streamBareJidStr = %@ ", [XmppTools sharedManager].userJid.bare];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"streamBareJidStr = %@", [XmppTools sharedManager].userJid.bare];
+
     [fetchRequest setPredicate:predicate];
     
     NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"mostRecentMessageTimestamp" ascending:NO];
