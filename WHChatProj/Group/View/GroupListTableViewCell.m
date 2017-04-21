@@ -8,7 +8,7 @@
 
 #import "GroupListTableViewCell.h"
 
-#define CellH 60
+#define CellH 80
 @interface GroupListTableViewCell()
 @end
 @implementation GroupListTableViewCell
@@ -18,7 +18,7 @@
         CGFloat leftMargin = 16;
         
         UIImageView *imageV  = [[UIImageView alloc]init];
-        imageV.frame = CGRectMake(leftMargin + 5, 15, 30, 30);
+        imageV.frame = CGRectMake(15, 15, 50, 50);
 //        imageV.contentMode = UIViewContentModeCenter;
         imageV.layer.cornerRadius = 10;
         imageV.clipsToBounds = YES;
@@ -26,8 +26,9 @@
         [self.contentView addSubview:_header];
         
         UILabel *label = [[UILabel alloc]init];
-        label.frame = CGRectMake(70, 15, screenW - 70,30);
-        [label setFont:[UIFont systemFontOfSize:14]];
+        label.frame = CGRectMake(imageV.right + 10, imageV.centerX - 15, screenW - 70,30);
+        label.font = [UIFont boldSystemFontOfSize:15];
+        label.textColor = [UIColor blackColor];
         _nameLabel = label;
         [self.contentView addSubview:_nameLabel];
         
@@ -39,5 +40,7 @@
     }
     return self;
 }
-
++(CGFloat)cellH{
+    return 80;
+}
 @end

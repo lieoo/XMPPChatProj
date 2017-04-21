@@ -62,17 +62,26 @@
 
 - (void)updateData:(XMPPMessageArchiving_Contact_CoreDataObject*)data{
     NSData *photoData = [[XmppTools sharedManager] getImageData:data.bareJid.user];
-    
+    NSLog(@"%@",data.bareJid.user);
+    NSLog(@"%@",data.bareJidStr);
     UIImage *headImg;
+
+    if ([data.bareJidStr rangeOfString:XMPP_GROUPSERVICE].location != NSNotFound) {
+        headImg = [UIImage imageNamed:@"people39"];
+        self.ivImg.image = headImg;
+    }
+    
     if (photoData) {
         headImg = [UIImage imageWithData:photoData];
 //        dispatch_async(dispatch_get_main_queue(), ^{
             self.ivImg.image = headImg;
 //        });
     }
-    
+    if ([data.bareJidStr rangeOfString:XMPP_GROUPSERVICE].location != NSNotFound) {
+        self.lbName.text = [NSString stringWithFormat:@"房间名:%@",data.bareJid.user];
+    }else{
     self.lbName.text = data.bareJid.user;
-    
+    }
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"HH:mm"];
     NSString *strDate = [dateFormatter stringFromDate:data.mostRecentMessageTimestamp];

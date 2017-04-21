@@ -32,7 +32,7 @@
 
     [self addRightBtn];
 
-    [self addLeftBtn];
+//    [self addLeftBtn];
     
     [self getRoomList];
     
@@ -83,6 +83,11 @@
     NSString *text = [NSString stringWithFormat:@"房间名:%@",[item attributeForName:@"name"].stringValue];
     cell.nameLabel.text = text;
     [cell.header setImage:[UIImage imageNamed:@"people39"]];
+    if (indexPath.row == self.RoomDataSource.count-1) {
+        cell.lineView.hidden = YES;
+    }else{
+        cell.lineView.hidden = NO;
+    }
 //    cell.detailTextLabel.text = [item attributeForName:@"jid"].stringValue;
     return cell;
 }
@@ -96,7 +101,7 @@
     [self.navigationController pushViewController:groupVC animated:TRUE];
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 60;
+    return [GroupListTableViewCell cellH];
 }
 
 - (void)addRightBtn{
@@ -180,7 +185,7 @@
 }
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
-    if (alertView.tag == 1 && buttonIndex == 0) {        
+    if (alertView.tag == 1 && buttonIndex == 1) {
         NSString *roomId = [NSString stringWithFormat:@"%@@%@",[alertView textFieldAtIndex:0].text, XMPP_GROUPSERVICE];
         XMPPJID *roomJID = [XMPPJID jidWithString:roomId];
         XMPPRoomMemoryStorage *xmppRoomStorage = [[XMPPRoomMemoryStorage alloc] init];

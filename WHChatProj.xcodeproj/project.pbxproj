@@ -272,8 +272,8 @@
 		D103BE8B1EA4B03500BEC0EF /* CellSetting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CellSetting.m; sourceTree = "<group>"; };
 		D103BE8D1EA4B08200BEC0EF /* CellUserImg.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CellUserImg.h; sourceTree = "<group>"; };
 		D103BE8E1EA4B08200BEC0EF /* CellUserImg.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CellUserImg.m; sourceTree = "<group>"; };
-		D1155A521EA24519008488EF /* VCMsgesCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VCMsgesCell.h; sourceTree = "<group>"; };
-		D1155A531EA24519008488EF /* VCMsgesCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VCMsgesCell.m; sourceTree = "<group>"; };
+		D1155A521EA24519008488EF /* VCMsgesCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VCMsgesCell.h; path = ../../VCMsgesCell.h; sourceTree = "<group>"; };
+		D1155A531EA24519008488EF /* VCMsgesCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VCMsgesCell.m; path = ../../VCMsgesCell.m; sourceTree = "<group>"; };
 		D11EF27D1EA5FC4400CC54EB /* VCRegFinish.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VCRegFinish.h; sourceTree = "<group>"; };
 		D11EF27E1EA5FC4400CC54EB /* VCRegFinish.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VCRegFinish.m; sourceTree = "<group>"; };
 		D11EF2801EA6247300CC54EB /* GroupMsgController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GroupMsgController.h; path = WHChatProj/GroupMsgController.h; sourceTree = SOURCE_ROOT; };
@@ -553,8 +553,8 @@
 		D1617B421EA5DFAA0049BE14 /* VCLogin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VCLogin.m; sourceTree = "<group>"; };
 		D1617B441EA5E49D0049BE14 /* VCTabbarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VCTabbarController.h; sourceTree = "<group>"; };
 		D1617B451EA5E49D0049BE14 /* VCTabbarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VCTabbarController.m; sourceTree = "<group>"; };
-		D1671C0B1EA8F2F400BECFFE /* InviteUserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InviteUserViewController.h; sourceTree = "<group>"; };
-		D1671C0C1EA8F2F400BECFFE /* InviteUserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InviteUserViewController.m; sourceTree = "<group>"; };
+		D1671C0B1EA8F2F400BECFFE /* InviteUserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = InviteUserViewController.h; path = ../../InviteUserViewController.h; sourceTree = "<group>"; };
+		D1671C0C1EA8F2F400BECFFE /* InviteUserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = InviteUserViewController.m; path = ../../InviteUserViewController.m; sourceTree = "<group>"; };
 		D16A4FAD1EA9E28F00E32E05 /* profile-group-icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "profile-group-icon@2x.png"; sourceTree = "<group>"; };
 		D16A4FAE1EA9E28F00E32E05 /* profile-group-icon@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "profile-group-icon@3x.png"; sourceTree = "<group>"; };
 		D16A4FB61EA9E61400E32E05 /* GroupListTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GroupListTableViewCell.h; sourceTree = "<group>"; };
@@ -683,14 +683,10 @@
 				D103BE681EA49F8500BEC0EF /* Mine */,
 				D15AF6DA1E9DFBFF007736EE /* AppDelegate.h */,
 				D15AF6DB1E9DFBFF007736EE /* AppDelegate.m */,
-				D1671C0B1EA8F2F400BECFFE /* InviteUserViewController.h */,
-				D1671C0C1EA8F2F400BECFFE /* InviteUserViewController.m */,
 				D1617B411EA5DFAA0049BE14 /* VCLogin.h */,
 				D1617B421EA5DFAA0049BE14 /* VCLogin.m */,
 				D11EF27D1EA5FC4400CC54EB /* VCRegFinish.h */,
 				D11EF27E1EA5FC4400CC54EB /* VCRegFinish.m */,
-				D1155A521EA24519008488EF /* VCMsgesCell.h */,
-				D1155A531EA24519008488EF /* VCMsgesCell.m */,
 				D1617B441EA5E49D0049BE14 /* VCTabbarController.h */,
 				D1617B451EA5E49D0049BE14 /* VCTabbarController.m */,
 				D15AF6E01E9DFBFF007736EE /* Main.storyboard */,
@@ -745,6 +741,8 @@
 		D15AF6F51E9DFC6A007736EE /* View */ = {
 			isa = PBXGroup;
 			children = (
+				D1155A521EA24519008488EF /* VCMsgesCell.h */,
+				D1155A531EA24519008488EF /* VCMsgesCell.m */,
 				D15F65AA1E9FAB76000B63CA /* KeyBoardView */,
 				D15AF6F61E9DFC6A007736EE /* ChatInputView.h */,
 				D15AF6F71E9DFC6A007736EE /* ChatInputView.m */,
@@ -1154,6 +1152,8 @@
 		D16A4F9D1EA9DE7500E32E05 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				D1671C0B1EA8F2F400BECFFE /* InviteUserViewController.h */,
+				D1671C0C1EA8F2F400BECFFE /* InviteUserViewController.m */,
 				D11EF2831EA62B0800CC54EB /* RoomListViewController.h */,
 				D11EF2841EA62B0800CC54EB /* RoomListViewController.m */,
 				D11EF2801EA6247300CC54EB /* GroupMsgController.h */,
