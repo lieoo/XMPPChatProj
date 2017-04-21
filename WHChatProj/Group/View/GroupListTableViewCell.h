@@ -10,4 +10,8 @@
 
 @interface GroupListTableViewCell : UITableViewCell
 
+@property (nonatomic,weak)UIImageView *header;
+@property (nonatomic,weak)UILabel *nameLabel;
+@property (nonatomic,weak)UIView *lineView;
+
 @end

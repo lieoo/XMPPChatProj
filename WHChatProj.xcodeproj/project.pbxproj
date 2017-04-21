@@ -245,7 +245,10 @@
 		D1617B431EA5DFAA0049BE14 /* VCLogin.m in Sources */ = {isa = PBXBuildFile; fileRef = D1617B421EA5DFAA0049BE14 /* VCLogin.m */; };
 		D1617B461EA5E49D0049BE14 /* VCTabbarController.m in Sources */ = {isa = PBXBuildFile; fileRef = D1617B451EA5E49D0049BE14 /* VCTabbarController.m */; };
 		D1671C0D1EA8F2F400BECFFE /* InviteUserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D1671C0C1EA8F2F400BECFFE /* InviteUserViewController.m */; };
-		D16A4FA21EA9DE9F00E32E05 /* GroupListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D16A4FA11EA9DE9F00E32E05 /* GroupListTableViewCell.m */; };
+		D16A4FAF1EA9E28F00E32E05 /* profile-group-icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D16A4FAD1EA9E28F00E32E05 /* profile-group-icon@2x.png */; };
+		D16A4FB01EA9E28F00E32E05 /* profile-group-icon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D16A4FAE1EA9E28F00E32E05 /* profile-group-icon@3x.png */; };
+		D16A4FB81EA9E61400E32E05 /* GroupListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D16A4FB71EA9E61400E32E05 /* GroupListTableViewCell.m */; };
+		D16A4FC01EA9EC7500E32E05 /* people39.png in Resources */ = {isa = PBXBuildFile; fileRef = D16A4FBF1EA9EC7500E32E05 /* people39.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -281,8 +284,8 @@
 		D15AF6D81E9DFBFF007736EE /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		D15AF6DA1E9DFBFF007736EE /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		D15AF6DB1E9DFBFF007736EE /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		D15AF6DD1E9DFBFF007736EE /* MsgViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MsgViewController.h; sourceTree = "<group>"; };
-		D15AF6DE1E9DFBFF007736EE /* MsgViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MsgViewController.m; sourceTree = "<group>"; };
+		D15AF6DD1E9DFBFF007736EE /* MsgViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MsgViewController.h; path = ../../MsgViewController.h; sourceTree = "<group>"; };
+		D15AF6DE1E9DFBFF007736EE /* MsgViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = MsgViewController.m; path = ../../MsgViewController.m; sourceTree = "<group>"; };
 		D15AF6E11E9DFBFF007736EE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		D15AF6E31E9DFBFF007736EE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D15AF6E61E9DFBFF007736EE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -552,8 +555,11 @@
 		D1617B451EA5E49D0049BE14 /* VCTabbarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VCTabbarController.m; sourceTree = "<group>"; };
 		D1671C0B1EA8F2F400BECFFE /* InviteUserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InviteUserViewController.h; sourceTree = "<group>"; };
 		D1671C0C1EA8F2F400BECFFE /* InviteUserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InviteUserViewController.m; sourceTree = "<group>"; };
-		D16A4FA01EA9DE9F00E32E05 /* GroupListTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GroupListTableViewCell.h; sourceTree = "<group>"; };
-		D16A4FA11EA9DE9F00E32E05 /* GroupListTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GroupListTableViewCell.m; sourceTree = "<group>"; };
+		D16A4FAD1EA9E28F00E32E05 /* profile-group-icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "profile-group-icon@2x.png"; sourceTree = "<group>"; };
+		D16A4FAE1EA9E28F00E32E05 /* profile-group-icon@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "profile-group-icon@3x.png"; sourceTree = "<group>"; };
+		D16A4FB61EA9E61400E32E05 /* GroupListTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GroupListTableViewCell.h; sourceTree = "<group>"; };
+		D16A4FB71EA9E61400E32E05 /* GroupListTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GroupListTableViewCell.m; sourceTree = "<group>"; };
+		D16A4FBF1EA9EC7500E32E05 /* people39.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = people39.png; sourceTree = "<group>"; };
 		FC991A9AA1DCAD6C67A2AB6A /* Pods-WHChatProj.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WHChatProj.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WHChatProj/Pods-WHChatProj.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -677,8 +683,6 @@
 				D103BE681EA49F8500BEC0EF /* Mine */,
 				D15AF6DA1E9DFBFF007736EE /* AppDelegate.h */,
 				D15AF6DB1E9DFBFF007736EE /* AppDelegate.m */,
-				D15AF6DD1E9DFBFF007736EE /* MsgViewController.h */,
-				D15AF6DE1E9DFBFF007736EE /* MsgViewController.m */,
 				D1671C0B1EA8F2F400BECFFE /* InviteUserViewController.h */,
 				D1671C0C1EA8F2F400BECFFE /* InviteUserViewController.m */,
 				D1617B411EA5DFAA0049BE14 /* VCLogin.h */,
@@ -721,6 +725,8 @@
 				D15AF73D1E9E0D8C007736EE /* VCBase.m */,
 				D15AF6F01E9DFC6A007736EE /* VCChat.h */,
 				D15AF6F11E9DFC6A007736EE /* VCChat.m */,
+				D15AF6DD1E9DFBFF007736EE /* MsgViewController.h */,
+				D15AF6DE1E9DFBFF007736EE /* MsgViewController.m */,
 			);
 			name = Controller;
 			path = ../Controller;
@@ -933,6 +939,9 @@
 		D15AF77A1E9E13A2007736EE /* ImageSource */ = {
 			isa = PBXGroup;
 			children = (
+				D16A4FBF1EA9EC7500E32E05 /* people39.png */,
+				D16A4FAD1EA9E28F00E32E05 /* profile-group-icon@2x.png */,
+				D16A4FAE1EA9E28F00E32E05 /* profile-group-icon@3x.png */,
 				D103BE6F1EA4A7A300BEC0EF /* TabFriendIcon@2x.png */,
 				D103BE701EA4A7A300BEC0EF /* TabFriendIcon@3x.png */,
 				D103BE731EA4A7AE00BEC0EF /* TabMeIcon@2x.png */,
@@ -1163,8 +1172,8 @@
 		D16A4F9F1EA9DE7500E32E05 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				D16A4FA01EA9DE9F00E32E05 /* GroupListTableViewCell.h */,
-				D16A4FA11EA9DE9F00E32E05 /* GroupListTableViewCell.m */,
+				D16A4FB61EA9E61400E32E05 /* GroupListTableViewCell.h */,
+				D16A4FB71EA9E61400E32E05 /* GroupListTableViewCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1285,6 +1294,7 @@
 				D15F65DC1E9FB7DE000B63CA /* more@3x.png in Resources */,
 				D103BE791EA4A7B700BEC0EF /* TabMessageIcon@2x.png in Resources */,
 				D15F66BC1E9FB8F6000B63CA /* Expression_89@2x.png in Resources */,
+				D16A4FB01EA9E28F00E32E05 /* profile-group-icon@3x.png in Resources */,
 				D15F66B41E9FB8F6000B63CA /* Expression_81@2x.png in Resources */,
 				D15F66BB1E9FB8F6000B63CA /* Expression_88@2x.png in Resources */,
 				D15F66751E9FB8F6000B63CA /* Expression_24@2x.png in Resources */,
@@ -1307,6 +1317,8 @@
 				D15AF78B1E9E13A2007736EE /* ChatAddIcon@2x.png in Resources */,
 				D15F65D21E9FB7DE000B63CA /* biaoqing@2x.png in Resources */,
 				D15F65D71E9FB7DE000B63CA /* keyboard.png in Resources */,
+				D16A4FAF1EA9E28F00E32E05 /* profile-group-icon@2x.png in Resources */,
+				D16A4FC01EA9EC7500E32E05 /* people39.png in Resources */,
 				D15F667E1E9FB8F6000B63CA /* Expression_32@2x.png in Resources */,
 				D15AF78C1E9E13A2007736EE /* ChatAddIcon@3x.png in Resources */,
 				D15F66B61E9FB8F6000B63CA /* Expression_83@2x.png in Resources */,
@@ -1470,7 +1482,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D15AF76D1E9E0DD5007736EE /* NSAttributedString+MLExpression.m in Sources */,
-				D16A4FA21EA9DE9F00E32E05 /* GroupListTableViewCell.m in Sources */,
+				D16A4FB81EA9E61400E32E05 /* GroupListTableViewCell.m in Sources */,
 				D15AF7241E9DFD46007736EE /* Toast.m in Sources */,
 				D103BE8F1EA4B08200BEC0EF /* CellUserImg.m in Sources */,
 				D15AF76A1E9E0DD5007736EE /* NSString+MLLabel.m in Sources */,

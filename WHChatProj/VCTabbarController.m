@@ -29,8 +29,8 @@
                                  
                                  @{kClassKey  : @"RoomListViewController",
                                    kTitleKey  : @"群聊",
-                                   kImgKey    : @"TabMessageIcon",
-                                   kSelImgKey : @"TabMessageIcon"},
+                                   kImgKey    : @"profile-group-icon",
+                                   kSelImgKey : @"profile-group-icon"},
                                  
                                  @{kClassKey  : @"VCFriends",
                                    kTitleKey  : @"好友",

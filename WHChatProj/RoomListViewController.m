@@ -11,6 +11,7 @@
 #import "GroupMsgController.h"
 #import "XMPPRoomMemoryStorage.h"
 #import <XMPPFramework/XMPPRoomCoreDataStorage.h>
+#import "GroupListTableViewCell.h"
 
 @interface RoomListViewController ()<XMPPRoomDelegate,UITableViewDataSource,UITableViewDelegate,UIAlertViewDelegate>
 
@@ -76,14 +77,13 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-//    VCMsgesCell *cell = [tableView dequeueReusableCellWithIdentifier:@"VCMsgesCell"];
-
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"roomCell" forIndexPath:indexPath];
+    GroupListTableViewCell *cell = [[GroupListTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"roomCell"];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     DDXMLElement *item = self.RoomDataSource[indexPath.row];
     NSString *text = [NSString stringWithFormat:@"房间名:%@",[item attributeForName:@"name"].stringValue];
-    cell.textLabel.text = text;
-    cell.detailTextLabel.text = [item attributeForName:@"jid"].stringValue;
+    cell.nameLabel.text = text;
+    [cell.header setImage:[UIImage imageNamed:@"people39"]];
+//    cell.detailTextLabel.text = [item attributeForName:@"jid"].stringValue;
     return cell;
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
