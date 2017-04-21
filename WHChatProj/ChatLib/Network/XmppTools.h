@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-
+#import "XMPPRoomMemoryStorage.h"
 typedef void(^SuccessBlock)(void);
 typedef void(^FailureBlock)(NSString *error);
 
@@ -51,6 +51,9 @@ typedef NS_ENUM(NSInteger, ConnectToServerPurpose)
 @property (nonatomic, copy)   SuccessBlock successBlack;
 @property (nonatomic, copy)   FailureBlock failureBlack;
 
+//邀请加入群名称
+@property (nonatomic,copy) NSString *groupName;
+
 + (instancetype)sharedManager;
 
 //登录方法
@@ -72,7 +75,7 @@ typedef NS_ENUM(NSInteger, ConnectToServerPurpose)
 
 - (void)removeFriend:(NSString *)name;
 
-- (void)sendTextMsg:(NSString *)msg withId:(NSString*)toUser;
+//- (void)sendTextMsg:(NSString *)msg withId:(NSString*)toUser;
 
 -(void)goOffLine;
 
@@ -80,4 +83,7 @@ typedef NS_ENUM(NSInteger, ConnectToServerPurpose)
 
 //更改密码
 - (void)changePassworduseWord:(NSString *)checkPassword withUser:(NSString*)userName;
+
+- (void)configRoom;
+
 @end

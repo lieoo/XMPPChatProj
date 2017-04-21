@@ -60,6 +60,7 @@
     VCChatCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifider];
     XMPPMessageArchiving_Message_CoreDataObject *msg = [self.dataSource objectAtIndex:indexPath.row];
     NSLog(@"%s__%d|%@",__func__,__LINE__,msg.body);
+    cell.isGoupChat = NO;
     [cell loadData:msg];
     cell.index = indexPath.row;
     __weak VCChat *weakSelf = self;
@@ -215,8 +216,8 @@
 }
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
-    [self.toolView removeFromSuperview];
-    self.toolView = nil;
+//    [self.toolView removeFromSuperview];
+//    self.toolView = nil;
 }
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
 }

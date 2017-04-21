@@ -250,8 +250,18 @@
         } else {
             [self.xmppRoster acceptPresenceSubscriptionRequestFrom:self.receivePresence.from andAddToRoster:YES];
         }
+    }else if (alertView.tag == 2 && buttonIndex ==1){
+        //群聊邀请
+        NSString *roomId = [NSString stringWithFormat:@"%@@%@",self.groupName, XMPP_GROUPSERVICE];
+        XMPPJID *roomJID = [XMPPJID jidWithString:roomId];
+        XMPPRoomMemoryStorage *xmppRoomStorage = [[XMPPRoomMemoryStorage alloc] init];
+        XMPPRoom *xmppRoom = [[XMPPRoom alloc] initWithRoomStorage:xmppRoomStorage jid:roomJID dispatchQueue:dispatch_get_main_queue()];
+        [xmppRoom activate:[XmppTools sharedManager].xmppStream];
+        [xmppRoom addDelegate:self delegateQueue:dispatch_get_main_queue()];
+        [xmppRoom joinRoomUsingNickname:[XmppTools sharedManager].xmppStream.myJID.user history:nil password:nil];
     }
 }
+
 
 - (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex{
     if (alertView.tag == 101) {
@@ -358,6 +368,34 @@
 //    [message addChild:[DDXMLNode elementWithName:@"body" stringValue:msg]];
 //    [self.xmppStream sendElement:message];
 //}
+- (void)xmppStream:(XMPPStream *)sender didReceiveMessage:(XMPPMessage *)message{
+    if ([self isChatRoomInvite:message].length) {
+        NSLog(@"%s--%d|收到邀请|",__func__,__LINE__);
+//        NSLog(@"%@",message.from.user);
+        self.groupName = [self isChatRoomInvite:message];
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[NSString stringWithFormat:@"%@邀请你加入%@",self.groupName,message.from.user] delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"加入",nil];
+        alertView.tag = 2;
+        [alertView show];
+    }
+}
+#pragma mark -- 危险写法 以后改
+-(NSString *)isChatRoomInvite:(XMPPMessage *)message{
+    if (message.childCount>0){
+        for (NSXMLElement* element in message.children) {
+            if ([element.name isEqualToString:@"x"] && [element.xmlns isEqualToString:@"http://jabber.org/protocol/muc#user"]){
+                for (NSXMLElement* element_a in element.children) {
+                    if ([element_a.name isEqualToString:@"invite"]){
+                        NSRange range = [element_a.prettyXMLString rangeOfString:@"\""];
+                        NSRange range2 = [element_a.prettyXMLString rangeOfString:@"@"];
+                        NSString *string = [element_a.prettyXMLString substringWithRange:NSMakeRange(range.location + 1, range2.location - range.location - 1)];
+                        return string;
+                    }
+                }
+            }
+        }
+    }
+    return @"";
+}
 
 
 - (NSData*)getCurUserImageData

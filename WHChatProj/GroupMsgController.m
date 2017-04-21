@@ -76,7 +76,7 @@
     XMPPMessageArchiving_Message_CoreDataObject *msg = [self.dataSource objectAtIndex:indexPath.row];
 //    NSLog(@"%s__%d|%@",__func__,__LINE__,msg.body);
     NSLog(@"%s__%d|%@",__func__,__LINE__,msg);
-    
+    cell.isGoupChat = YES;
     [cell loadData:msg];
     cell.index = indexPath.row;
     __weak GroupMsgController *weakSelf = self;

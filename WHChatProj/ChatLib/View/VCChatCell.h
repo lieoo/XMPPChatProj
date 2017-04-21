@@ -19,6 +19,7 @@ typedef void(^touchCellIndex)(NSInteger index,UITapGestureRecognizer *sender);
 
 @property (nonatomic,assign) NSInteger index;
 @property (nonatomic,copy)touchCellIndex touchCellIndex;
+@property (nonatomic,assign)BOOL isGoupChat;
 
 @end
 

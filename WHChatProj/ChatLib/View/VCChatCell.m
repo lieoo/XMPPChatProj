@@ -21,8 +21,9 @@
 @property(nonatomic,strong) MLEmojiLabel *lbContent;   //文字消息
 @property(nonatomic,strong)UIImageView *ivImg;      //图片消息
 @property(nonatomic,strong) XMPPMessageArchiving_Message_CoreDataObject *msg;
-@property(nonatomic,strong)UILabel *timelabel;
 
+@property(nonatomic,strong)UILabel *timelabel;
+@property(nonatomic,strong)UILabel *userNameLable;
 @end
 @implementation VCChatCell
 
@@ -74,6 +75,13 @@
     _timelabel.textColor = [UIColor grayColor];
     [self.contentView addSubview:_timelabel];
     
+    _userNameLable = [[UILabel alloc]init];
+    _userNameLable.font = _timelabel.font;
+    _userNameLable.textColor = _timelabel.textColor;
+    
+    if (self.isGoupChat)[self.contentView addSubview:_userNameLable];
+    
+    
     [_lbContent addGestureRecognizer:[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(labelTouchUpInside:)]];
     [_ivImg addGestureRecognizer:[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(imageTouchUpInside:)]];
 }
@@ -121,11 +129,13 @@
     }
     self.maskViewImage.image = self.containerImageView.image;
     
+    //时间
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"MM月dd日 HH:mm"];
     NSString *strDate = [dateFormatter stringFromDate:msg.timestamp];
     self.timelabel.text = strDate;
-    
+    //用户名字
+    self.userNameLable.text = msg.bareJid.user;
 }
 
 #pragma  mark - MLEmojiLabelDelegate
@@ -158,7 +168,7 @@
     self.userImg.frame = r;
     
     self.timelabel.frame = CGRectMake(15+r.size.width, 0, 100, 15);
-    
+    self.userNameLable.frame = CGRectMake(5,0, 50, 15);
     CGFloat w ,h;
     
     NSString *chatType = [self.msg.message attributeStringValueForName:@"bodyType"];

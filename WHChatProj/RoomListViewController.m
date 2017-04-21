@@ -58,7 +58,6 @@
     [self.table reloadData];
 }
 
-
 - (void)getRoomList{
     NSXMLElement *queryElement= [NSXMLElement elementWithName:@"query" xmlns:@"http://jabber.org/protocol/disco#items"];
     NSXMLElement *iqElement = [NSXMLElement elementWithName:@"iq"];
@@ -128,6 +127,7 @@
 - (void)xmppRoom:(XMPPRoom *)sender didFailToDestroy:(XMPPIQ *)iqError{
     
 }
+
 - (void)configNewRoom:(XMPPRoom *)xmppRoom
 {
     NSXMLElement *x = [NSXMLElement elementWithName:@"x"xmlns:@"jabber:x:data"];

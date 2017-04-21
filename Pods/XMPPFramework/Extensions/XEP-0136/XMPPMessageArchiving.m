@@ -424,7 +424,11 @@
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSString *userName = [defaults stringForKey:@"userName"];
     NSString *jidStr = message.toStr;
-    if([jidStr hasPrefix:userName] && [message.type isEqualToString:@"groupchat"])return;
+    
+    NSString *messageType = message.type;
+    
+    if ([jidStr hasPrefix:userName] && [messageType isEqualToString:@"error"]) return;
+    if ([jidStr hasPrefix:userName] && [messageType isEqualToString:@"groupchat"]) return;
     
 	if ([self shouldArchiveMessage:message outgoing:NO xmppStream:sender])
 	{
