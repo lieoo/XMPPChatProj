@@ -14,7 +14,7 @@
 #import <MediaPlayer/MediaPlayer.h>//播放语音
 #import "XMPPMessageArchivingCoreDataStorage.h"
 #import "InviteUserViewController.h"
-@interface GroupMsgController ()<UITableViewDelegate,UITableViewDataSource,WPToolBarDataDelegate,UIPickerViewDelegate,UINavigationBarDelegate>
+@interface GroupMsgController ()<UITableViewDelegate,UITableViewDataSource,WPToolBarDataDelegate,UIPickerViewDelegate,UINavigationControllerDelegate>
 
 @property (nonatomic, strong) UITableView *table;
 @property (nonatomic, strong) NSMutableArray *dataSource;
@@ -169,8 +169,6 @@
 #pragma mark - ChatInputViewDelegate
 -(void)send:(NSString *)msg {
     if (![msg isEqualToString:@""]) {
-//        XMPPMessage *message = [XMPPMessage messageWithType:kXMPP_SUBDOMAIN to:self.room];
-//        XMPPMessage *message = [XMPPMessage messageWithType:kXMPP_SUBDOMAIN];
         XMPPMessage *message = [XMPPMessage messageWithType:CHATTYPEGROUP to:self.room.roomJID];
         [message addAttributeWithName:@"bodyType" stringValue:[NSString stringWithFormat:@"%d",TEXT]];
         [message addBody:msg];
@@ -206,8 +204,7 @@
 /** 发送图片 */
 - (void)sendMessageWithData:(NSData *)data bodyName:(NSString *)name {
     NSString *base64str = [data base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
-//    XMPPMessage *message = [XMPPMessage messageWithType:kXMPP_SUBDOMAIN to:self.toUser];
-    XMPPMessage *message = [XMPPMessage messageWithType:CHATTYPEGROUP];
+    XMPPMessage *message = [XMPPMessage messageWithType:CHATTYPEGROUP to:self.room.roomJID];
     [message addAttributeWithName:@"bodyType" stringValue:[NSString stringWithFormat:@"%d",IMAGE]];
     [message addAttributeWithName:@"imgBody" stringValue:base64str];
     [message addBody:name];
@@ -217,7 +214,7 @@
 /** 发送录音 */
 - (void)sendRecordMessageWithData:(NSData *)data bodyName:(NSString *)name withTime:(float)time {
     NSString *base64str = [data base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
-    XMPPMessage *message = [XMPPMessage messageWithType:CHATTYPEGROUP];
+    XMPPMessage *message = [XMPPMessage messageWithType:CHATTYPEGROUP to:self.room.roomJID];
     [message addAttributeWithName:@"bodyType" stringValue:[NSString stringWithFormat:@"%d",RECORD]];
     [message addAttributeWithName:@"time" stringValue:[NSString stringWithFormat:@"%f",time]];
     [message addAttributeWithName:@"timeBody" stringValue:base64str];
