@@ -138,7 +138,7 @@
     
     p = [NSXMLElement elementWithName:@"field" ];
     [p addAttributeWithName:@"var"stringValue:@"muc#roomconfig_maxusers"];//最大用户
-    [p addChild:[NSXMLElement elementWithName:@"value" stringValue:@"10000"]];
+    [p addChild:[NSXMLElement elementWithName:@"value" stringValue:@"100"]];
     [x addChild:p];
     
     p = [NSXMLElement elementWithName:@"field" ];
@@ -146,19 +146,34 @@
     [p addChild:[NSXMLElement elementWithName:@"value"stringValue:@"1"]];
     [x addChild:p];
     
-//    p = [NSXMLElement elementWithName:@"field" ];
-//    [p addAttributeWithName:@"var"stringValue:@"muc#roomconfig_publicroom"];//公共房间
-//    [p addChild:[NSXMLElement elementWithName:@"value"stringValue:@"0"]];
-//    [x addChild:p];
-    
-    p = [NSXMLElement elementWithName:@"field"];
-    [p addAttributeWithName:@"var" stringValue:@"muc#roomconfig_unmoderatedroom"];
-    [p addChild:[NSXMLElement elementWithName:@"value" stringValue:@"1"]];
+    p = [NSXMLElement elementWithName:@"field" ];
+    [p addAttributeWithName:@"var"stringValue:@"muc#roomconfig_publicroom"];//公共房间
+    [p addChild:[NSXMLElement elementWithName:@"value"stringValue:@"0"]];
     [x addChild:p];
     
     p = [NSXMLElement elementWithName:@"field" ];
     [p addAttributeWithName:@"var"stringValue:@"muc#roomconfig_allowinvites"];//允许邀请
     [p addChild:[NSXMLElement elementWithName:@"value"stringValue:@"1"]];
+    [x addChild:p];
+    
+    p = [NSXMLElement elementWithName:@"field" ];
+    [p addAttributeWithName:@"var"stringValue:@"muc#roomconfig_enablelogging"];//登录房间会话
+    [p addChild:[NSXMLElement elementWithName:@"value"stringValue:@"1"]];
+    [x addChild:p];
+    
+    p = [NSXMLElement elementWithName:@"field" ];
+    [p addAttributeWithName:@"var"stringValue:@"muc#roomconfig_roomadmins"];//
+    [p addChild:[NSXMLElement elementWithName:@"value"stringValue:@"1"]];
+    [x addChild:p];
+    
+    p = [NSXMLElement elementWithName:@"field"];
+    [p addAttributeWithName:@"var" stringValue:@"muc#maxhistoryfetch"];
+    [p addChild:[NSXMLElement elementWithName:@"value" stringValue:@"0"]]; //history
+    [x addChild:p];
+    
+    p = [NSXMLElement elementWithName:@"field"];
+    [p addAttributeWithName:@"var" stringValue:@"muc#roomconfig_Unmoderatedroom"];
+    [p addChild:[NSXMLElement elementWithName:@"value" stringValue:@"1"]];
     [x addChild:p];
     
     [xmppRoom configureRoomUsingOptions:x];
