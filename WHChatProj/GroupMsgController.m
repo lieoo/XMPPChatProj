@@ -33,6 +33,7 @@
 - (void)inviteFriend{
     NSLog(@"%s",__func__);
     InviteUserViewController *invite = [[InviteUserViewController alloc]init];
+    invite.currentRoom = self.room;
     UINavigationController *naVC = [[UINavigationController alloc]initWithRootViewController: invite];
     [self.navigationController presentViewController:naVC animated:YES completion:nil];
 }
@@ -170,7 +171,10 @@
 -(void)send:(NSString *)msg {
     if (![msg isEqualToString:@""]) {
         XMPPMessage *message = [XMPPMessage messageWithType:CHATTYPEGROUP to:self.room.roomJID];
+//        XMPPMessage *message = [[XMPPMessage alloc]initWithType:@"groupchat" to:self.room.roomJID];
         [message addAttributeWithName:@"bodyType" stringValue:[NSString stringWithFormat:@"%d",TEXT]];
+        [message addAttributeWithName:@"type" stringValue:@"groupchat"];
+
         [message addBody:msg];
         [[XmppTools sharedManager].xmppStream sendElement:message];
     }

@@ -121,7 +121,7 @@
     [self.xmppRoom fetchConfigurationForm];
     [self.xmppRoom fetchBanList];
     [self.xmppRoom fetchMembersList];
-    [self.xmppRoom fetchModeratorsList];
+//    [self.xmppRoom fetchModeratorsList];
 
 }
 - (void)xmppRoom:(XMPPRoom *)sender didFailToDestroy:(XMPPIQ *)iqError{
@@ -146,9 +146,14 @@
     [p addChild:[NSXMLElement elementWithName:@"value"stringValue:@"1"]];
     [x addChild:p];
     
-    p = [NSXMLElement elementWithName:@"field" ];
-    [p addAttributeWithName:@"var"stringValue:@"muc#roomconfig_publicroom"];//公共房间
-    [p addChild:[NSXMLElement elementWithName:@"value"stringValue:@"0"]];
+//    p = [NSXMLElement elementWithName:@"field" ];
+//    [p addAttributeWithName:@"var"stringValue:@"muc#roomconfig_publicroom"];//公共房间
+//    [p addChild:[NSXMLElement elementWithName:@"value"stringValue:@"0"]];
+//    [x addChild:p];
+    
+    p = [NSXMLElement elementWithName:@"field"];
+    [p addAttributeWithName:@"var" stringValue:@"muc#roomconfig_unmoderatedroom"];
+    [p addChild:[NSXMLElement elementWithName:@"value" stringValue:@"1"]];
     [x addChild:p];
     
     p = [NSXMLElement elementWithName:@"field" ];

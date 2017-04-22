@@ -106,7 +106,7 @@
 
 //连接服务器
 - (void)connection:(NSString*)userName{
-    XMPPJID *jid = [XMPPJID jidWithUser:userName domain:XMPP_HOST resource:XMPP_PLATFORM];
+    XMPPJID *jid = [XMPPJID jidWithUser:userName domain:XMPP_HOST resource:userName];
     self.userJid = jid;
     [self.xmppStream setMyJID:jid];
     // 发送请求
@@ -251,17 +251,79 @@
             [self.xmppRoster acceptPresenceSubscriptionRequestFrom:self.receivePresence.from andAddToRoster:YES];
         }
     }else if (alertView.tag == 2 && buttonIndex ==1){
-        //群聊邀请
-        NSString *roomId = [NSString stringWithFormat:@"%@@%@",self.groupName, XMPP_GROUPSERVICE];
-        XMPPJID *roomJID = [XMPPJID jidWithString:roomId];
-        XMPPRoomMemoryStorage *xmppRoomStorage = [[XMPPRoomMemoryStorage alloc] init];
-        XMPPRoom *xmppRoom = [[XMPPRoom alloc] initWithRoomStorage:xmppRoomStorage jid:roomJID dispatchQueue:dispatch_get_main_queue()];
-        [xmppRoom activate:[XmppTools sharedManager].xmppStream];
-        [xmppRoom addDelegate:self delegateQueue:dispatch_get_main_queue()];
-        [xmppRoom joinRoomUsingNickname:[XmppTools sharedManager].xmppStream.myJID.user history:nil password:nil];
+     
     }
 }
 
+- (void)xmppRoomDidJoin:(XMPPRoom *)sender
+{
+    NSLog(@"%s %d",__func__,__LINE__);
+    
+    [sender fetchBanList];
+    [sender fetchMembersList];
+    [sender fetchModeratorsList];
+    [self configNewRoom:sender];//可以自定义房间配置 此处可以自定义
+    [sender fetchConfigurationForm];
+
+    NSLog(@"加入房间成功");
+//    [self getRoomList];
+}
+
+- (void)xmppRoom:(XMPPRoom *)sender didFailToDestroy:(XMPPIQ *)iqError{
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:@"加入群组失败" delegate:nil cancelButtonTitle:@"我知道了"otherButtonTitles: nil];
+    [alertView show];
+}
+
+- (void)configNewRoom:(XMPPRoom *)xmppRoom
+{
+    NSXMLElement *x = [NSXMLElement elementWithName:@"x"xmlns:@"jabber:x:data"];
+    NSXMLElement *p = [NSXMLElement elementWithName:@"field" ];
+    [p addAttributeWithName:@"var"stringValue:@"muc#roomconfig_persistentroom"];//永久房间
+    [p addChild:[NSXMLElement elementWithName:@"value" stringValue:@"1"]];
+    [x addChild:p];
+    
+    p = [NSXMLElement elementWithName:@"field" ];
+    [p addAttributeWithName:@"var"stringValue:@"muc#roomconfig_maxusers"];//最大用户
+    [p addChild:[NSXMLElement elementWithName:@"value" stringValue:@"100"]];
+    [x addChild:p];
+    
+    p = [NSXMLElement elementWithName:@"field" ];
+    [p addAttributeWithName:@"var"stringValue:@"muc#roomconfig_changesubject"];//允许改变主题
+    [p addChild:[NSXMLElement elementWithName:@"value"stringValue:@"1"]];
+    [x addChild:p];
+    
+    p = [NSXMLElement elementWithName:@"field" ];
+    [p addAttributeWithName:@"var"stringValue:@"muc#roomconfig_publicroom"];//公共房间
+    [p addChild:[NSXMLElement elementWithName:@"value"stringValue:@"0"]];
+    [x addChild:p];
+    
+    p = [NSXMLElement elementWithName:@"field" ];
+    [p addAttributeWithName:@"var"stringValue:@"muc#roomconfig_allowinvites"];//允许邀请
+    [p addChild:[NSXMLElement elementWithName:@"value"stringValue:@"1"]];
+    [x addChild:p];
+    
+    p = [NSXMLElement elementWithName:@"field" ];
+    [p addAttributeWithName:@"var"stringValue:@"muc#roomconfig_enablelogging"];//登录房间会话
+    [p addChild:[NSXMLElement elementWithName:@"value"stringValue:@"1"]];
+    [x addChild:p];
+    
+    p = [NSXMLElement elementWithName:@"field" ];
+    [p addAttributeWithName:@"var"stringValue:@"muc#roomconfig_roomadmins"];//
+    [p addChild:[NSXMLElement elementWithName:@"value"stringValue:@"1"]];
+    [x addChild:p];
+    
+    p = [NSXMLElement elementWithName:@"field"];
+    [p addAttributeWithName:@"var" stringValue:@"muc#maxhistoryfetch"];
+    [p addChild:[NSXMLElement elementWithName:@"value" stringValue:@"0"]]; //history
+    [x addChild:p];
+    
+    p = [NSXMLElement elementWithName:@"field"];
+    [p addAttributeWithName:@"var" stringValue:@"muc#roomconfig_Unmoderatedroom"];
+    [p addChild:[NSXMLElement elementWithName:@"value" stringValue:@"1"]];
+    [x addChild:p];
+    
+    [xmppRoom configureRoomUsingOptions:x];
+}
 
 - (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex{
     if (alertView.tag == 101) {
@@ -270,6 +332,10 @@
 //        VCNavBase *nvc = [[VCNavBase alloc]initWithRootViewController:vc];
 //        window.rootViewController = nvc;
     }
+}
+
+-(void) xmppRoom:(XMPPRoom *)sender occupantDidJoin:(XMPPJID *)occupantJID withPresence:(XMPPPresence *)presence{
+    NSLog(@"新人加入群聊 %s ",__func__);
 }
 
 - (void)xmppStream:(XMPPStream *)sender didReceivePresence:(XMPPPresence *)presence
@@ -369,13 +435,23 @@
 //    [self.xmppStream sendElement:message];
 //}
 - (void)xmppStream:(XMPPStream *)sender didReceiveMessage:(XMPPMessage *)message{
+    
     if ([self isChatRoomInvite:message].length) {
         NSLog(@"%s--%d|收到邀请|",__func__,__LINE__);
 //        NSLog(@"%@",message.from.user);
-        self.groupName = [self isChatRoomInvite:message];
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[NSString stringWithFormat:@"%@邀请你加入%@",self.groupName,message.from.user] delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"加入",nil];
+        self.groupName = message.from.user;
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[NSString stringWithFormat:@"%@邀请你加入%@",[self isChatRoomInvite:message],self.groupName] delegate:self cancelButtonTitle:nil otherButtonTitles:@"我知道了",nil];
         alertView.tag = 2;
         [alertView show];
+        
+        //群聊邀请
+        NSString *roomId = [NSString stringWithFormat:@"%@@%@",self.groupName, XMPP_GROUPSERVICE];
+        XMPPJID *roomJID = [XMPPJID jidWithString:roomId];
+        XMPPRoomMemoryStorage *xmppRoomStorage = [[XMPPRoomMemoryStorage alloc] init];
+        XMPPRoom *xmppRoom = [[XMPPRoom alloc] initWithRoomStorage:xmppRoomStorage jid:roomJID dispatchQueue:dispatch_get_main_queue()];
+        [xmppRoom activate:[XmppTools sharedManager].xmppStream];
+        [xmppRoom addDelegate:self delegateQueue:dispatch_get_main_queue()];
+        [xmppRoom joinRoomUsingNickname:[XmppTools sharedManager].xmppStream.myJID.user history:nil password:nil];
     }
 }
 #pragma mark -- 危险写法 以后改
@@ -405,7 +481,7 @@
     return photoData;
 }
 - (BOOL)xmppStream:(XMPPStream *)sender didReceiveIQ:(XMPPIQ *)iq{
-//    NSLog(@"iq:%@",iq);
+    NSLog(@"\niq:%@\n",iq.type);
     // 以下两个判断其实只需要有一个就够了
     NSString *elementID = iq.elementID;
     if (![elementID isEqualToString:@"getMyRooms"]) {

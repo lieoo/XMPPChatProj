@@ -26,7 +26,7 @@
     [self.table reloadData];
     self.dataSource = [XmppTools sharedManager].contacts;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(rosterChange) name:kXMPP_ROSTER_CHANGE object:nil];
-    [self setUpRightButton];
+//    [self setUpRightButton];
 }
 - (void)setUpRightButton{
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"确定" style:UIBarButtonItemStylePlain target:self action:@selector(inviteUser)];
@@ -55,13 +55,43 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:TRUE];
     XMPPUserMemoryStorageObject *user = [self.dataSource objectAtIndex:indexPath.row];
+    [_currentRoom inviteUser:user.jid withMessage:@""];
+    
+    XMPPMessage* message=[[XMPPMessage alloc]init];
+//    [message addAttributeWithName:@"from" stringValue:self.currentRoom.roomJID.full];
+    [message addAttributeWithName:@"to" stringValue:user.jid.full];
+    NSXMLElement* element_x=[NSXMLElement elementWithName:@"x" xmlns:@"http://jabber.org/protocol/muc#user"];
+    [message addChild:element_x];
+    NSXMLElement* element_invite=[NSXMLElement elementWithName:@"invite"];
+    [element_invite addAttributeWithName:@"from" stringValue:[XmppTools sharedManager].userJid.user];
+//    [element_invite addAttributeWithName:@"to" stringValue:user.jid.full];
+    [element_x addChild:element_invite];
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    
+//    if (reason){
+//        NSXMLElement* element_reason=[NSXMLElement elementWithName:@"reason"];
+//        element_reason.stringValue=reason;
+//        [element_invite addChild:element_reason];
+//    }
+//    if (password){
+//        NSXMLElement* element_password=[NSXMLElement elementWithName:@"password"];
+//        element_password.stringValue=password;
+//        [element_x addChild:element_password];
+//    }
+    [[XmppTools sharedManager].xmppStream sendElement:message];
+    
+    [self performSelector:@selector(dismissController) withObject:nil afterDelay:1];
+    
 //    VCChat *vc = [[VCChat alloc]init];
 //    vc.toUser = user.jid;
 //    vc.title = user.jid.user;
 //    vc.hidesBottomBarWhenPushed = YES;
 //    [self.navigationController pushViewController:vc animated:TRUE];
 }
-
+- (void)dismissController{
+    [MBProgressHUD hideHUDForView:self.view animated:YES];
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
 }
 

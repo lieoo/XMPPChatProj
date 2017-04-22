@@ -12,4 +12,6 @@ typedef void (^slideInviteUserBlock)(NSArray *friendArray);
 @interface InviteUserViewController : UIViewController
 @property (nonatomic,copy)slideInviteUserBlock slideInviteUserBlock;
 
+@property (nonatomic,strong)XMPPRoom *currentRoom;
+
 @end
