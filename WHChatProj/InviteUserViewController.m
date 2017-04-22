@@ -55,18 +55,35 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:TRUE];
     XMPPUserMemoryStorageObject *user = [self.dataSource objectAtIndex:indexPath.row];
-    [_currentRoom inviteUser:user.jid withMessage:@""];
+//    [_currentRoom inviteUser:user.jid withMessage:@""];
+    NSLog(@"%@",self.currentRoom.roomJID);
+    
+//    XMPPMessage* message=[[XMPPMessage alloc]init];
+//    [message addAttributeWithName:@"from" stringValue:self.currentRoom.roomJID.full];
+//    [message addAttributeWithName:@"to" stringValue:user.jid.full];
+//    NSXMLElement* element_x=[NSXMLElement elementWithName:@"x" xmlns:@"http://jabber.org/protocol/muc#user"];
+//    [message addChild:element_x];
+//    NSXMLElement* element_invite=[NSXMLElement elementWithName:@"invite"];
+//    [element_invite addAttributeWithName:@"from" stringValue:[XmppTools sharedManager].userJid.user];
+//    [element_invite addAttributeWithName:@"to" stringValue:user.jid.full];
+//    [element_x addChild:element_invite];
+//    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+
     
     XMPPMessage* message=[[XMPPMessage alloc]init];
-//    [message addAttributeWithName:@"from" stringValue:self.currentRoom.roomJID.full];
+    [message addAttributeWithName:@"from" stringValue:self.currentRoom.roomJID.full];
     [message addAttributeWithName:@"to" stringValue:user.jid.full];
     NSXMLElement* element_x=[NSXMLElement elementWithName:@"x" xmlns:@"http://jabber.org/protocol/muc#user"];
     [message addChild:element_x];
     NSXMLElement* element_invite=[NSXMLElement elementWithName:@"invite"];
     [element_invite addAttributeWithName:@"from" stringValue:[XmppTools sharedManager].userJid.user];
-//    [element_invite addAttributeWithName:@"to" stringValue:user.jid.full];
+    [element_invite addAttributeWithName:@"to" stringValue:user.jid.full];
+    [element_invite addAttributeWithName:@"body" stringValue:@"body"];
     [element_x addChild:element_invite];
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    
+//    [self.currentRoom editRoomPrivileges:@[[XMPPRoom itemWithRole:@"admin" jid:user.jid]]];
+    [self.currentRoom editRoomPrivileges:@[[XMPPRoom itemWithRole:@"member" jid:user.jid]]];
     
 //    if (reason){
 //        NSXMLElement* element_reason=[NSXMLElement elementWithName:@"reason"];
