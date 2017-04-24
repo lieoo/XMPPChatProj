@@ -31,10 +31,12 @@
 
 //XMPP 聊天
 
-#define XMPP_HOST @"127.0.0.1"
+//#define XMPP_HOST @"127.0.0.1"
+//#define XMPP_GROUPSERVICE @"conference.127.0.0.1"
+#define XMPP_HOST @"172.16.3.211"
+#define XMPP_GROUPSERVICE @"conference.172.16.3.211"
 #define XMPP_PLATFORM @"IOS"
 #define CHATTYPECHAT @"chat"                //消息类型chat、group
 #define CHATTYPEGROUP @"groupchat"
 #define kXMPP_GET_GROUPS     @"kXMPP_GET_GROUPS"
-#define XMPP_GROUPSERVICE @"conference.127.0.0.1"
 #endif /* Global_h */

@@ -237,9 +237,12 @@
     self.fullImageView.backgroundColor = [UIColor blackColor];
     [[UIApplication sharedApplication].keyWindow addSubview:self.fullImageView];
     self.fullImageView.contentMode = UIViewContentModeScaleAspectFit;
+#pragma mark --- TODO 记录当前是否弹出键盘 记录一下
     [UIView animateWithDuration:.3 animations:^{
         self.fullImageView.frame = [UIScreen mainScreen].bounds;
+        [[[UIApplication sharedApplication] keyWindow] endEditing:YES];
     }];
+
 }
 - (void)actionTap2:(UITapGestureRecognizer *)tap{
     [UIView animateWithDuration:0.2 animations:^{

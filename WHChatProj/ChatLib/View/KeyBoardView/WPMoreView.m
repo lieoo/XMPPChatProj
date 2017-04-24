@@ -121,7 +121,7 @@
 - (void)loadView{
     self.scrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 1, self.frame.size.width, self.frame.size.height)];
     self.scrollView.backgroundColor = UIColorFromRGB(0xececef);
-    self.scrollView.contentSize = CGSizeMake(self.frame.size.width * 2, self.frame.size.height);
+    self.scrollView.contentSize = CGSizeMake(self.frame.size.width, self.frame.size.height);
     self.scrollView.showsVerticalScrollIndicator = NO;
     self.scrollView.showsHorizontalScrollIndicator = NO;
     self.scrollView.userInteractionEnabled = YES;
