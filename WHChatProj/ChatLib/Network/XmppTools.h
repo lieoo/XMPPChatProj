@@ -54,6 +54,7 @@ typedef NS_ENUM(NSInteger, ConnectToServerPurpose)
 //邀请加入群名称
 @property (nonatomic,copy) NSString *groupName;
 @property (nonatomic,strong) XMPPRoom *room;
+@property (nonatomic,copy) NSString *xmppToolsroomJidStr;
 
 + (instancetype)sharedManager;
 

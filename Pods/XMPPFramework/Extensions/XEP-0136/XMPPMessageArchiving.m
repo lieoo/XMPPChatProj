@@ -2,7 +2,7 @@
 #import "XMPPFramework.h"
 #import "XMPPLogging.h"
 #import "NSNumber+XMPP.h"
-
+#import <UIKit/UIKit.h>
 #if ! __has_feature(objc_arc)
 #warning This file must be compiled with ARC. Use -fobjc-arc flag (or convert project to ARC).
 #endif
@@ -430,6 +430,11 @@
     NSLog(@"%s %@",__func__,message);
     NSString *messageType = message.type;
     if ([userName isEqualToString:jid.resource]) return;
+    
+    if ([messageType isEqualToString:@"error"])NSLog(@"\n errorMSG:%@",message.errorMessage);
+    
+//    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:[NSString stringWithFormat:@"error %@",message.errorMessage] message:nil delegate:nil cancelButtonTitle:@"好的" otherButtonTitles:nil, nil];
+//    [alert show];
     
 //    if ([jidStr hasPrefix:userName] && [messageType isEqualToString:@"error"]) return;
 //    if ([jidStr hasPrefix:userName] && [messageType isEqualToString:@"groupchat"]) return;

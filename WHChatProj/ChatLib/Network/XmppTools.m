@@ -440,13 +440,14 @@
         NSLog(@"%s--%d|收到邀请|",__func__,__LINE__);
 //        NSLog(@"%@",message.from.user);
         self.groupName = message.from.user;
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[NSString stringWithFormat:@"%@邀请你加入%@",[self isChatRoomInvite:message],self.groupName] delegate:self cancelButtonTitle:nil otherButtonTitles:@"我知道了",nil];
+//        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[NSString stringWithFormat:@"%@邀请你加入%@",[self isChatRoomInvite:message],self.groupName] delegate:self cancelButtonTitle:nil otherButtonTitles:@"我知道了",nil];邀请你加入
+        UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:nil message:[NSString stringWithFormat:@"%@邀请你加入%@",message.from.user,[self isChatRoomInvite:message]] delegate:self cancelButtonTitle:@"知道了" otherButtonTitles:nil, nil];
         alertView.tag = 2;
         [alertView show];
         
         //群聊邀请
-        NSString *roomId = [NSString stringWithFormat:@"%@@%@",self.groupName, XMPP_GROUPSERVICE];
-        XMPPJID *roomJID = [XMPPJID jidWithString:roomId];
+//        NSString *roomId = [NSString stringWithFormat:@"%@@%@",self.groupName, XMPP_GROUPSERVICE];
+        XMPPJID *roomJID = [XMPPJID jidWithString:_xmppToolsroomJidStr];
         XMPPRoomMemoryStorage *xmppRoomStorage = [[XMPPRoomMemoryStorage alloc] init];
         XMPPRoom *xmppRoom = [[XMPPRoom alloc] initWithRoomStorage:xmppRoomStorage jid:roomJID dispatchQueue:dispatch_get_main_queue()];
         [xmppRoom activate:[XmppTools sharedManager].xmppStream];
@@ -461,10 +462,15 @@
             if ([element.name isEqualToString:@"x"] && [element.xmlns isEqualToString:@"http://jabber.org/protocol/muc#user"]){
                 for (NSXMLElement* element_a in element.children) {
                     if ([element_a.name isEqualToString:@"invite"]){
-                        NSRange range = [element_a.prettyXMLString rangeOfString:@"\""];
-                        NSRange range2 = [element_a.prettyXMLString rangeOfString:@"@"];
-                        NSString *string = [element_a.prettyXMLString substringWithRange:NSMakeRange(range.location + 1, range2.location - range.location - 1)];
-                        return string;
+//                        NSRange range = [element_a.prettyXMLString rangeOfString:@"\""];
+//                        NSRange range2 = [element_a.prettyXMLString rangeOfString:@"@"];
+//                        NSString *string = [element_a.prettyXMLString substringWithRange:NSMakeRange(range.location + 1, range2.location - range.location - 1)];
+                        NSRange bodyRange = [element_a.prettyXMLString rangeOfString:@"body=\""];
+                        NSRange endBodyRange = [element_a.prettyXMLString rangeOfString:@"@conference"];
+                        NSString *string2 = [element_a.prettyXMLString substringWithRange:NSMakeRange(bodyRange.location + 6, endBodyRange.location - message.fromStr.length - 1 - XMPP_GROUPSERVICE.length - 1)];
+                        _xmppToolsroomJidStr = [element_a.prettyXMLString substringWithRange:NSMakeRange(bodyRange.location + 6, endBodyRange.location - message.fromStr.length - 1)];
+                        
+                        return string2;
                     }
                 }
             }
@@ -472,6 +478,7 @@
     }
     return @"";
 }
+
 
 - (void)xmppStream:(XMPPStream *)sender didFailToSendMessage:(XMPPMessage *)message error:(NSError *)error{
     

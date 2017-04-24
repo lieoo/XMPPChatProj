@@ -95,7 +95,18 @@
     DDXMLElement *item = self.RoomDataSource[indexPath.row];
     XMPPRoomMemoryStorage *roomStorage = [[XMPPRoomMemoryStorage alloc] init];
     XMPPRoom *xmppRoom = [[XMPPRoom alloc] initWithRoomStorage:roomStorage jid:[XMPPJID jidWithString:[item attributeForName:@"jid"].stringValue] dispatchQueue:dispatch_get_main_queue()];
+    [xmppRoom joinRoomUsingNickname:[XmppTools sharedManager].xmppStream.myJID.bare history:nil];
     groupVC.room = xmppRoom;
+    
+    
+    XMPPPresence* presence=[XMPPPresence presence];
+    [presence addAttributeWithName:@"from" stringValue:[XmppTools sharedManager].userJid.user];
+    [presence addAttributeWithName:@"to" stringValue:[item attributeForName:@"jid"].stringValue];
+    NSXMLElement* element_x=[NSXMLElement elementWithName:@"x" xmlns:@"http://jabber.org/protocol/muc"];
+    [presence addChild:element_x];
+    [[XmppTools sharedManager].xmppStream sendElement:presence];
+    
+    
     self.tabBarController.tabBar.hidden = YES;
     [self.navigationController pushViewController:groupVC animated:TRUE];
 }
@@ -116,7 +127,6 @@
     NSLog(@"加入房间成功");
     [self getRoomList];
 }
-
 - (void)setUpJoinAndCreatRoomConfig{
     [self.xmppRoom fetchConfigurationForm];
     [self.xmppRoom fetchBanList];

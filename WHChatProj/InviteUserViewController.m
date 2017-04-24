@@ -27,6 +27,14 @@
     self.dataSource = [XmppTools sharedManager].contacts;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(rosterChange) name:kXMPP_ROSTER_CHANGE object:nil];
 //    [self setUpRightButton];
+    [self addRightBtn];
+    
+}
+- (void)addRightBtn{
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"返回" style:UIBarButtonItemStylePlain target:self action:@selector(back)];
+}
+-(void)back{
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 - (void)setUpRightButton{
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"确定" style:UIBarButtonItemStylePlain target:self action:@selector(inviteUser)];
@@ -78,12 +86,12 @@
     NSXMLElement* element_invite=[NSXMLElement elementWithName:@"invite"];
     [element_invite addAttributeWithName:@"from" stringValue:[XmppTools sharedManager].userJid.user];
     [element_invite addAttributeWithName:@"to" stringValue:user.jid.full];
-    [element_invite addAttributeWithName:@"body" stringValue:@"body"];
+    [element_invite addAttributeWithName:@"body" stringValue:[NSString stringWithFormat:@"%@",self.currentRoom.roomJID]];
     [element_x addChild:element_invite];
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     
 //    [self.currentRoom editRoomPrivileges:@[[XMPPRoom itemWithRole:@"admin" jid:user.jid]]];
-    [self.currentRoom editRoomPrivileges:@[[XMPPRoom itemWithRole:@"member" jid:user.jid]]];
+    [self.currentRoom editRoomPrivileges:@[[XMPPRoom itemWithRole:@"admin" jid:user.jid]]];
     
 //    if (reason){
 //        NSXMLElement* element_reason=[NSXMLElement elementWithName:@"reason"];

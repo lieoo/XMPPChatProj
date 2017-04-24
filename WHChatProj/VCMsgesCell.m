@@ -69,7 +69,7 @@
         self.ivImg.image = headImg;
     }
     
-    if (photoData) {
+    if (photoData && [data.bareJidStr rangeOfString:XMPP_GROUPSERVICE].location == NSNotFound) {
         headImg = [UIImage imageWithData:photoData];
 //        dispatch_async(dispatch_get_main_queue(), ^{
             self.ivImg.image = headImg;
