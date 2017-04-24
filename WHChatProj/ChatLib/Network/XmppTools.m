@@ -484,7 +484,8 @@
 }
 - (BOOL)xmppStream:(XMPPStream *)sender didReceiveIQ:(XMPPIQ *)iq{
     NSLog(@"\niq:%@\n",iq.type);
-    NSLog(@"%@",iq);
+    NSLog(@"iqType:%@ %s %d",iq.type,__func__,__LINE__);
+//    NSLog(@"%@",iq);
     // 以下两个判断其实只需要有一个就够了
     NSString *elementID = iq.elementID;
     if (![elementID isEqualToString:@"getMyRooms"]) {
