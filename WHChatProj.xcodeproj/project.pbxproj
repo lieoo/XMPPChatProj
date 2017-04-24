@@ -315,7 +315,7 @@
 		D15AF7141E9DFD46007736EE /* Toast.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Toast.m; sourceTree = "<group>"; };
 		D15AF7151E9DFD46007736EE /* UIImageView+SDWebImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+SDWebImage.h"; sourceTree = "<group>"; };
 		D15AF7161E9DFD46007736EE /* UIImageView+SDWebImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+SDWebImage.m"; sourceTree = "<group>"; };
-		D15AF7181E9DFD46007736EE /* Global.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Global.h; sourceTree = "<group>"; };
+		D15AF7181E9DFD46007736EE /* Global.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Global.h; path = ../Tools/Const/Global.h; sourceTree = "<group>"; };
 		D15AF7191E9DFD46007736EE /* NetContants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetContants.h; sourceTree = "<group>"; };
 		D15AF71A1E9DFD46007736EE /* Notify.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Notify.h; sourceTree = "<group>"; };
 		D15AF71C1E9DFD46007736EE /* DataStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataStore.h; sourceTree = "<group>"; };
@@ -766,6 +766,7 @@
 			isa = PBXGroup;
 			children = (
 				D15AF7751E9E0DF2007736EE /* AtChat.pch */,
+				D15AF7181E9DFD46007736EE /* Global.h */,
 				D15AF7281E9E0D34007736EE /* AFNetworking */,
 				D15AF7081E9DFD46007736EE /* ApiObject.h */,
 				D15AF7091E9DFD46007736EE /* ApiObject.m */,
@@ -811,7 +812,6 @@
 		D15AF7171E9DFD46007736EE /* Const */ = {
 			isa = PBXGroup;
 			children = (
-				D15AF7181E9DFD46007736EE /* Global.h */,
 				D15AF7191E9DFD46007736EE /* NetContants.h */,
 				D15AF71A1E9DFD46007736EE /* Notify.h */,
 			);

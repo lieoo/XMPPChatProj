@@ -473,7 +473,9 @@
     return @"";
 }
 
-
+- (void)xmppStream:(XMPPStream *)sender didFailToSendMessage:(XMPPMessage *)message error:(NSError *)error{
+    
+}
 - (NSData*)getCurUserImageData
 {
     XMPPJID *jid = [XMPPJID jidWithString:[self idAndHost:self.userName] resource:XMPP_PLATFORM];
@@ -482,6 +484,7 @@
 }
 - (BOOL)xmppStream:(XMPPStream *)sender didReceiveIQ:(XMPPIQ *)iq{
     NSLog(@"\niq:%@\n",iq.type);
+    NSLog(@"%@",iq);
     // 以下两个判断其实只需要有一个就够了
     NSString *elementID = iq.elementID;
     if (![elementID isEqualToString:@"getMyRooms"]) {
@@ -512,7 +515,11 @@
     XMPPJID * jid = [XMPPJID jidWithString:jidStr];
     [room inviteUser:jid withMessage:message];
 }
-
+- (void)xmppStream:(XMPPStream *)sender didSendMessage:(XMPPMessage *)message{
+    NSLog(@"%@",message.type);
+    NSLog(@"%@",message.body);
+    NSLog(@"%s",__func__);
+}
 /**
  * 更改密码  ------ 暂时未修改成功
  */

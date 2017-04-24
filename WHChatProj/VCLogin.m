@@ -130,6 +130,7 @@
     if (!_tfPhone) {
         _tfPhone = [[UITextField alloc]initWithFrame:CGRectMake(10, 2.5, DEVICEWIDTH-40, 40)];
         _tfPhone.placeholder = @"请输入账号";
+        _tfPhone.keyboardType = UIKeyboardTypeDefault;
         _tfPhone.delegate = self;
     }
     return _tfPhone;

@@ -28,11 +28,13 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    if (indexPath.section == 0) {
-        return 70*RATIO_WIDHT320;
-    }else{
-        return 40*RATIO_WIDHT320;
-    }
+//    if (indexPath.section == 0) {
+//        return 70*RATIO_WIDHT320;
+    return 70;
+    
+//    }else{
+//        return 40*RATIO_WIDHT320;
+//    }
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return 1;
@@ -120,6 +122,7 @@
 - (UITableView*)table{
     if (!_table) {
         _table = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, DEVICEWIDTH, DEVICEHEIGHT) style:UITableViewStyleGrouped];
+        _table.separatorStyle = UITableViewCellSeparatorStyleNone;
         _table.delegate = self;
         _table.dataSource = self;
     }

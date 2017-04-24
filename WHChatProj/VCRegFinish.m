@@ -63,6 +63,9 @@
             UIAlertView *alert = [[UIAlertView alloc]initWithTitle:nil message:@"注册成功" delegate:self cancelButtonTitle:@"我知道了" otherButtonTitles:nil];
             alert.delegate = self;
             [alert show];
+            [XmppTools sharedManager].xmppvCardModule.myvCardTemp.title = self.tfUserName.text;
+            [[XmppTools sharedManager].xmppvCardModule updateMyvCardTemp:[XmppTools sharedManager].xmppvCardModule.myvCardTemp];
+            
        } withFail:^(NSString *error) {
            [self hideMsg];
            UIAlertView *alert = [[UIAlertView alloc]initWithTitle:nil message:@"注册失败" delegate:nil cancelButtonTitle:@"我知道了" otherButtonTitles:nil];
@@ -111,6 +114,7 @@
     if (_tfUserName) return _tfUserName;
     _tfUserName = [[UITextField alloc]initWithFrame:CGRectMake(10, 2.5, DEVICEWIDTH-40, 40)];
     _tfUserName.placeholder = @"请输入用户名";
+    _tfUserName.keyboardType = UIKeyboardTypeDefault;
     _tfUserName.delegate = self;
     return _tfUserName;
 }
