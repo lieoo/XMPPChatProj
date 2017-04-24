@@ -57,6 +57,7 @@
         //登录
         MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         hud.label.text = @"注册中...";
+        [hud hideAnimated:YES afterDelay:3];
         [[XmppTools sharedManager] registerWithUser:self.tfUserName.text password:password withSuccess:^{
             [self hideMsg];
             UIAlertView *alert = [[UIAlertView alloc]initWithTitle:nil message:@"注册成功" delegate:self cancelButtonTitle:@"我知道了" otherButtonTitles:nil];
