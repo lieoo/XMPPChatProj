@@ -119,8 +119,8 @@
         self.lbContent.hidden = NO;
     }else if([chatType integerValue] == RECORD){  //语音
         self.lbContent.hidden = NO;
-        NSString *time = [msg.message attributeStringValueForName:@"time"];
-        self.lbContent.text = [NSString stringWithFormat:@"[语音] %@''",time];
+        float time = [[msg.message attributeStringValueForName:@"time"] floatValue];
+        self.lbContent.text = [NSString stringWithFormat:@"[语音] %.2f''",time];
     }
     if(self.msg.isOutgoing){
         self.containerImageView.image = [self stretchImage:@"SenderTextNodeBkg"];
@@ -262,12 +262,12 @@
         CGFloat h = [text sizeThatFits:CGSizeMake(w-30, MAXFLOAT*RATIO_WIDHT320)].height;
         height += h + 30;
     }else if([chatType integerValue] == RECORD){     //语音
-        NSString *time = [msg.message attributeStringValueForName:@"time"];
+        float time = [[msg.message attributeStringValueForName:@"time"] floatValue];
         
         UILabel *lbContent = [[UILabel alloc]init];
         lbContent.font = [UIFont systemFontOfSize:14*RATIO_WIDHT320];
         lbContent.numberOfLines = 0;
-        lbContent.text = [NSString stringWithFormat:@"[语音] %@''",time];
+        lbContent.text = [NSString stringWithFormat:@"[语音] %.2f''",time];
         
         
         CGFloat w = [lbContent sizeThatFits:CGSizeMake(MAXFLOAT, 14*RATIO_WIDHT320)].width;
