@@ -38,7 +38,6 @@
 		D15AF7051E9DFC6A007736EE /* FaceView.m in Sources */ = {isa = PBXBuildFile; fileRef = D15AF6FD1E9DFC6A007736EE /* FaceView.m */; };
 		D15AF7231E9DFD46007736EE /* XmppTools.m in Sources */ = {isa = PBXBuildFile; fileRef = D15AF7101E9DFD46007736EE /* XmppTools.m */; };
 		D15AF7241E9DFD46007736EE /* Toast.m in Sources */ = {isa = PBXBuildFile; fileRef = D15AF7141E9DFD46007736EE /* Toast.m */; };
-		D15AF7251E9DFD46007736EE /* UIImageView+SDWebImage.m in Sources */ = {isa = PBXBuildFile; fileRef = D15AF7161E9DFD46007736EE /* UIImageView+SDWebImage.m */; };
 		D15AF73E1E9E0D8C007736EE /* VCBase.m in Sources */ = {isa = PBXBuildFile; fileRef = D15AF73D1E9E0D8C007736EE /* VCBase.m */; };
 		D15AF7641E9E0DD5007736EE /* MLEmoji_Expression.bundle in Resources */ = {isa = PBXBuildFile; fileRef = D15AF7401E9E0DD5007736EE /* MLEmoji_Expression.bundle */; };
 		D15AF7651E9E0DD5007736EE /* MLEmoji_Expression.plist in Resources */ = {isa = PBXBuildFile; fileRef = D15AF7411E9E0DD5007736EE /* MLEmoji_Expression.plist */; };
@@ -296,8 +295,6 @@
 		D15AF7101E9DFD46007736EE /* XmppTools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = XmppTools.m; path = ChatLib/Network/XmppTools.m; sourceTree = "<group>"; };
 		D15AF7131E9DFD46007736EE /* Toast.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Toast.h; sourceTree = "<group>"; };
 		D15AF7141E9DFD46007736EE /* Toast.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Toast.m; sourceTree = "<group>"; };
-		D15AF7151E9DFD46007736EE /* UIImageView+SDWebImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+SDWebImage.h"; sourceTree = "<group>"; };
-		D15AF7161E9DFD46007736EE /* UIImageView+SDWebImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+SDWebImage.m"; sourceTree = "<group>"; };
 		D15AF7181E9DFD46007736EE /* Global.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Global.h; path = ChatLib/Tools/Const/Global.h; sourceTree = "<group>"; };
 		D15AF7191E9DFD46007736EE /* NetContants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetContants.h; sourceTree = "<group>"; };
 		D15AF71A1E9DFD46007736EE /* Notify.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Notify.h; sourceTree = "<group>"; };
@@ -334,8 +331,8 @@
 		D15AF7621E9E0DD5007736EE /* TTTAttributedLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTTAttributedLabel.h; sourceTree = "<group>"; };
 		D15AF7631E9E0DD5007736EE /* TTTAttributedLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTTAttributedLabel.m; sourceTree = "<group>"; };
 		D15AF7751E9E0DF2007736EE /* AtChat.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AtChat.pch; path = ChatLib/Network/AFNetworking/AtChat.pch; sourceTree = "<group>"; };
-		D15AF7761E9E1308007736EE /* expression_custom.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = expression_custom.plist; sourceTree = "<group>"; };
-		D15AF7781E9E130B007736EE /* expressionImage_custom.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = expressionImage_custom.plist; sourceTree = "<group>"; };
+		D15AF7761E9E1308007736EE /* expression_custom.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = expression_custom.plist; path = ../expression_custom.plist; sourceTree = "<group>"; };
+		D15AF7781E9E130B007736EE /* expressionImage_custom.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = expressionImage_custom.plist; path = ../expressionImage_custom.plist; sourceTree = "<group>"; };
 		D15AF77B1E9E13A2007736EE /* ChatAddIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ChatAddIcon@2x.png"; sourceTree = "<group>"; };
 		D15AF77C1E9E13A2007736EE /* ChatAddIcon@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ChatAddIcon@3x.png"; sourceTree = "<group>"; };
 		D15AF77D1E9E13A2007736EE /* ChatFaceAdd@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ChatFaceAdd@2x.png"; sourceTree = "<group>"; };
@@ -514,7 +511,7 @@
 		D15F665D1E9FB8F6000B63CA /* Expression_98@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Expression_98@2x.png"; sourceTree = "<group>"; };
 		D15F665E1E9FB8F6000B63CA /* Expression_99@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Expression_99@2x.png"; sourceTree = "<group>"; };
 		D15F665F1E9FB8F6000B63CA /* Expression_9@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Expression_9@2x.png"; sourceTree = "<group>"; };
-		D15F66C91E9FB9C6000B63CA /* expression_CH.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = expression_CH.plist; sourceTree = "<group>"; };
+		D15F66C91E9FB9C6000B63CA /* expression_CH.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = expression_CH.plist; path = ../expression_CH.plist; sourceTree = "<group>"; };
 		D1617B411EA5DFAA0049BE14 /* VCLogin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VCLogin.h; sourceTree = "<group>"; };
 		D1617B421EA5DFAA0049BE14 /* VCLogin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VCLogin.m; sourceTree = "<group>"; };
 		D1617B441EA5E49D0049BE14 /* VCTabbarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VCTabbarController.h; sourceTree = "<group>"; };
@@ -734,9 +731,6 @@
 			isa = PBXGroup;
 			children = (
 				D15AF77A1E9E13A2007736EE /* ImageSource */,
-				D15AF7761E9E1308007736EE /* expression_custom.plist */,
-				D15AF7781E9E130B007736EE /* expressionImage_custom.plist */,
-				D15F66C91E9FB9C6000B63CA /* expression_CH.plist */,
 				D15AF73F1E9E0DD5007736EE /* MLEmojiLabel */,
 				D15AF7121E9DFD46007736EE /* Category */,
 				D15AF7171E9DFD46007736EE /* Const */,
@@ -750,8 +744,6 @@
 			children = (
 				D15AF7131E9DFD46007736EE /* Toast.h */,
 				D15AF7141E9DFD46007736EE /* Toast.m */,
-				D15AF7151E9DFD46007736EE /* UIImageView+SDWebImage.h */,
-				D15AF7161E9DFD46007736EE /* UIImageView+SDWebImage.m */,
 			);
 			path = Category;
 			sourceTree = "<group>";
@@ -768,6 +760,9 @@
 		D15AF73F1E9E0DD5007736EE /* MLEmojiLabel */ = {
 			isa = PBXGroup;
 			children = (
+				D15AF7761E9E1308007736EE /* expression_custom.plist */,
+				D15AF7781E9E130B007736EE /* expressionImage_custom.plist */,
+				D15F66C91E9FB9C6000B63CA /* expression_CH.plist */,
 				D15AF7401E9E0DD5007736EE /* MLEmoji_Expression.bundle */,
 				D15AF7411E9E0DD5007736EE /* MLEmoji_Expression.plist */,
 				D15AF7421E9E0DD5007736EE /* MLEmoji_ExpressionImage.plist */,
@@ -1407,7 +1402,6 @@
 				D15AF7701E9E0DD5007736EE /* MLLabel.m in Sources */,
 				D15AF7051E9DFC6A007736EE /* FaceView.m in Sources */,
 				D15AF7691E9E0DD5007736EE /* NSMutableAttributedString+MLLabel.m in Sources */,
-				D15AF7251E9DFD46007736EE /* UIImageView+SDWebImage.m in Sources */,
 				D103BE851EA4A96400BEC0EF /* VCFriends.m in Sources */,
 				D1155A541EA24519008488EF /* VCMsgesCell.m in Sources */,
 				D15F65801E9E4E5A000B63CA /* VoiceHUDView.m in Sources */,
