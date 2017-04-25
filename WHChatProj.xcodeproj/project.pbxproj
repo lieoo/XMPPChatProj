@@ -1658,7 +1658,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 4ZPUG3YB9Y;
-				GCC_PREFIX_HEADER = /Users/xingzheng/Desktop/WHChatProj/WHChatProj/ChatLib/Network/AFNetworking/AtChat.pch;
+				GCC_PREFIX_HEADER = /Users/xingzheng/Downloads/XMPPChatProj/WHChatProj/ChatLib/Network/AFNetworking/AtChat.pch;
 				INFOPLIST_FILE = WHChatProj/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1673,7 +1673,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 4ZPUG3YB9Y;
-				GCC_PREFIX_HEADER = /Users/xingzheng/Desktop/WHChatProj/WHChatProj/ChatLib/Network/AFNetworking/AtChat.pch;
+				GCC_PREFIX_HEADER = /Users/xingzheng/Downloads/XMPPChatProj/WHChatProj/ChatLib/Network/AFNetworking/AtChat.pch;
 				INFOPLIST_FILE = WHChatProj/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

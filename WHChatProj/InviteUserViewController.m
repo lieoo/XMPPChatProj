@@ -87,12 +87,12 @@
     [element_invite addAttributeWithName:@"from" stringValue:[XmppTools sharedManager].userJid.user];
     [element_invite addAttributeWithName:@"to" stringValue:user.jid.full];
     [element_invite addAttributeWithName:@"body" stringValue:[NSString stringWithFormat:@"%@",self.currentRoom.roomJID]];
+    [element_invite addAttributeWithName:@"affiliation" stringValue:@"admin"];
     [element_x addChild:element_invite];
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     
 //    [self.currentRoom editRoomPrivileges:@[[XMPPRoom itemWithRole:@"admin" jid:user.jid]]];
     [self.currentRoom editRoomPrivileges:@[[XMPPRoom itemWithRole:@"admin" jid:user.jid]]];
-    
 //    if (reason){
 //        NSXMLElement* element_reason=[NSXMLElement elementWithName:@"reason"];
 //        element_reason.stringValue=reason;

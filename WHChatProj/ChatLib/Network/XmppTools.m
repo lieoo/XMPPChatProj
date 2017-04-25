@@ -141,13 +141,13 @@
     if(error && error.code == 7){
         [self goOffLine];
         
-        NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-        [userDefaults setObject:@(TRUE) forKey:@"loginFlag"];
-        [userDefaults synchronize];
-        NSLog(@"%s--%d|异地登录|%@",__func__,__LINE__,error);
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:@"该帐号在其他设备登录" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
-        alertView.tag = 101;
-        [alertView show];
+//        NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+//        [userDefaults setObject:@(TRUE) forKey:@"loginFlag"];
+//        [userDefaults synchronize];
+//        NSLog(@"%s--%d|异地登录|%@",__func__,__LINE__,error);
+//        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:@"该帐号在其他设备登录" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
+//        alertView.tag = 101;
+//        [alertView show];
     }else if (error.code != 0){
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:@"连接失败" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
         [alertView show];
@@ -294,7 +294,7 @@
     
     p = [NSXMLElement elementWithName:@"field" ];
     [p addAttributeWithName:@"var"stringValue:@"muc#roomconfig_publicroom"];//公共房间
-    [p addChild:[NSXMLElement elementWithName:@"value"stringValue:@"0"]];
+    [p addChild:[NSXMLElement elementWithName:@"value"stringValue:@"1"]];
     [x addChild:p];
     
     p = [NSXMLElement elementWithName:@"field" ];
@@ -450,9 +450,11 @@
         XMPPJID *roomJID = [XMPPJID jidWithString:_xmppToolsroomJidStr];
         XMPPRoomMemoryStorage *xmppRoomStorage = [[XMPPRoomMemoryStorage alloc] init];
         XMPPRoom *xmppRoom = [[XMPPRoom alloc] initWithRoomStorage:xmppRoomStorage jid:roomJID dispatchQueue:dispatch_get_main_queue()];
-        [xmppRoom activate:[XmppTools sharedManager].xmppStream];
+        [xmppRoom activate:_xmppStream];
         [xmppRoom addDelegate:self delegateQueue:dispatch_get_main_queue()];
         [xmppRoom joinRoomUsingNickname:[XmppTools sharedManager].xmppStream.myJID.user history:nil password:nil];
+        
+        
     }
 }
 #pragma mark -- 危险写法 以后改
@@ -469,7 +471,6 @@
                         NSRange endBodyRange = [element_a.prettyXMLString rangeOfString:@"@conference"];
                         NSString *string2 = [element_a.prettyXMLString substringWithRange:NSMakeRange(bodyRange.location + 6, endBodyRange.location - message.fromStr.length - 1 - XMPP_GROUPSERVICE.length - 1)];
                         _xmppToolsroomJidStr = [element_a.prettyXMLString substringWithRange:NSMakeRange(bodyRange.location + 6, endBodyRange.location - message.fromStr.length - 1)];
-                        
                         return string2;
                     }
                 }

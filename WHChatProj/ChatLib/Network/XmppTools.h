@@ -86,6 +86,6 @@ typedef NS_ENUM(NSInteger, ConnectToServerPurpose)
 //更改密码
 - (void)changePassworduseWord:(NSString *)checkPassword withUser:(NSString*)userName;
 
-- (void)configRoom;
+//- (void)configRoom;
 
 @end

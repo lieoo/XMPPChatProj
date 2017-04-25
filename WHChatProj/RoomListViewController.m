@@ -74,7 +74,6 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return self.RoomDataSource.count;
 }
-
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     GroupListTableViewCell *cell = [[GroupListTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"roomCell"];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -158,7 +157,7 @@
     
     p = [NSXMLElement elementWithName:@"field" ];
     [p addAttributeWithName:@"var"stringValue:@"muc#roomconfig_publicroom"];//公共房间
-    [p addChild:[NSXMLElement elementWithName:@"value"stringValue:@"0"]];
+    [p addChild:[NSXMLElement elementWithName:@"value"stringValue:@"1"]];
     [x addChild:p];
     
     p = [NSXMLElement elementWithName:@"field" ];
