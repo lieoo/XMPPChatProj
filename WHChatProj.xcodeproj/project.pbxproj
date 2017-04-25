@@ -36,20 +36,9 @@
 		D15AF7031E9DFC6A007736EE /* FaceCollCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D15AF6F91E9DFC6A007736EE /* FaceCollCell.m */; };
 		D15AF7041E9DFC6A007736EE /* FaceHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = D15AF6FB1E9DFC6A007736EE /* FaceHeaderView.m */; };
 		D15AF7051E9DFC6A007736EE /* FaceView.m in Sources */ = {isa = PBXBuildFile; fileRef = D15AF6FD1E9DFC6A007736EE /* FaceView.m */; };
-		D15AF7201E9DFD46007736EE /* ApiObject.m in Sources */ = {isa = PBXBuildFile; fileRef = D15AF7091E9DFD46007736EE /* ApiObject.m */; };
-		D15AF7211E9DFD46007736EE /* NetRequestTool.m in Sources */ = {isa = PBXBuildFile; fileRef = D15AF70B1E9DFD46007736EE /* NetRequestTool.m */; };
-		D15AF7221E9DFD46007736EE /* NetTool.m in Sources */ = {isa = PBXBuildFile; fileRef = D15AF70D1E9DFD46007736EE /* NetTool.m */; };
 		D15AF7231E9DFD46007736EE /* XmppTools.m in Sources */ = {isa = PBXBuildFile; fileRef = D15AF7101E9DFD46007736EE /* XmppTools.m */; };
 		D15AF7241E9DFD46007736EE /* Toast.m in Sources */ = {isa = PBXBuildFile; fileRef = D15AF7141E9DFD46007736EE /* Toast.m */; };
 		D15AF7251E9DFD46007736EE /* UIImageView+SDWebImage.m in Sources */ = {isa = PBXBuildFile; fileRef = D15AF7161E9DFD46007736EE /* UIImageView+SDWebImage.m */; };
-		D15AF7261E9DFD46007736EE /* DataStore.m in Sources */ = {isa = PBXBuildFile; fileRef = D15AF71D1E9DFD46007736EE /* DataStore.m */; };
-		D15AF7271E9DFD46007736EE /* DataStoreManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D15AF71F1E9DFD46007736EE /* DataStoreManager.m */; };
-		D15AF7361E9E0D34007736EE /* AFHTTPSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D15AF72A1E9E0D34007736EE /* AFHTTPSessionManager.m */; };
-		D15AF7371E9E0D34007736EE /* AFNetworkReachabilityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D15AF72D1E9E0D34007736EE /* AFNetworkReachabilityManager.m */; };
-		D15AF7381E9E0D34007736EE /* AFSecurityPolicy.m in Sources */ = {isa = PBXBuildFile; fileRef = D15AF72F1E9E0D34007736EE /* AFSecurityPolicy.m */; };
-		D15AF7391E9E0D34007736EE /* AFURLRequestSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = D15AF7311E9E0D34007736EE /* AFURLRequestSerialization.m */; };
-		D15AF73A1E9E0D34007736EE /* AFURLResponseSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = D15AF7331E9E0D34007736EE /* AFURLResponseSerialization.m */; };
-		D15AF73B1E9E0D34007736EE /* AFURLSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D15AF7351E9E0D34007736EE /* AFURLSessionManager.m */; };
 		D15AF73E1E9E0D8C007736EE /* VCBase.m in Sources */ = {isa = PBXBuildFile; fileRef = D15AF73D1E9E0D8C007736EE /* VCBase.m */; };
 		D15AF7641E9E0DD5007736EE /* MLEmoji_Expression.bundle in Resources */ = {isa = PBXBuildFile; fileRef = D15AF7401E9E0DD5007736EE /* MLEmoji_Expression.bundle */; };
 		D15AF7651E9E0DD5007736EE /* MLEmoji_Expression.plist in Resources */ = {isa = PBXBuildFile; fileRef = D15AF7411E9E0DD5007736EE /* MLEmoji_Expression.plist */; };
@@ -302,39 +291,16 @@
 		D15AF6FB1E9DFC6A007736EE /* FaceHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FaceHeaderView.m; sourceTree = "<group>"; };
 		D15AF6FC1E9DFC6A007736EE /* FaceView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FaceView.h; sourceTree = "<group>"; };
 		D15AF6FD1E9DFC6A007736EE /* FaceView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FaceView.m; sourceTree = "<group>"; };
-		D15AF7081E9DFD46007736EE /* ApiObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApiObject.h; sourceTree = "<group>"; };
-		D15AF7091E9DFD46007736EE /* ApiObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApiObject.m; sourceTree = "<group>"; };
-		D15AF70A1E9DFD46007736EE /* NetRequestTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetRequestTool.h; sourceTree = "<group>"; };
-		D15AF70B1E9DFD46007736EE /* NetRequestTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetRequestTool.m; sourceTree = "<group>"; };
-		D15AF70C1E9DFD46007736EE /* NetTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetTool.h; sourceTree = "<group>"; };
-		D15AF70D1E9DFD46007736EE /* NetTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetTool.m; sourceTree = "<group>"; };
-		D15AF70E1E9DFD46007736EE /* XMPPConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMPPConfig.h; sourceTree = "<group>"; };
-		D15AF70F1E9DFD46007736EE /* XmppTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XmppTools.h; sourceTree = "<group>"; };
-		D15AF7101E9DFD46007736EE /* XmppTools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XmppTools.m; sourceTree = "<group>"; };
+		D15AF70E1E9DFD46007736EE /* XMPPConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XMPPConfig.h; path = ChatLib/Network/XMPPConfig.h; sourceTree = "<group>"; };
+		D15AF70F1E9DFD46007736EE /* XmppTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XmppTools.h; path = ChatLib/Network/XmppTools.h; sourceTree = "<group>"; };
+		D15AF7101E9DFD46007736EE /* XmppTools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = XmppTools.m; path = ChatLib/Network/XmppTools.m; sourceTree = "<group>"; };
 		D15AF7131E9DFD46007736EE /* Toast.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Toast.h; sourceTree = "<group>"; };
 		D15AF7141E9DFD46007736EE /* Toast.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Toast.m; sourceTree = "<group>"; };
 		D15AF7151E9DFD46007736EE /* UIImageView+SDWebImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+SDWebImage.h"; sourceTree = "<group>"; };
 		D15AF7161E9DFD46007736EE /* UIImageView+SDWebImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+SDWebImage.m"; sourceTree = "<group>"; };
-		D15AF7181E9DFD46007736EE /* Global.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Global.h; path = ../Tools/Const/Global.h; sourceTree = "<group>"; };
+		D15AF7181E9DFD46007736EE /* Global.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Global.h; path = ChatLib/Tools/Const/Global.h; sourceTree = "<group>"; };
 		D15AF7191E9DFD46007736EE /* NetContants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetContants.h; sourceTree = "<group>"; };
 		D15AF71A1E9DFD46007736EE /* Notify.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Notify.h; sourceTree = "<group>"; };
-		D15AF71C1E9DFD46007736EE /* DataStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataStore.h; sourceTree = "<group>"; };
-		D15AF71D1E9DFD46007736EE /* DataStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataStore.m; sourceTree = "<group>"; };
-		D15AF71E1E9DFD46007736EE /* DataStoreManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataStoreManager.h; sourceTree = "<group>"; };
-		D15AF71F1E9DFD46007736EE /* DataStoreManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataStoreManager.m; sourceTree = "<group>"; };
-		D15AF7291E9E0D34007736EE /* AFHTTPSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPSessionManager.h; sourceTree = "<group>"; };
-		D15AF72A1E9E0D34007736EE /* AFHTTPSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPSessionManager.m; sourceTree = "<group>"; };
-		D15AF72B1E9E0D34007736EE /* AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFNetworking.h; sourceTree = "<group>"; };
-		D15AF72C1E9E0D34007736EE /* AFNetworkReachabilityManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFNetworkReachabilityManager.h; sourceTree = "<group>"; };
-		D15AF72D1E9E0D34007736EE /* AFNetworkReachabilityManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFNetworkReachabilityManager.m; sourceTree = "<group>"; };
-		D15AF72E1E9E0D34007736EE /* AFSecurityPolicy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFSecurityPolicy.h; sourceTree = "<group>"; };
-		D15AF72F1E9E0D34007736EE /* AFSecurityPolicy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFSecurityPolicy.m; sourceTree = "<group>"; };
-		D15AF7301E9E0D34007736EE /* AFURLRequestSerialization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFURLRequestSerialization.h; sourceTree = "<group>"; };
-		D15AF7311E9E0D34007736EE /* AFURLRequestSerialization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFURLRequestSerialization.m; sourceTree = "<group>"; };
-		D15AF7321E9E0D34007736EE /* AFURLResponseSerialization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFURLResponseSerialization.h; sourceTree = "<group>"; };
-		D15AF7331E9E0D34007736EE /* AFURLResponseSerialization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFURLResponseSerialization.m; sourceTree = "<group>"; };
-		D15AF7341E9E0D34007736EE /* AFURLSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFURLSessionManager.h; sourceTree = "<group>"; };
-		D15AF7351E9E0D34007736EE /* AFURLSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFURLSessionManager.m; sourceTree = "<group>"; };
 		D15AF73C1E9E0D8C007736EE /* VCBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VCBase.h; sourceTree = "<group>"; };
 		D15AF73D1E9E0D8C007736EE /* VCBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VCBase.m; sourceTree = "<group>"; };
 		D15AF7401E9E0DD5007736EE /* MLEmoji_Expression.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = MLEmoji_Expression.bundle; sourceTree = "<group>"; };
@@ -367,7 +333,7 @@
 		D15AF7601E9E0DD5007736EE /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		D15AF7621E9E0DD5007736EE /* TTTAttributedLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTTAttributedLabel.h; sourceTree = "<group>"; };
 		D15AF7631E9E0DD5007736EE /* TTTAttributedLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTTAttributedLabel.m; sourceTree = "<group>"; };
-		D15AF7751E9E0DF2007736EE /* AtChat.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AtChat.pch; path = AFNetworking/AtChat.pch; sourceTree = "<group>"; };
+		D15AF7751E9E0DF2007736EE /* AtChat.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AtChat.pch; path = ChatLib/Network/AFNetworking/AtChat.pch; sourceTree = "<group>"; };
 		D15AF7761E9E1308007736EE /* expression_custom.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = expression_custom.plist; sourceTree = "<group>"; };
 		D15AF7781E9E130B007736EE /* expressionImage_custom.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = expressionImage_custom.plist; sourceTree = "<group>"; };
 		D15AF77B1E9E13A2007736EE /* ChatAddIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ChatAddIcon@2x.png"; sourceTree = "<group>"; };
@@ -609,8 +575,7 @@
 				D103BE801EA4A96400BEC0EF /* Model */,
 				D103BE811EA4A96400BEC0EF /* View */,
 			);
-			name = Friend;
-			path = ChatLib/Friend;
+			path = Friend;
 			sourceTree = "<group>";
 		};
 		D103BE681EA49F8500BEC0EF /* Mine */ = {
@@ -623,8 +588,7 @@
 				D103BE8D1EA4B08200BEC0EF /* CellUserImg.h */,
 				D103BE8E1EA4B08200BEC0EF /* CellUserImg.m */,
 			);
-			name = Mine;
-			path = ChatLib/Mine;
+			path = Mine;
 			sourceTree = "<group>";
 		};
 		D103BE7B1EA4A96400BEC0EF /* Controller */ = {
@@ -675,12 +639,13 @@
 		D15AF6D61E9DFBFF007736EE /* WHChatProj */ = {
 			isa = PBXGroup;
 			children = (
-				D15AF7071E9DFD46007736EE /* Network */,
 				D15AF7111E9DFD46007736EE /* Tools */,
+				D15AF70E1E9DFD46007736EE /* XMPPConfig.h */,
+				D15AF70F1E9DFD46007736EE /* XmppTools.h */,
+				D15AF7101E9DFD46007736EE /* XmppTools.m */,
+				D15AF7751E9E0DF2007736EE /* AtChat.pch */,
+				D15AF7181E9DFD46007736EE /* Global.h */,
 				D15AF6EE1E9DFC33007736EE /* ChatLib */,
-				D16A4F9C1EA9DE5200E32E05 /* Group */,
-				D103BE671EA49F8000BEC0EF /* Friend */,
-				D103BE681EA49F8500BEC0EF /* Mine */,
 				D15AF6DA1E9DFBFF007736EE /* AppDelegate.h */,
 				D15AF6DB1E9DFBFF007736EE /* AppDelegate.m */,
 				D1617B411EA5DFAA0049BE14 /* VCLogin.h */,
@@ -710,6 +675,9 @@
 			isa = PBXGroup;
 			children = (
 				D103BE661EA49F0A00BEC0EF /* Message */,
+				D103BE671EA49F8000BEC0EF /* Friend */,
+				D16A4F9C1EA9DE5200E32E05 /* Group */,
+				D103BE681EA49F8500BEC0EF /* Mine */,
 			);
 			path = ChatLib;
 			sourceTree = "<group>";
@@ -762,26 +730,6 @@
 			path = ../View;
 			sourceTree = "<group>";
 		};
-		D15AF7071E9DFD46007736EE /* Network */ = {
-			isa = PBXGroup;
-			children = (
-				D15AF7751E9E0DF2007736EE /* AtChat.pch */,
-				D15AF7181E9DFD46007736EE /* Global.h */,
-				D15AF7281E9E0D34007736EE /* AFNetworking */,
-				D15AF7081E9DFD46007736EE /* ApiObject.h */,
-				D15AF7091E9DFD46007736EE /* ApiObject.m */,
-				D15AF70A1E9DFD46007736EE /* NetRequestTool.h */,
-				D15AF70B1E9DFD46007736EE /* NetRequestTool.m */,
-				D15AF70C1E9DFD46007736EE /* NetTool.h */,
-				D15AF70D1E9DFD46007736EE /* NetTool.m */,
-				D15AF70E1E9DFD46007736EE /* XMPPConfig.h */,
-				D15AF70F1E9DFD46007736EE /* XmppTools.h */,
-				D15AF7101E9DFD46007736EE /* XmppTools.m */,
-			);
-			name = Network;
-			path = ChatLib/Network;
-			sourceTree = "<group>";
-		};
 		D15AF7111E9DFD46007736EE /* Tools */ = {
 			isa = PBXGroup;
 			children = (
@@ -792,7 +740,6 @@
 				D15AF73F1E9E0DD5007736EE /* MLEmojiLabel */,
 				D15AF7121E9DFD46007736EE /* Category */,
 				D15AF7171E9DFD46007736EE /* Const */,
-				D15AF71B1E9DFD46007736EE /* DataBase */,
 			);
 			name = Tools;
 			path = ChatLib/Tools;
@@ -816,37 +763,6 @@
 				D15AF71A1E9DFD46007736EE /* Notify.h */,
 			);
 			path = Const;
-			sourceTree = "<group>";
-		};
-		D15AF71B1E9DFD46007736EE /* DataBase */ = {
-			isa = PBXGroup;
-			children = (
-				D15AF71C1E9DFD46007736EE /* DataStore.h */,
-				D15AF71D1E9DFD46007736EE /* DataStore.m */,
-				D15AF71E1E9DFD46007736EE /* DataStoreManager.h */,
-				D15AF71F1E9DFD46007736EE /* DataStoreManager.m */,
-			);
-			path = DataBase;
-			sourceTree = "<group>";
-		};
-		D15AF7281E9E0D34007736EE /* AFNetworking */ = {
-			isa = PBXGroup;
-			children = (
-				D15AF7291E9E0D34007736EE /* AFHTTPSessionManager.h */,
-				D15AF72A1E9E0D34007736EE /* AFHTTPSessionManager.m */,
-				D15AF72B1E9E0D34007736EE /* AFNetworking.h */,
-				D15AF72C1E9E0D34007736EE /* AFNetworkReachabilityManager.h */,
-				D15AF72D1E9E0D34007736EE /* AFNetworkReachabilityManager.m */,
-				D15AF72E1E9E0D34007736EE /* AFSecurityPolicy.h */,
-				D15AF72F1E9E0D34007736EE /* AFSecurityPolicy.m */,
-				D15AF7301E9E0D34007736EE /* AFURLRequestSerialization.h */,
-				D15AF7311E9E0D34007736EE /* AFURLRequestSerialization.m */,
-				D15AF7321E9E0D34007736EE /* AFURLResponseSerialization.h */,
-				D15AF7331E9E0D34007736EE /* AFURLResponseSerialization.m */,
-				D15AF7341E9E0D34007736EE /* AFURLSessionManager.h */,
-				D15AF7351E9E0D34007736EE /* AFURLSessionManager.m */,
-			);
-			path = AFNetworking;
 			sourceTree = "<group>";
 		};
 		D15AF73F1E9E0DD5007736EE /* MLEmojiLabel */ = {
@@ -1146,7 +1062,8 @@
 				D16A4F9E1EA9DE7500E32E05 /* Model */,
 				D16A4F9F1EA9DE7500E32E05 /* View */,
 			);
-			path = Group;
+			name = Group;
+			path = ../Group;
 			sourceTree = "<group>";
 		};
 		D16A4F9D1EA9DE7500E32E05 /* Controller */ = {
@@ -1487,40 +1404,31 @@
 				D103BE8F1EA4B08200BEC0EF /* CellUserImg.m in Sources */,
 				D15AF76A1E9E0DD5007736EE /* NSString+MLLabel.m in Sources */,
 				D15AF76B1E9E0DD5007736EE /* MLExpressionManager.m in Sources */,
-				D15AF7361E9E0D34007736EE /* AFHTTPSessionManager.m in Sources */,
-				D15AF7371E9E0D34007736EE /* AFNetworkReachabilityManager.m in Sources */,
 				D15AF7701E9E0DD5007736EE /* MLLabel.m in Sources */,
 				D15AF7051E9DFC6A007736EE /* FaceView.m in Sources */,
 				D15AF7691E9E0DD5007736EE /* NSMutableAttributedString+MLLabel.m in Sources */,
 				D15AF7251E9DFD46007736EE /* UIImageView+SDWebImage.m in Sources */,
 				D103BE851EA4A96400BEC0EF /* VCFriends.m in Sources */,
-				D15AF7261E9DFD46007736EE /* DataStore.m in Sources */,
 				D1155A541EA24519008488EF /* VCMsgesCell.m in Sources */,
 				D15F65801E9E4E5A000B63CA /* VoiceHUDView.m in Sources */,
 				D15F65A91E9F8666000B63CA /* VCChatCell.m in Sources */,
-				D15AF7201E9DFD46007736EE /* ApiObject.m in Sources */,
 				D15F65B61E9FAC68000B63CA /* WPTextView.m in Sources */,
-				D15AF7391E9E0D34007736EE /* AFURLRequestSerialization.m in Sources */,
 				D15AF7671E9E0DD5007736EE /* MLEmojiLabel.m in Sources */,
-				D15AF7381E9E0D34007736EE /* AFSecurityPolicy.m in Sources */,
 				D103BE8C1EA4B03500BEC0EF /* CellSetting.m in Sources */,
 				D15AF7681E9E0DD5007736EE /* NSAttributedString+MLLabel.m in Sources */,
 				D15AF76C1E9E0DD5007736EE /* MLTextAttachment.m in Sources */,
 				D15F65B91E9FAC68000B63CA /* WPImageViewBtn.m in Sources */,
 				D15AF73E1E9E0D8C007736EE /* VCBase.m in Sources */,
 				D15F65B71E9FAC68000B63CA /* WPBiaoqiangView.m in Sources */,
-				D15AF73B1E9E0D34007736EE /* AFURLSessionManager.m in Sources */,
 				D1671C0D1EA8F2F400BECFFE /* InviteUserViewController.m in Sources */,
 				D103BE841EA4A96400BEC0EF /* VCAddFriend.m in Sources */,
 				D15AF7001E9DFC6A007736EE /* VCChat.m in Sources */,
 				D15AF76F1E9E0DD5007736EE /* MLLabelLayoutManager.m in Sources */,
 				D15F65B51E9FAC68000B63CA /* WPToolBarView.m in Sources */,
 				D15AF6DF1E9DFBFF007736EE /* MsgViewController.m in Sources */,
-				D15AF7271E9DFD46007736EE /* DataStoreManager.m in Sources */,
 				D1617B431EA5DFAA0049BE14 /* VCLogin.m in Sources */,
 				D15AF7711E9E0DD5007736EE /* MLLinkLabel.m in Sources */,
 				D15AF7011E9DFC6A007736EE /* Message.m in Sources */,
-				D15AF7211E9DFD46007736EE /* NetRequestTool.m in Sources */,
 				D15AF76E1E9E0DD5007736EE /* NSString+MLExpression.m in Sources */,
 				D15AF7741E9E0DD5007736EE /* TTTAttributedLabel.m in Sources */,
 				D11EF27F1EA5FC4400CC54EB /* VCRegFinish.m in Sources */,
@@ -1532,13 +1440,11 @@
 				D15AF6D91E9DFBFF007736EE /* main.m in Sources */,
 				D1617B461EA5E49D0049BE14 /* VCTabbarController.m in Sources */,
 				D15AF7031E9DFC6A007736EE /* FaceCollCell.m in Sources */,
-				D15AF7221E9DFD46007736EE /* NetTool.m in Sources */,
 				D103BE861EA4A96400BEC0EF /* VCFriendsCell.m in Sources */,
 				D15F65B81E9FAC68000B63CA /* WPMoreView.m in Sources */,
 				D15AF7041E9DFC6A007736EE /* FaceHeaderView.m in Sources */,
 				D15AF7021E9DFC6A007736EE /* ChatInputView.m in Sources */,
 				D103BE891EA4B02900BEC0EF /* VCMine.m in Sources */,
-				D15AF73A1E9E0D34007736EE /* AFURLResponseSerialization.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1582,6 +1488,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -1629,6 +1536,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -1656,6 +1564,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = FC991A9AA1DCAD6C67A2AB6A /* Pods-WHChatProj.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 4ZPUG3YB9Y;
 				GCC_PREFIX_HEADER = /Users/xingzheng/Downloads/XMPPChatProj/WHChatProj/ChatLib/Network/AFNetworking/AtChat.pch;
@@ -1671,6 +1580,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = CCECB1C205230BD8D98802D0 /* Pods-WHChatProj.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 4ZPUG3YB9Y;
 				GCC_PREFIX_HEADER = /Users/xingzheng/Downloads/XMPPChatProj/WHChatProj/ChatLib/Network/AFNetworking/AtChat.pch;
