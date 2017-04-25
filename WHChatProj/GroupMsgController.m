@@ -252,6 +252,7 @@
 }
 - (void)showImageWithData:(NSData *)data TapSender:(UITapGestureRecognizer *)sender{
     UIImage *imageData = [UIImage imageWithData:data];
+    [self.fullImageView removeFromSuperview];
     self.fullImageView = [[UIImageView alloc]initWithImage:imageData];
     self.fullImageView.userInteractionEnabled = YES;
     [self.fullImageView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(actionTap2:)]];
